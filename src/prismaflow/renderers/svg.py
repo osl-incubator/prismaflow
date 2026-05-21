@@ -27,8 +27,8 @@ class SVGRenderer:
         self,
         *,
         font_family: str = "Arial, Helvetica, sans-serif",
-        font_size: int = 14,
-        line_height: int = 17,
+        font_size: int = 12,
+        line_height: int = 14,
     ) -> None:
         """
         title: Configure SVG font and line spacing.
@@ -99,9 +99,9 @@ class SVGRenderer:
         """
         return """
 <defs>
-  <marker id="arrowhead" markerWidth="10" markerHeight="7"
-          refX="9" refY="3.5" orient="auto">
-    <polygon points="0 0, 10 3.5, 0 7" />
+  <marker id="arrowhead" markerWidth="8" markerHeight="6"
+          refX="7.5" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" />
   </marker>
 </defs>""".strip()
 
@@ -117,33 +117,65 @@ class SVGRenderer:
   svg {{ background: #ffffff; color: #111827; }}
   .diagram-title {{
     font-family: {self.font_family};
-    font-size: 22px;
+    font-size: 15px;
     font-weight: 700;
     text-anchor: middle;
-    fill: #111827;
+    fill: #111111;
   }}
   .node rect {{
     fill: #ffffff;
-    stroke: #1f2937;
-    stroke-width: 1.5;
-    rx: 4;
-    ry: 4;
+    stroke: #111111;
+    stroke-width: 1.15;
+    rx: 0;
+    ry: 0;
   }}
-  .node.exclusion rect {{ fill: #f9fafb; stroke: #4b5563; }}
+  .node.header.process-header rect {{
+    fill: #fbbf24;
+    stroke: #b45309;
+    stroke-width: 1.1;
+    rx: 6;
+    ry: 6;
+  }}
+  .node.header.stage-label rect {{
+    fill: #9dc3e6;
+    stroke: #1f4e79;
+    stroke-width: 1.1;
+    rx: 5;
+    ry: 5;
+  }}
+  .node.exclusion rect {{ fill: #ffffff; }}
   .node text {{
     font-family: {self.font_family};
     font-size: {self.font_size}px;
-    text-anchor: middle;
-    dominant-baseline: middle;
-    fill: #111827;
+    fill: #111111;
+  }}
+  .node.header.process-header text {{
+    font-size: 11px;
+    font-weight: 700;
+  }}
+  .node.header.stage-label text {{
+    font-size: 11px;
+    font-weight: 700;
+  }}
+  .node.note text {{
+    font-size: 10px;
+  }}
+  .node.note.source text {{
+    font-size: 9.5px;
+    font-style: italic;
+  }}
+  .node.note.source-link text {{
+    fill: #1d4ed8;
+    font-size: 10px;
+    text-decoration: underline;
   }}
   .edge {{
     fill: none;
-    stroke: #1f2937;
-    stroke-width: 1.6;
+    stroke: #111111;
+    stroke-width: 1.2;
     marker-end: url(#arrowhead);
   }}
-  marker polygon {{ fill: #1f2937; }}
+  marker polygon {{ fill: #111111; }}
 </style>""".strip()
 
     def _render_node(self, node: DiagramNode) -> str:
@@ -157,28 +189,153 @@ class SVGRenderer:
           type: str
           description: Return value.
         """
-        css_parts = ["node", node.kind]
-        if node.css_class:
-            css_parts.append(node.css_class)
+        css_parts = self._node_css_parts(node)
         css_class = " ".join(css_parts)
         rect = node.rect
         href_start = f'<a href="{escape(node.href)}">' if node.href else ""
         href_end = "</a>" if node.href else ""
         title = f"<title>{escape(node.tooltip)}</title>\n" if node.tooltip else ""
-        text_lines = wrap_text(node.text, max_chars=max(18, int(rect.width / 8)))
-        text = self._render_text(rect.center_x, rect.center_y, text_lines)
+        rect_svg = ""
+        if self._node_has_rect(node):
+            rect_svg = (
+                f'  <rect x="{rect.x:g}" y="{rect.y:g}" '
+                f'width="{rect.width:g}" height="{rect.height:g}" />\n'
+            )
+        text_lines = wrap_text(node.text, max_chars=self._max_chars(node))
+        text = self._render_node_text(node, text_lines)
         return (
             f'{href_start}<g id="{escape(node.id)}" class="{css_class}">\n'
             f"{title}"
-            f'  <rect x="{rect.x:g}" y="{rect.y:g}" '
-            f'width="{rect.width:g}" height="{rect.height:g}" />\n'
+            f"{rect_svg}"
             f"{text}\n"
             f"</g>{href_end}"
         )
 
-    def _render_text(self, x: float, y: float, lines: list[str]) -> str:
+    def _render_node_text(self, node: DiagramNode, lines: list[str]) -> str:
+        """
+        title: Render node text with node-specific positioning.
+        parameters:
+          node:
+            type: DiagramNode
+            description: Value for node.
+          lines:
+            type: list[str]
+            description: Value for lines.
+        returns:
+          type: str
+          description: Return value.
+        """
+        class_names = set(self._node_css_parts(node))
+        rect = node.rect
+        if "stage-label" in class_names:
+            return self._render_rotated_text(rect.center_x, rect.center_y, lines)
+        if "process-header" in class_names:
+            return self._render_text(rect.center_x, rect.center_y, lines)
+        if "source-link" in class_names:
+            return self._render_text(rect.center_x, rect.y + 12, lines)
+        if node.kind == "note":
+            return self._render_top_text(
+                rect.x,
+                rect.y + 10,
+                lines,
+                line_height=12,
+                text_anchor="start",
+            )
+        return self._render_text(
+            rect.x + 14,
+            rect.center_y,
+            lines,
+            text_anchor="start",
+        )
+
+    def _render_text(
+        self,
+        x: float,
+        y: float,
+        lines: list[str],
+        *,
+        line_height: int | None = None,
+        text_anchor: str = "middle",
+    ) -> str:
         """
         title: _render_text.
+        parameters:
+          x:
+            type: float
+            description: Value for x.
+          y:
+            type: float
+            description: Value for y.
+          lines:
+            type: list[str]
+            description: Value for lines.
+          line_height:
+            type: int | None
+            description: Value for line_height.
+          text_anchor:
+            type: str
+            description: Value for text_anchor.
+        returns:
+          type: str
+          description: Return value.
+        """
+        rendered_line_height = self.line_height if line_height is None else line_height
+        line_count = len(lines)
+        start_y = y - ((line_count - 1) * rendered_line_height / 2)
+        tspans = []
+        for index, line in enumerate(lines):
+            dy = 0 if index == 0 else rendered_line_height
+            tspans.append(f'    <tspan x="{x:g}" dy="{dy:g}">{escape(line)}</tspan>')
+        return (
+            f'  <text x="{x:g}" y="{start_y:g}" text-anchor="{text_anchor}">\n'
+            + "\n".join(tspans)
+            + "\n  </text>"
+        )
+
+    def _render_top_text(
+        self,
+        x: float,
+        y: float,
+        lines: list[str],
+        *,
+        line_height: int,
+        text_anchor: str,
+    ) -> str:
+        """
+        title: Render a text block from its first-line baseline.
+        parameters:
+          x:
+            type: float
+            description: Value for x.
+          y:
+            type: float
+            description: Value for y.
+          lines:
+            type: list[str]
+            description: Value for lines.
+          line_height:
+            type: int
+            description: Value for line_height.
+          text_anchor:
+            type: str
+            description: Value for text_anchor.
+        returns:
+          type: str
+          description: Return value.
+        """
+        tspans = []
+        for index, line in enumerate(lines):
+            dy = 0 if index == 0 else line_height
+            tspans.append(f'    <tspan x="{x:g}" dy="{dy:g}">{escape(line)}</tspan>')
+        return (
+            f'  <text x="{x:g}" y="{y:g}" text-anchor="{text_anchor}">\n'
+            + "\n".join(tspans)
+            + "\n  </text>"
+        )
+
+    def _render_rotated_text(self, x: float, y: float, lines: list[str]) -> str:
+        """
+        title: Render text rotated for vertical stage labels.
         parameters:
           x:
             type: float
@@ -193,15 +350,64 @@ class SVGRenderer:
           type: str
           description: Return value.
         """
-        line_count = len(lines)
-        start_y = y - ((line_count - 1) * self.line_height / 2)
-        tspans = []
-        for index, line in enumerate(lines):
-            dy = 0 if index == 0 else self.line_height
-            tspans.append(f'    <tspan x="{x:g}" dy="{dy:g}">{escape(line)}</tspan>')
+        text = " ".join(lines)
         return (
-            f'  <text x="{x:g}" y="{start_y:g}">\n' + "\n".join(tspans) + "\n  </text>"
+            f'  <text x="{x:g}" y="{y:g}" text-anchor="middle" '
+            f'transform="rotate(-90 {x:g} {y:g})">{escape(text)}</text>'
         )
+
+    @staticmethod
+    def _node_css_parts(node: DiagramNode) -> list[str]:
+        """
+        title: Return CSS class parts for a node.
+        parameters:
+          node:
+            type: DiagramNode
+            description: Value for node.
+        returns:
+          type: list[str]
+          description: Return value.
+        """
+        css_parts = ["node", node.kind]
+        if node.css_class:
+            css_parts.extend(node.css_class.split())
+        return css_parts
+
+    @staticmethod
+    def _node_has_rect(node: DiagramNode) -> bool:
+        """
+        title: Return whether a node should draw a rectangle.
+        parameters:
+          node:
+            type: DiagramNode
+            description: Value for node.
+        returns:
+          type: bool
+          description: Return value.
+        """
+        return node.kind != "note"
+
+    def _max_chars(self, node: DiagramNode) -> int:
+        """
+        title: Return wrapping width for a node.
+        parameters:
+          node:
+            type: DiagramNode
+            description: Value for node.
+        returns:
+          type: int
+          description: Return value.
+        """
+        class_names = set(self._node_css_parts(node))
+        if "stage-label" in class_names:
+            return 80
+        if "process-header" in class_names:
+            return 90
+        if "source-link" in class_names:
+            return 80
+        if node.kind == "note":
+            return max(45, int(node.rect.width / 6.4))
+        return max(18, int((node.rect.width - 28) / 6.1))
 
     def _render_edge(self, layout: DiagramLayout, edge: DiagramEdge) -> str:
         """

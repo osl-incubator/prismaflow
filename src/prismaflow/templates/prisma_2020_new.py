@@ -25,14 +25,26 @@ class Prisma2020NewTemplate:
           type: DiagramLayout
           description: Return value.
         """
-        main_x = 300.0
-        side_x = 660.0
-        box_width = 300.0
-        side_width = 270.0
-        box_height = 82.0
-        tall_height = 118.0
-        y0 = 90.0
-        gap = 104.0
+        stage_label_x = 38.0
+        stage_label_width = 34.0
+        main_x = 100.0
+        side_x = 440.0
+        box_width = 260.0
+        side_width = 260.0
+        header_y = 62.0
+        header_height = 32.0
+        identified_y = 112.0
+        identification_height = 112.0
+        box_height = 74.0
+        tall_height = 122.0
+        screened_y = 272.0
+        reports_sought_y = 378.0
+        reports_assessed_y = 484.0
+        reports_excluded_y = 478.0
+        included_y = 642.0
+        included_height = 86.0
+        notes_x = 28.0
+        notes_width = 690.0
         identification = flow.identification
         screening = flow.screening
         eligibility = flow.eligibility
@@ -40,10 +52,58 @@ class Prisma2020NewTemplate:
 
         nodes = [
             DiagramNode(
+                id="databases_registers_header",
+                rect=Rect(
+                    main_x,
+                    header_y,
+                    side_x + side_width - main_x,
+                    header_height,
+                ),
+                text="Identification of studies via databases and registers",
+                kind="header",
+                css_class="process-header",
+            ),
+            DiagramNode(
+                id="identification_label",
+                rect=Rect(
+                    stage_label_x,
+                    identified_y,
+                    stage_label_width,
+                    identification_height,
+                ),
+                text="Identification",
+                kind="header",
+                css_class="stage-label",
+            ),
+            DiagramNode(
+                id="screening_label",
+                rect=Rect(
+                    stage_label_x,
+                    screened_y,
+                    stage_label_width,
+                    reports_excluded_y + tall_height - screened_y,
+                ),
+                text="Screening",
+                kind="header",
+                css_class="stage-label",
+            ),
+            DiagramNode(
+                id="included_label",
+                rect=Rect(
+                    stage_label_x,
+                    included_y,
+                    stage_label_width,
+                    included_height,
+                ),
+                text="Included",
+                kind="header",
+                css_class="stage-label",
+            ),
+            DiagramNode(
                 id="identified",
-                rect=Rect(main_x, y0, box_width, box_height),
+                rect=Rect(main_x, identified_y, box_width, identification_height),
                 text=(
-                    "Records identified from:\n"
+                    "Records identified from*:\n"
                     f"Databases (n = {identification.records_identified_databases})\n"
                     f"Registers (n = {identification.records_identified_registers})"
                 ),
@@ -51,33 +111,33 @@ class Prisma2020NewTemplate:
             ),
             DiagramNode(
                 id="removed",
-                rect=Rect(main_x, y0 + gap, box_width, tall_height),
+                rect=Rect(side_x, identified_y, side_width, identification_height),
                 text=(
                     "Records removed before screening:\n"
-                    "Duplicate records removed "
+                    "Duplicate records removed\n"
                     f"(n = {screening.records_removed_duplicates})\n"
-                    "Records marked as ineligible by automation tools "
+                    "Records marked as ineligible by automation tools\n"
                     f"(n = {screening.records_removed_automation})\n"
-                    "Records removed for other reasons "
+                    "Records removed for other reasons\n"
                     f"(n = {screening.records_removed_other})"
                 ),
                 kind="stage",
             ),
             DiagramNode(
                 id="screened",
-                rect=Rect(main_x, y0 + gap * 2 + 36, box_width, box_height),
+                rect=Rect(main_x, screened_y, box_width, box_height),
                 text=f"Records screened\n(n = {screening.records_screened})",
                 kind="stage",
             ),
             DiagramNode(
                 id="records_excluded",
-                rect=Rect(side_x, y0 + gap * 2 + 36, side_width, box_height),
-                text=f"Records excluded\n(n = {screening.records_excluded})",
+                rect=Rect(side_x, screened_y, side_width, box_height),
+                text=f"Records excluded**\n(n = {screening.records_excluded})",
                 kind="exclusion",
             ),
             DiagramNode(
                 id="reports_sought",
-                rect=Rect(main_x, y0 + gap * 3 + 36, box_width, box_height),
+                rect=Rect(main_x, reports_sought_y, box_width, box_height),
                 text=(
                     f"Reports sought for retrieval\n(n = {eligibility.reports_sought})"
                 ),
@@ -85,7 +145,7 @@ class Prisma2020NewTemplate:
             ),
             DiagramNode(
                 id="reports_not_retrieved",
-                rect=Rect(side_x, y0 + gap * 3 + 36, side_width, box_height),
+                rect=Rect(side_x, reports_sought_y, side_width, box_height),
                 text=(
                     f"Reports not retrieved\n(n = {eligibility.reports_not_retrieved})"
                 ),
@@ -93,7 +153,7 @@ class Prisma2020NewTemplate:
             ),
             DiagramNode(
                 id="reports_assessed",
-                rect=Rect(main_x, y0 + gap * 4 + 36, box_width, box_height),
+                rect=Rect(main_x, reports_assessed_y, box_width, box_height),
                 text=(
                     "Reports assessed for eligibility\n"
                     f"(n = {eligibility.reports_assessed})"
@@ -102,15 +162,57 @@ class Prisma2020NewTemplate:
             ),
             DiagramNode(
                 id="reports_excluded",
-                rect=Rect(side_x, y0 + gap * 4 + 22, side_width, tall_height),
+                rect=Rect(side_x, reports_excluded_y, side_width, tall_height),
                 text=self._reports_excluded_text(flow),
                 kind="exclusion",
             ),
             DiagramNode(
                 id="included",
-                rect=Rect(main_x, y0 + gap * 5 + 50, box_width, box_height),
+                rect=Rect(main_x, included_y, box_width, included_height),
                 text=(f"Studies included in review\n(n = {included.studies_included})"),
                 kind="stage",
+            ),
+            DiagramNode(
+                id="database_note",
+                rect=Rect(notes_x, 762.0, notes_width, 44.0),
+                text=(
+                    "*Consider, if feasible to do so, reporting the number of "
+                    "records identified from each database or register searched "
+                    "(rather than the total number across all databases/registers)."
+                ),
+                kind="note",
+                css_class="footnote",
+            ),
+            DiagramNode(
+                id="automation_note",
+                rect=Rect(notes_x, 816.0, notes_width, 38.0),
+                text=(
+                    "**If automation tools were used, indicate how many records "
+                    "were excluded by a human and how many were excluded by "
+                    "automation tools."
+                ),
+                kind="note",
+                css_class="footnote",
+            ),
+            DiagramNode(
+                id="source_citation",
+                rect=Rect(notes_x, 900.0, notes_width, 40.0),
+                text=(
+                    "From: Page MJ, McKenzie JE, Bossuyt PM, Boutron I, "
+                    "Hoffmann TC, Mulrow CD, et al. The PRISMA 2020 statement: "
+                    "an updated guideline for reporting systematic reviews. "
+                    "BMJ. 2021;372:n71. doi: 10.1136/bmj.n71"
+                ),
+                kind="note",
+                css_class="source",
+            ),
+            DiagramNode(
+                id="source_link",
+                rect=Rect(214.0, 948.0, 332.0, 18.0),
+                text="For more information, visit: http://www.prisma-statement.org/",
+                kind="note",
+                href="https://www.prisma-statement.org/",
+                css_class="source-link",
             ),
         ]
 
@@ -119,12 +221,12 @@ class Prisma2020NewTemplate:
                 id="identified_to_removed",
                 source_id="identified",
                 target_id="removed",
-                source_anchor="bottom",
-                target_anchor="top",
+                source_anchor="right",
+                target_anchor="left",
             ),
             DiagramEdge(
-                id="removed_to_screened",
-                source_id="removed",
+                id="identified_to_screened",
+                source_id="identified",
                 target_id="screened",
                 source_anchor="bottom",
                 target_anchor="top",
@@ -171,15 +273,15 @@ class Prisma2020NewTemplate:
                 source_anchor="right",
                 target_anchor="left",
                 path=[
-                    Point(main_x + box_width, y0 + gap * 4 + 77),
-                    Point(side_x, y0 + gap * 4 + 77),
+                    Point(main_x + box_width, reports_assessed_y + box_height / 2),
+                    Point(side_x, reports_assessed_y + box_height / 2),
                 ],
             ),
         ]
 
         return DiagramLayout(
-            width=980.0,
-            height=780.0,
+            width=740.0,
+            height=982.0,
             nodes=nodes,
             edges=edges,
             title=flow.title,

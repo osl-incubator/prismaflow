@@ -8,6 +8,10 @@ def test_svg_renderer_outputs_accessible_svg() -> None:
     assert "<svg" in svg
     assert "<title" in svg
     assert 'marker-end="url(#arrowhead)"' in svg
+    assert "Identification of studies via databases and registers" in svg
+    assert 'class="node header stage-label"' in svg
+    assert "PRISMA 2020" in svg
+    assert "statement:" in svg
     assert "Wrong population" in svg
 
 

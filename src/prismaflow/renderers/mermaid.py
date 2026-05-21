@@ -4,7 +4,7 @@ title: Mermaid text renderer.
 
 from __future__ import annotations
 
-from prismaflow.layout.engine import DiagramLayout
+from prismaflow.layout.engine import DiagramLayout, DiagramNode
 
 
 class MermaidRenderer:
@@ -23,9 +23,10 @@ class MermaidRenderer:
           type: str
           description: Return value.
         """
-        aliases = self._aliases(layout)
+        nodes = self._renderable_nodes(layout)
+        aliases = self._aliases(nodes)
         lines = ["flowchart TD"]
-        for node in layout.nodes:
+        for node in nodes:
             label = self._label(node.text)
             lines.append(f'    {aliases[node.id]}["{label}"]')
         lines.append("")
@@ -34,20 +35,34 @@ class MermaidRenderer:
         return "\n".join(lines) + "\n"
 
     @staticmethod
-    def _aliases(layout: DiagramLayout) -> dict[str, str]:
+    def _renderable_nodes(layout: DiagramLayout) -> list[DiagramNode]:
         """
-        title: _aliases.
+        title: Return nodes that should appear in Mermaid output.
         parameters:
           layout:
             type: DiagramLayout
             description: Value for layout.
+        returns:
+          type: list[DiagramNode]
+          description: Return value.
+        """
+        return [node for node in layout.nodes if node.kind in {"stage", "exclusion"}]
+
+    @staticmethod
+    def _aliases(nodes: list[DiagramNode]) -> dict[str, str]:
+        """
+        title: _aliases.
+        parameters:
+          nodes:
+            type: list[DiagramNode]
+            description: Value for nodes.
         returns:
           type: dict[str, str]
           description: Return value.
         """
         alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         aliases: dict[str, str] = {}
-        for index, node in enumerate(layout.nodes):
+        for index, node in enumerate(nodes):
             if index < len(alphabet):
                 aliases[node.id] = alphabet[index]
             else:

@@ -222,3 +222,6 @@ __marimo__/
 # AI
 PLAN.md
 pytest-*
+
+# tmp
+tmp/
