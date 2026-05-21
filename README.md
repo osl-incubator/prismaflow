@@ -8,6 +8,12 @@
 `prisma-flow` is a lightweight Python package for generating PRISMA-style flow
 diagrams for evidence synthesis workflows.
 
+PRISMA means **Preferred Reporting Items for Systematic reviews and
+Meta-Analyses**. `prisma-flow` is an independent Python implementation for
+generating diagrams based on PRISMA 2020 flow diagram structures; it is not the
+PRISMA reporting guideline itself and is not affiliated with or endorsed by the
+PRISMA Executive.
+
 Unlike Graphviz-based tools, `prisma-flow` does not require system-level graph
 layout binaries. Unlike Mermaid-based tools, it does not require Node or Mermaid
 CLI. The default renderer is a pure-Python, template-based SVG generator.
@@ -158,6 +164,26 @@ is intentionally optional and not implemented as a required renderer in v0.1.
 
 The package does **not** require Graphviz, Cairo, CairoSVG, Node, Mermaid CLI,
 Inkscape, Playwright, browser engines, Matplotlib, or Plotly.
+
+## PRISMA acknowledgement and citation
+
+The PRISMA 2020 reporting guideline, checklist, and flow diagram templates were
+developed by the PRISMA 2020 authors and are maintained through the PRISMA
+Executive. When using PRISMA-style diagrams in reports, manuscripts, or
+presentations, cite the original PRISMA 2020 publications:
+
+- Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al.
+  The PRISMA 2020 statement: an updated guideline for reporting systematic
+  reviews. _BMJ_. 2021;372:n71. doi:
+  [10.1136/bmj.n71](https://doi.org/10.1136/bmj.n71).
+- Page MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. PRISMA
+  2020 explanation and elaboration: updated guidance and exemplars for reporting
+  systematic reviews. _BMJ_. 2021;372:n160. doi:
+  [10.1136/bmj.n160](https://doi.org/10.1136/bmj.n160).
+
+See the official [PRISMA website](https://www.prisma-statement.org/) and
+[PRISMA 2020 flow diagram page](https://www.prisma-statement.org/prisma-2020-flow-diagram)
+for source templates and usage guidance.
 
 ## Development
 

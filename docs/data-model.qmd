@@ -5,6 +5,11 @@ title: Data model
 The main model is `PrismaFlow`. It contains four PRISMA stages and optional
 metadata.
 
+The stage names and count relationships follow the PRISMA 2020 flow diagram
+concepts for identification, screening, eligibility, and included studies. For
+the reporting guideline itself and citation guidance, see
+[PRISMA acknowledgement and references](references.qmd).
+
 ```python
 from prismaflow import (
     EligibilityStage,

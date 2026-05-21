@@ -4,6 +4,11 @@ title: Validation
 
 `prisma-flow` validates PRISMA count relationships before rendering.
 
+These checks are intended to help catch arithmetic inconsistencies in data used
+to populate PRISMA-style flow diagrams. They do not replace the PRISMA 2020
+reporting guideline, checklist, or author guidance; cite and follow the
+original PRISMA publications for scholarly reporting.
+
 ## Hard validation rules
 
 ```text

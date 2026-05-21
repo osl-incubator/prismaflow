@@ -49,6 +49,7 @@ website:
           - api.qmd
           - examples.qmd
           - dependency-policy.qmd
+          - references.qmd
           - changelog.qmd
 
 format:

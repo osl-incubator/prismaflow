@@ -5,6 +5,12 @@ title: Templates
 `prisma-flow` treats PRISMA diagrams as template-based documents rather than
 arbitrary graphs.
 
+Templates in this package are software implementations of the official PRISMA
+2020 flow diagram structures. The PRISMA 2020 reporting guideline, checklist,
+and flow diagrams were developed by the PRISMA 2020 authors and are maintained
+through the PRISMA Executive; `prisma-flow` is not affiliated with or endorsed
+by them.
+
 ## Implemented in v0.1
 
 | Template enum | Value |
@@ -13,6 +19,10 @@ arbitrary graphs.
 
 This template supports the standard PRISMA 2020 new-review flow with databases
 and registers.
+
+The official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0.
+When publishing or presenting diagrams, cite the original PRISMA 2020 papers;
+see [PRISMA acknowledgement and references](references.qmd).
 
 ## Planned templates
 

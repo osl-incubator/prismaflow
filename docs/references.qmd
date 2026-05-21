@@ -1,0 +1,63 @@
+---
+title: PRISMA acknowledgement and references
+---
+
+`prisma-flow` is an independent Python implementation for producing
+PRISMA-style flow diagrams. It is not the PRISMA reporting guideline itself and
+is not affiliated with or endorsed by the PRISMA Executive.
+
+## What PRISMA is
+
+PRISMA stands for **Preferred Reporting Items for Systematic reviews and
+Meta-Analyses**. The official PRISMA website describes PRISMA as a reporting
+guideline intended to improve reporting of systematic reviews and to guide
+authors in reporting why a review was done, what methods were used, and what
+results were found.
+
+The current main guideline is **PRISMA 2020**. It includes the statement paper,
+checklists, and template flow diagrams for original and updated reviews.
+
+## Acknowledgement
+
+The PRISMA 2020 reporting guideline, checklist, and flow diagram templates were
+developed by the PRISMA 2020 authors and are maintained through the PRISMA
+Executive. `prisma-flow` acknowledges that work and aims only to provide a
+Python implementation for generating diagrams and validating count
+relationships in software workflows.
+
+When using `prisma-flow` outputs in reports, manuscripts, presentations, or
+software documentation, cite the original PRISMA 2020 publications rather than
+citing `prisma-flow` as the source of the reporting guideline.
+
+## Recommended PRISMA citations
+
+The PRISMA website recommends citing the journal articles presenting the
+statement paper and the explanation and elaboration paper.
+
+### Statement paper
+
+Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al.
+The PRISMA 2020 statement: an updated guideline for reporting systematic
+reviews. *BMJ*. 2021;372:n71. doi:
+[10.1136/bmj.n71](https://doi.org/10.1136/bmj.n71).
+
+### Explanation and elaboration paper
+
+Page MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al.
+PRISMA 2020 explanation and elaboration: updated guidance and exemplars for
+reporting systematic reviews. *BMJ*. 2021;372:n160. doi:
+[10.1136/bmj.n160](https://doi.org/10.1136/bmj.n160).
+
+## Official resources
+
+- [PRISMA website](https://www.prisma-statement.org/)
+- [PRISMA 2020 overview](https://www.prisma-statement.org/prisma-2020)
+- [PRISMA 2020 flow diagrams](https://www.prisma-statement.org/prisma-2020-flow-diagram)
+- [Citing PRISMA 2020](https://www.prisma-statement.org/citing-prisma-2020)
+
+## Flow diagram licensing
+
+The official PRISMA 2020 flow diagram templates are distributed under the
+[Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+That license permits reuse and adaptation, including commercial use, provided
+the original work is properly cited.

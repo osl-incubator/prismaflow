@@ -10,6 +10,12 @@ description: Lightweight PRISMA-style flow diagrams for evidence synthesis workf
 diagrams for systematic reviews, scoping reviews, evidence syntheses, and
 literature review workflows.
 
+PRISMA refers to the **Preferred Reporting Items for Systematic reviews and
+Meta-Analyses** reporting guideline. `prisma-flow` is an independent Python
+implementation for generating PRISMA-style flow diagrams; it is not the PRISMA
+guideline itself. See [PRISMA acknowledgement and references](references.qmd)
+for original publications and official resources.
+
 The default output is **SVG rendered with pure Python**. There are no required
 system-level layout or rendering tools.
 :::
@@ -83,3 +89,7 @@ prisma-flow render examples/basic_new_review.json -o prisma.svg
 PRISMA flow diagrams are structured reporting documents, not arbitrary graphs.
 `prisma-flow` uses fixed PRISMA templates and a small layout engine so output is
 predictable and easy to reproduce in research workflows.
+
+The implemented templates are based on the official PRISMA 2020 flow diagram
+templates. Please cite the PRISMA 2020 statement and explanation/elaboration
+papers when using PRISMA-style diagrams in scholarly outputs.
