@@ -1,6 +1,6 @@
 [project]
 name = "prisma-flow"
-version = "0.3.0"  # semantic-release
+version = "0.4.0"  # semantic-release
 description = "Lightweight Python tools for generating PRISMA-style flow diagrams without system dependencies."
 readme = "README.md"
 requires-python = ">=3.10,<4"

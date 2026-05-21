@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.4.0](https://github.com/osl-incubator/prisma-flow/compare/0.3.0...0.4.0) (2026-05-21)
+
+
+### Features
+
+* Add support for exporting to png ([0a7adb0](https://github.com/osl-incubator/prisma-flow/commit/0a7adb07b9da43763555c920b07805e693760f80))
+
 # [0.3.0](https://github.com/osl-incubator/prisma-flow/compare/0.2.0...0.3.0) (2026-05-21)
 
 
