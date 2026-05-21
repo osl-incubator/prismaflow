@@ -45,7 +45,7 @@ rendering stacks.
 - `src/prismaflow/cli.py`: command-line interface
 - `examples/`: runnable example inputs/scripts
 - `tests/`: pytest coverage
-- `docs/`: MkDocs documentation
+- `docs/`: Quarto documentation website
 
 ## Development commands
 
@@ -56,6 +56,7 @@ uv run ruff format --check .
 uv run mypy src
 uv run pytest
 uv build
+quarto render docs
 ```
 
 Makim wrappers:

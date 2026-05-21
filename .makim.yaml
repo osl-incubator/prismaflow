@@ -22,43 +22,24 @@ groups:
 
   docs:
     tasks:
-      render:
-        help: Render documentation
+      build:
+        help: Build the Quarto documentation website
         backend: bash
-        env-file: tests/.env
+        run: quarto render docs --no-execute-daemon
+
+      render:
+        help: Alias for docs.build
         hooks:
           pre-run:
-            - task: tests.ensure-env
-          post-run:
             - task: docs.build
-        run: |
-          QUARTO_PYTHON=$(which python) quarto render docs/example.qmd \
-            --to md \
-            --output example.md \
-            --output-dir docs/ \
-            --no-execute-daemon
-
-      build:
-        help: Build documentation
-        backend: bash
-        run: |
-          mkdocs build --config-file mkdocs.yaml
 
       preview:
-        help: Preview documentation page locally
-        hooks:
-          pre-run:
-            - task: docs.build
-        run: |
-          mkdocs serve --watch docs --config-file mkdocs.yaml
+        help: Preview the Quarto documentation website locally
+        backend: bash
+        run: quarto preview docs
 
   tests:
     tasks:
-      ensure-env:
-        help: Ensure the dotenv file
-        backend: bash
-        run: touch .env
-
       linter:
         help: Run linter tools
         run: |
@@ -85,18 +66,18 @@ groups:
             --no-cov-on-fail ${{ args.path }} ${{ args.params }}
 
       ci:
-        help: run the sames tests executed on CI
+        help: run the same tests executed on CI
         hooks:
           pre-run:
             - task: tests.unit
             - task: tests.linter
+            - task: docs.build
 
   package:
     tasks:
       build:
-        help: "Build the package"
-        run: |
-          ./scripts/build.sh
+        help: Build the package
+        run: uv build
 
   release:
     vars:
@@ -120,10 +101,3 @@ groups:
       dry:
         help: run semantic release in dry-run mode
         run: ${{ vars.app }} --dry-run
-
-  gen:
-    tasks:
-      fhir-models:
-        help: Auto-generate the FHIR models
-        run: |
-          python scripts/gen_models/gen_sqla.py

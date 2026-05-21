@@ -1,0 +1,42 @@
+---
+title: Dependency policy
+---
+
+The core package is intentionally small.
+
+## Required runtime dependency
+
+- `pydantic>=2`
+
+## Base-install outputs
+
+These work without optional extras:
+
+- SVG
+- HTML
+- Mermaid text
+- JSON
+
+## Optional extras
+
+| Extra | Purpose |
+|---|---|
+| `prisma-flow[yaml]` | YAML input/output through PyYAML. |
+| `prisma-flow[png]` | Future optional PNG backend. |
+
+## Not required
+
+The package does not require:
+
+- Graphviz
+- Cairo or CairoSVG
+- Node
+- Mermaid CLI
+- Inkscape
+- Playwright
+- browser engines
+- Matplotlib
+- Plotly
+
+Documentation is built with Quarto, but Quarto is a development/documentation
+tool and not a runtime dependency of `prisma-flow`.

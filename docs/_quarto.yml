@@ -1,0 +1,69 @@
+project:
+  type: website
+  output-dir: ../build
+
+website:
+  title: prisma-flow
+  description: Lightweight Python tools for generating PRISMA-style flow diagrams without system dependencies.
+  site-url: https://osl-incubator.github.io/prisma-flow/
+  repo-url: https://github.com/osl-incubator/prisma-flow
+  repo-actions: [edit, issue]
+  page-navigation: true
+  bread-crumbs: true
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - href: installation.qmd
+        text: Install
+      - href: quickstart.qmd
+        text: Quickstart
+      - href: cli.qmd
+        text: CLI
+      - href: api.qmd
+        text: API
+    right:
+      - icon: github
+        href: https://github.com/osl-incubator/prisma-flow
+        aria-label: GitHub repository
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: Get started
+        contents:
+          - index.qmd
+          - installation.qmd
+          - quickstart.qmd
+      - section: User guide
+        contents:
+          - data-model.qmd
+          - validation.qmd
+          - rendering.qmd
+          - cli.qmd
+          - templates.qmd
+      - section: Reference
+        contents:
+          - api.qmd
+          - examples.qmd
+          - dependency-policy.qmd
+          - changelog.qmd
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    link-external-newwindow: true
+    mermaid:
+      theme: default
+
+execute:
+  freeze: auto

@@ -1,0 +1,91 @@
+---
+title: Quickstart
+---
+
+## 1. Create a flow
+
+```python
+from prismaflow import PrismaFlow
+
+flow = PrismaFlow.new_review(
+    title="Example PRISMA Flow Diagram",
+    records_identified_databases=1240,
+    records_identified_registers=50,
+    records_removed_duplicates=210,
+    records_removed_automation=0,
+    records_removed_other=0,
+    records_screened=1080,
+    records_excluded=950,
+    reports_sought=130,
+    reports_not_retrieved=10,
+    reports_assessed=120,
+    reports_excluded={
+        "Wrong population": 30,
+        "Wrong intervention": 20,
+        "Wrong outcome": 15,
+        "Not primary research": 15,
+    },
+    studies_included=40,
+)
+```
+
+## 2. Validate counts
+
+```python
+report = flow.validate()
+print(report.format_text())
+```
+
+A valid flow prints:
+
+```text
+Validation passed.
+```
+
+## 3. Export outputs
+
+```python
+flow.to_svg("prisma.svg")
+flow.to_html("prisma.html")
+flow.to_mermaid("prisma.mmd")
+flow.to_json("review.json")
+```
+
+## 4. Render from JSON
+
+The same flow can be represented as JSON:
+
+```json
+{
+  "template": "prisma_2020_new_databases_registers",
+  "identification": {
+    "records_identified_databases": 1240,
+    "records_identified_registers": 50
+  },
+  "screening": {
+    "records_removed_duplicates": 210,
+    "records_removed_automation": 0,
+    "records_removed_other": 0,
+    "records_screened": 1080,
+    "records_excluded": 950
+  },
+  "eligibility": {
+    "reports_sought": 130,
+    "reports_not_retrieved": 10,
+    "reports_assessed": 120,
+    "reports_excluded": {
+      "Wrong population": 30,
+      "Wrong intervention": 20
+    }
+  },
+  "included": {
+    "studies_included": 40
+  }
+}
+```
+
+Render it with the CLI:
+
+```bash
+prisma-flow render review.json -o prisma.svg
+```

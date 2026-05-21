@@ -51,10 +51,7 @@ dev = [
   "pre-commit>=3",
   "makim==1.29.0"
 ]
-docs = [
-  "mkdocs>=1.6",
-  "mkdocs-material>=9",
-]
+docs = []
 
 [project.scripts]
 prisma-flow = "prismaflow.cli:main"

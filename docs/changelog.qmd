@@ -1,0 +1,9 @@
+---
+title: Changelog
+---
+
+## 0.1.0
+
+- Initial PRISMA 2020 new-review databases/registers implementation.
+- Added Pydantic models, validation reports, SVG/HTML/Mermaid renderers,
+  JSON/YAML I/O, CLI, examples, tests, and Quarto documentation.

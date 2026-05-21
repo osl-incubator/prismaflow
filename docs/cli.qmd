@@ -1,0 +1,60 @@
+---
+title: Command-line interface
+---
+
+The installed command is:
+
+```bash
+prisma-flow
+```
+
+## Validate
+
+```bash
+prisma-flow validate review.json
+```
+
+Use strict included-study reconciliation:
+
+```bash
+prisma-flow validate review.json --strict-included
+```
+
+## Render
+
+Render SVG:
+
+```bash
+prisma-flow render review.json --format svg --output prisma.svg
+```
+
+Short form:
+
+```bash
+prisma-flow render review.json -o prisma.svg
+```
+
+Render HTML:
+
+```bash
+prisma-flow render review.json -f html -o prisma.html
+```
+
+Render Mermaid text:
+
+```bash
+prisma-flow render review.json -f mermaid -o prisma.mmd
+```
+
+## Format inference
+
+When `--format` is omitted, the CLI infers the format from the output extension.
+For example, `-o prisma.html` renders HTML.
+
+## Invalid inputs
+
+Rendering stops when validation has errors. To render anyway:
+
+```bash
+prisma-flow render review.json -o prisma.svg --allow-invalid
+```

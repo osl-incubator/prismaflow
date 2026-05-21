@@ -1,0 +1,80 @@
+---
+title: Installation
+---
+
+## Base install
+
+Install from PyPI with `pip`:
+
+```bash
+pip install prisma-flow
+```
+
+or with `uv`:
+
+```bash
+uv add prisma-flow
+```
+
+The base install supports:
+
+- JSON input and output
+- SVG rendering
+- standalone HTML rendering
+- Mermaid text rendering
+- validation reports
+- the `prisma-flow` CLI
+
+## Optional YAML support
+
+```bash
+pip install "prisma-flow[yaml]"
+```
+
+or:
+
+```bash
+uv add "prisma-flow[yaml]"
+```
+
+## Optional PNG support
+
+PNG export is intentionally optional. In v0.1, `to_png()` and
+`prisma-flow render --format png` raise a clear optional-dependency error rather
+than adding a required rendering stack.
+
+```bash
+uv add "prisma-flow[png]"
+```
+
+## Development install
+
+```bash
+uv sync --all-extras --dev
+```
+
+Run quality checks:
+
+```bash
+uv run ruff check .
+uv run ruff format --check .
+uv run mypy src
+uv run pytest
+uv build
+```
+
+## Documentation tooling
+
+The documentation site is built with [Quarto](https://quarto.org/). If you use
+Conda, install the development environment:
+
+```bash
+conda env create -f conda/dev.yaml
+conda activate prismaflow
+```
+
+Build the docs:
+
+```bash
+quarto render docs
+```

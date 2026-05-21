@@ -117,8 +117,8 @@ def validate_flow(
         it is a warning by default because one study can have multiple reports.
 
     """
-    errors: list[ValidationMessage] = Field(default_factory=list)
-    warnings: list[ValidationMessage] = Field(default_factory=list)
+    errors: list[ValidationMessage] = []
+    warnings: list[ValidationMessage] = []
 
     expected_screened = (
         flow.identification.records_identified_total

@@ -1,0 +1,50 @@
+---
+title: Validation
+---
+
+`prisma-flow` validates PRISMA count relationships before rendering.
+
+## Hard validation rules
+
+```text
+records_screened = identified_total - removed_total
+reports_sought = records_screened - records_excluded
+reports_assessed = reports_sought - reports_not_retrieved
+```
+
+All counts must be non-negative integers.
+
+## Included-study reconciliation
+
+This relationship is a warning by default:
+
+```text
+studies_included = reports_assessed - reports_excluded_total
+```
+
+It is not a hard error in v0.1 because one study can have multiple reports.
+Use strict validation when your workflow expects a one-to-one relationship.
+
+```python
+report = flow.validate(strict_included=True)
+```
+
+## Validation report
+
+`validate()` returns a `ValidationReport`:
+
+```python
+report = flow.validate()
+
+if report.ok:
+    print("Ready to render")
+else:
+    print(report.format_text())
+```
+
+A failed report looks like:
+
+```text
+Validation failed:
+- records_screened should equal identified records minus removed records. Expected: 1080 Found: 1090
+```

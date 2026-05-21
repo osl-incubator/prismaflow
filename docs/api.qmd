@@ -1,0 +1,46 @@
+---
+title: API reference
+---
+
+The public API is exported from `prismaflow`.
+
+## Core model
+
+- `PrismaFlow`
+- `FlowMetadata`
+
+## Stage models
+
+- `IdentificationStage`
+- `ScreeningStage`
+- `EligibilityStage`
+- `IncludedStage`
+
+## Enums
+
+- `PrismaTemplate`
+
+## Validation
+
+- `ValidationReport`
+- `ValidationMessage`
+- `validate_flow`
+
+## Exceptions
+
+- `PrismaFlowError`
+- `PrismaValidationError`
+- `TemplateNotSupportedError`
+- `OptionalDependencyError`
+
+## Common methods
+
+| Method | Description |
+|---|---|
+| `PrismaFlow.new_review(...)` | Create a v0.1 new-review flow from flat count arguments. |
+| `flow.validate()` | Return a structured validation report. |
+| `flow.to_svg(path=None)` | Render SVG text and optionally write a file. |
+| `flow.to_html(path=None)` | Render standalone HTML and optionally write a file. |
+| `flow.to_mermaid(path=None)` | Render Mermaid text and optionally write a file. |
+| `flow.to_json(path=None)` | Serialize JSON and optionally write a file. |
+| `PrismaFlow.from_json(source)` | Load a flow from JSON text or a JSON path. |

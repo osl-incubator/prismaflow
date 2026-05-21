@@ -1,0 +1,74 @@
+---
+title: Data model
+---
+
+The main model is `PrismaFlow`. It contains four PRISMA stages and optional
+metadata.
+
+```python
+from prismaflow import (
+    EligibilityStage,
+    IdentificationStage,
+    IncludedStage,
+    PrismaFlow,
+    PrismaTemplate,
+    ScreeningStage,
+)
+
+flow = PrismaFlow(
+    template=PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS,
+    title="Example PRISMA Flow Diagram",
+    identification=IdentificationStage(
+        records_identified_databases=1240,
+        records_identified_registers=50,
+    ),
+    screening=ScreeningStage(
+        records_removed_duplicates=210,
+        records_removed_automation=0,
+        records_removed_other=0,
+        records_screened=1080,
+        records_excluded=950,
+    ),
+    eligibility=EligibilityStage(
+        reports_sought=130,
+        reports_not_retrieved=10,
+        reports_assessed=120,
+        reports_excluded={"Wrong population": 30},
+    ),
+    included=IncludedStage(studies_included=40),
+)
+```
+
+## Stages
+
+### Identification
+
+- `records_identified_databases`
+- `records_identified_registers`
+- computed property: `records_identified_total`
+
+### Screening
+
+- `records_removed_duplicates`
+- `records_removed_automation`
+- `records_removed_other`
+- `records_screened`
+- `records_excluded`
+- computed property: `records_removed_total`
+
+### Eligibility
+
+- `reports_sought`
+- `reports_not_retrieved`
+- `reports_assessed`
+- `reports_excluded`
+- computed property: `reports_excluded_total`
+
+### Included
+
+- `studies_included`
+
+## Count types
+
+All count fields are strict non-negative integers. String values such as
+`"10"` are not accepted as counts.

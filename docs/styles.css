@@ -1,0 +1,40 @@
+:root {
+  --pf-accent: #356859;
+  --pf-accent-light: #e8f3ef;
+}
+
+.hero {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--pf-accent-light), #ffffff);
+  border: 1px solid #d8e8e2;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  margin-top: 0;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin: 1.5rem 0;
+}
+
+.feature-card {
+  border: 1px solid #d8dee4;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+.feature-card h3 {
+  margin-top: 0;
+  color: var(--pf-accent);
+}
+
+.callout-tip strong,
+.callout-note strong {
+  color: var(--pf-accent);
+}

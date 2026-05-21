@@ -1,0 +1,26 @@
+---
+title: Templates
+---
+
+`prisma-flow` treats PRISMA diagrams as template-based documents rather than
+arbitrary graphs.
+
+## Implemented in v0.1
+
+| Template enum | Value |
+|---|---|
+| `PRISMA_2020_NEW_DATABASES_REGISTERS` | `prisma_2020_new_databases_registers` |
+
+This template supports the standard PRISMA 2020 new-review flow with databases
+and registers.
+
+## Planned templates
+
+The enum also reserves future template values:
+
+- `PRISMA_2020_NEW_DATABASES_REGISTERS_OTHER`
+- `PRISMA_2020_UPDATED_DATABASES_REGISTERS`
+- `PRISMA_2020_UPDATED_DATABASES_REGISTERS_OTHER`
+
+Attempting to render a planned-but-unimplemented template raises
+`TemplateNotSupportedError`.

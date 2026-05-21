@@ -140,7 +140,10 @@ class SVGRenderer:
             + [f"L {point.x:g} {point.y:g}" for point in points[1:]]
         )
         css_class = "edge" + (f" {edge.css_class}" if edge.css_class else "")
-        return f'<path id="{escape(edge.id)}" class="{css_class}" d="{path}" />'
+        return (
+            f'<path id="{escape(edge.id)}" class="{css_class}" d="{path}" '
+            'marker-end="url(#arrowhead)" />'
+        )
 
     @staticmethod
     def _edge_points(layout: DiagramLayout, edge: DiagramEdge) -> list[Point]:

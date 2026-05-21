@@ -166,6 +166,7 @@ uv run ruff check .
 uv run mypy src
 uv run pytest
 uv build
+quarto render docs
 ```
 
 Useful Makim tasks are also available:
@@ -175,6 +176,20 @@ makim prisma-flow.unittests
 makim prisma-flow.typecheck
 makim prisma-flow.lint
 makim prisma-flow.build
+```
+
+## Documentation
+
+The documentation site is built with Quarto:
+
+```bash
+quarto render docs
+```
+
+Preview locally:
+
+```bash
+quarto preview docs
 ```
 
 ## License
