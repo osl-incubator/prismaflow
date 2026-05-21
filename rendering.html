@@ -453,6 +453,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PRISMA acknowledgement and references</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./changelog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Changelog</span></a>
   </div>
@@ -470,6 +476,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#svg" id="toc-svg" class="nav-link active" data-scroll-target="#svg">SVG</a></li>
+  <li><a href="#notebook-display" id="toc-notebook-display" class="nav-link" data-scroll-target="#notebook-display">Notebook display</a></li>
   <li><a href="#html" id="toc-html" class="nav-link" data-scroll-target="#html">HTML</a></li>
   <li><a href="#mermaid" id="toc-mermaid" class="nav-link" data-scroll-target="#mermaid">Mermaid</a></li>
   <li><a href="#png" id="toc-png" class="nav-link" data-scroll-target="#png">PNG</a></li>
@@ -514,24 +521,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>rectangles</li>
 <li>arrows</li>
 <li>side boxes</li>
+<li>PRISMA 2020-style header, stage labels, footnotes, and source citation</li>
 <li>wrapped multiline text</li>
 <li>escaped user text</li>
 <li>embedded CSS</li>
 <li>accessibility title and description</li>
 </ul>
 </section>
+<section id="notebook-display" class="level2">
+<h2 class="anchored" data-anchor-id="notebook-display">Notebook display</h2>
+<p><code>PrismaFlow</code> implements the Jupyter rich display protocol directly. In notebook frontends, evaluate a flow object as the last expression in a cell to display the SVG diagram inline:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prismaflow <span class="im">import</span> new_review</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>flow <span class="op">=</span> new_review(...)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>flow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This uses SVG MIME output and does not require <code>prisma-flow</code> to depend on Jupyter or IPython.</p>
+</section>
 <section id="html" class="level2">
 <h2 class="anchored" data-anchor-id="html">HTML</h2>
 <p>HTML output embeds the generated SVG in a standalone document.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>flow.to_html(<span class="st">"prisma.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flow.to_html(<span class="st">"prisma.html"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mermaid" class="level2">
 <h2 class="anchored" data-anchor-id="mermaid">Mermaid</h2>
 <p>Mermaid output is text only. <code>prisma-flow</code> does not call Mermaid CLI.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flow.to_mermaid(<span class="st">"prisma.mmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flow.to_mermaid(<span class="st">"prisma.mmd"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Example output:</p>
 <pre class="mermaid"><code>flowchart TD
-    A["Records identified from:&lt;br/&gt;Databases (n = 1240)"]
+    A["Records identified from*:&lt;br/&gt;Databases (n = 1240)"]
     B["Records removed before screening"]
     A --&gt; B</code></pre>
 </section>

@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/dependency-policy.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/templates.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/installation.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/quickstart.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/data-model.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
-    <loc>https://osl-incubator.github.io/prisma-flow/examples.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <loc>https://osl-incubator.github.io/prisma-flow/references.html</loc>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/rendering.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
+  </url>
+  <url>
+    <loc>https://osl-incubator.github.io/prisma-flow/examples.html</loc>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/cli.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/index.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/validation.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/api.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
   <url>
     <loc>https://osl-incubator.github.io/prisma-flow/changelog.html</loc>
-    <lastmod>2026-05-21T15:21:33.544Z</lastmod>
+    <lastmod>2026-05-21T20:42:47.869Z</lastmod>
   </url>
 </urlset>

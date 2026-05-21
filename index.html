@@ -453,6 +453,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PRISMA acknowledgement and references</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./changelog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Changelog</span></a>
   </div>
@@ -507,6 +513,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="prisma-flow" class="level1 hero">
 <h1>prisma-flow</h1>
 <p><code>prisma-flow</code> is a lightweight Python package for generating PRISMA-style flow diagrams for systematic reviews, scoping reviews, evidence syntheses, and literature review workflows.</p>
+<p>PRISMA refers to the <strong>Preferred Reporting Items for Systematic reviews and Meta-Analyses</strong> reporting guideline. <code>prisma-flow</code> is an independent Python implementation for generating PRISMA-style flow diagrams; it is not the PRISMA guideline itself. See <a href="./references.html">PRISMA acknowledgement and references</a> for original publications and official resources.</p>
 <p>The default output is <strong>SVG rendered with pure Python</strong>. There are no required system-level layout or rendering tools.</p>
 </section>
 <div class="feature-grid">
@@ -529,9 +536,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="minimal-example" class="level2">
 <h2 class="anchored" data-anchor-id="minimal-example">Minimal example</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prismaflow <span class="im">import</span> PrismaFlow</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> prismaflow <span class="im">import</span> new_review</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>flow <span class="op">=</span> PrismaFlow.new_review(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>flow <span class="op">=</span> new_review(</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    records_identified_databases<span class="op">=</span><span class="dv">1240</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    records_identified_registers<span class="op">=</span><span class="dv">50</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    records_removed_duplicates<span class="op">=</span><span class="dv">210</span>,</span>
@@ -560,6 +567,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="why-template-based-diagrams" class="level2">
 <h2 class="anchored" data-anchor-id="why-template-based-diagrams">Why template-based diagrams?</h2>
 <p>PRISMA flow diagrams are structured reporting documents, not arbitrary graphs. <code>prisma-flow</code> uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.</p>
+<p>The implemented templates are based on the official PRISMA 2020 flow diagram templates. Please cite the PRISMA 2020 statement and explanation/elaboration papers when using PRISMA-style diagrams in scholarly outputs.</p>
 
 
 </section>

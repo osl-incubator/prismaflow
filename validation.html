@@ -453,6 +453,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PRISMA acknowledgement and references</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./changelog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Changelog</span></a>
   </div>
@@ -499,6 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><code>prisma-flow</code> validates PRISMA count relationships before rendering.</p>
+<p>These checks are intended to help catch arithmetic inconsistencies in data used to populate PRISMA-style flow diagrams. They do not replace the PRISMA 2020 reporting guideline, checklist, or author guidance; cite and follow the original PRISMA publications for scholarly reporting.</p>
 <section id="hard-validation-rules" class="level2">
 <h2 class="anchored" data-anchor-id="hard-validation-rules">Hard validation rules</h2>
 <pre class="text"><code>records_screened = identified_total - removed_total

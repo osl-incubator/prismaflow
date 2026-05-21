@@ -418,6 +418,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PRISMA acknowledgement and references</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./changelog.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Changelog</span></a>
   </div>
@@ -472,6 +478,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><code>PrismaFlow</code></li>
 <li><code>FlowMetadata</code></li>
+<li><code>new_review</code></li>
 </ul>
 </section>
 <section id="stage-models" class="level2">
@@ -521,8 +528,16 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>PrismaFlow.new_review(...)</code></td>
+<td><code>new_review(...)</code></td>
 <td>Create a v0.1 new-review flow from flat count arguments.</td>
+</tr>
+<tr class="even">
+<td><code>PrismaFlow(...)</code></td>
+<td>Create a flow from nested stage models.</td>
+</tr>
+<tr class="odd">
+<td><code>PrismaFlow.new_review(...)</code></td>
+<td>Compatibility factory for a v0.1 new-review flow.</td>
 </tr>
 <tr class="even">
 <td><code>flow.validate()</code></td>
@@ -531,6 +546,14 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td><code>flow.to_svg(path=None)</code></td>
 <td>Render SVG text and optionally write a file.</td>
+</tr>
+<tr class="even">
+<td><code>flow._repr_svg_()</code></td>
+<td>Return SVG for inline notebook display.</td>
+</tr>
+<tr class="odd">
+<td><code>flow._repr_mimebundle_()</code></td>
+<td>Return an SVG MIME bundle for notebook frontends.</td>
 </tr>
 <tr class="even">
 <td><code>flow.to_html(path=None)</code></td>

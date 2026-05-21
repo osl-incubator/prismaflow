@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Command-line interface – prisma-flow</title>
+<title>PRISMA acknowledgement and references – prisma-flow</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -68,8 +33,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./templates.html" rel="next">
-<link href="./rendering.html" rel="prev">
+<link href="./changelog.html" rel="next">
+<link href="./dependency-policy.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -334,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-model.html">User guide</a></li><li class="breadcrumb-item"><a href="./cli.html">Command-line interface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Reference</a></li><li class="breadcrumb-item"><a href="./references.html">PRISMA acknowledgement and references</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -412,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./cli.html" class="sidebar-item-text sidebar-link active">
+  <a href="./cli.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Command-line interface</span></a>
   </div>
 </li>
@@ -453,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.html" class="sidebar-item-text sidebar-link">
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">PRISMA acknowledgement and references</span></a>
   </div>
 </li>
@@ -475,20 +440,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#validate" id="toc-validate" class="nav-link active" data-scroll-target="#validate">Validate</a></li>
-  <li><a href="#render" id="toc-render" class="nav-link" data-scroll-target="#render">Render</a></li>
-  <li><a href="#format-inference" id="toc-format-inference" class="nav-link" data-scroll-target="#format-inference">Format inference</a></li>
-  <li><a href="#invalid-inputs" id="toc-invalid-inputs" class="nav-link" data-scroll-target="#invalid-inputs">Invalid inputs</a></li>
+  <li><a href="#what-prisma-is" id="toc-what-prisma-is" class="nav-link active" data-scroll-target="#what-prisma-is">What PRISMA is</a></li>
+  <li><a href="#acknowledgement" id="toc-acknowledgement" class="nav-link" data-scroll-target="#acknowledgement">Acknowledgement</a></li>
+  <li><a href="#recommended-prisma-citations" id="toc-recommended-prisma-citations" class="nav-link" data-scroll-target="#recommended-prisma-citations">Recommended PRISMA citations</a>
+  <ul class="collapse">
+  <li><a href="#statement-paper" id="toc-statement-paper" class="nav-link" data-scroll-target="#statement-paper">Statement paper</a></li>
+  <li><a href="#explanation-and-elaboration-paper" id="toc-explanation-and-elaboration-paper" class="nav-link" data-scroll-target="#explanation-and-elaboration-paper">Explanation and elaboration paper</a></li>
+  </ul></li>
+  <li><a href="#official-resources" id="toc-official-resources" class="nav-link" data-scroll-target="#official-resources">Official resources</a></li>
+  <li><a href="#flow-diagram-licensing" id="toc-flow-diagram-licensing" class="nav-link" data-scroll-target="#flow-diagram-licensing">Flow diagram licensing</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/osl-incubator/prisma-flow/edit/main/cli.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/osl-incubator/prisma-flow/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/osl-incubator/prisma-flow/edit/main/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/osl-incubator/prisma-flow/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data-model.html">User guide</a></li><li class="breadcrumb-item"><a href="./cli.html">Command-line interface</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./api.html">Reference</a></li><li class="breadcrumb-item"><a href="./references.html">PRISMA acknowledgement and references</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Command-line interface</h1>
+<h1 class="title">PRISMA acknowledgement and references</h1>
 </div>
 
 
@@ -505,33 +475,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The installed command is:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="validate" class="level2">
-<h2 class="anchored" data-anchor-id="validate">Validate</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> validate review.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Use strict included-study reconciliation:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> validate review.json <span class="at">--strict-included</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>prisma-flow</code> is an independent Python implementation for producing PRISMA-style flow diagrams. It is not the PRISMA reporting guideline itself and is not affiliated with or endorsed by the PRISMA Executive.</p>
+<section id="what-prisma-is" class="level2">
+<h2 class="anchored" data-anchor-id="what-prisma-is">What PRISMA is</h2>
+<p>PRISMA stands for <strong>Preferred Reporting Items for Systematic reviews and Meta-Analyses</strong>. The official PRISMA website describes PRISMA as a reporting guideline intended to improve reporting of systematic reviews and to guide authors in reporting why a review was done, what methods were used, and what results were found.</p>
+<p>The current main guideline is <strong>PRISMA 2020</strong>. It includes the statement paper, checklists, and template flow diagrams for original and updated reviews.</p>
 </section>
-<section id="render" class="level2">
-<h2 class="anchored" data-anchor-id="render">Render</h2>
-<p>Render SVG:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> render review.json <span class="at">--format</span> svg <span class="at">--output</span> prisma.svg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Short form:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> render review.json <span class="at">-o</span> prisma.svg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Render HTML:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> render review.json <span class="at">-f</span> html <span class="at">-o</span> prisma.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Render Mermaid text:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> render review.json <span class="at">-f</span> mermaid <span class="at">-o</span> prisma.mmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="acknowledgement" class="level2">
+<h2 class="anchored" data-anchor-id="acknowledgement">Acknowledgement</h2>
+<p>The PRISMA 2020 reporting guideline, checklist, and flow diagram templates were developed by the PRISMA 2020 authors and are maintained through the PRISMA Executive. <code>prisma-flow</code> acknowledges that work and aims only to provide a Python implementation for generating diagrams and validating count relationships in software workflows.</p>
+<p>When using <code>prisma-flow</code> outputs in reports, manuscripts, presentations, or software documentation, cite the original PRISMA 2020 publications rather than citing <code>prisma-flow</code> as the source of the reporting guideline.</p>
 </section>
-<section id="format-inference" class="level2">
-<h2 class="anchored" data-anchor-id="format-inference">Format inference</h2>
-<p>When <code>--format</code> is omitted, the CLI infers the format from the output extension. For example, <code>-o prisma.html</code> renders HTML.</p>
+<section id="recommended-prisma-citations" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-prisma-citations">Recommended PRISMA citations</h2>
+<p>The PRISMA website recommends citing the journal articles presenting the statement paper and the explanation and elaboration paper.</p>
+<section id="statement-paper" class="level3">
+<h3 class="anchored" data-anchor-id="statement-paper">Statement paper</h3>
+<p>Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. <em>BMJ</em>. 2021;372:n71. doi: <a href="https://doi.org/10.1136/bmj.n71">10.1136/bmj.n71</a>.</p>
 </section>
-<section id="invalid-inputs" class="level2">
-<h2 class="anchored" data-anchor-id="invalid-inputs">Invalid inputs</h2>
-<p>Rendering stops when validation has errors. To render anyway:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prisma-flow</span> render review.json <span class="at">-o</span> prisma.svg <span class="at">--allow-invalid</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="explanation-and-elaboration-paper" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-and-elaboration-paper">Explanation and elaboration paper</h3>
+<p>Page MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. <em>BMJ</em>. 2021;372:n160. doi: <a href="https://doi.org/10.1136/bmj.n160">10.1136/bmj.n160</a>.</p>
+</section>
+</section>
+<section id="official-resources" class="level2">
+<h2 class="anchored" data-anchor-id="official-resources">Official resources</h2>
+<ul>
+<li><a href="https://www.prisma-statement.org/">PRISMA website</a></li>
+<li><a href="https://www.prisma-statement.org/prisma-2020">PRISMA 2020 overview</a></li>
+<li><a href="https://www.prisma-statement.org/prisma-2020-flow-diagram">PRISMA 2020 flow diagrams</a></li>
+<li><a href="https://www.prisma-statement.org/citing-prisma-2020">Citing PRISMA 2020</a></li>
+</ul>
+</section>
+<section id="flow-diagram-licensing" class="level2">
+<h2 class="anchored" data-anchor-id="flow-diagram-licensing">Flow diagram licensing</h2>
+<p>The official PRISMA 2020 flow diagram templates are distributed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. That license permits reuse and adaptation, including commercial use, provided the original work is properly cited.</p>
 
 
 </section>
@@ -957,13 +935,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./rendering.html" class="pagination-link" aria-label="Rendering">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Rendering</span>
+      <a href="./dependency-policy.html" class="pagination-link" aria-label="Dependency policy">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Dependency policy</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./templates.html" class="pagination-link" aria-label="Templates">
-        <span class="nav-page-text">Templates</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./changelog.html" class="pagination-link" aria-label="Changelog">
+        <span class="nav-page-text">Changelog</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -972,4 +950,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/osl-incubator/prisma-flow/edit/main/cli.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/osl-incubator/prisma-flow/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/osl-incubator/prisma-flow/edit/main/references.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/osl-incubator/prisma-flow/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

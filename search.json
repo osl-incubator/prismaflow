@@ -64,7 +64,7 @@
     "href": "templates.html",
     "title": "Templates",
     "section": "",
-    "text": "prisma-flow treats PRISMA diagrams as template-based documents rather than arbitrary graphs.",
+    "text": "prisma-flow treats PRISMA diagrams as template-based documents rather than arbitrary graphs.\nTemplates in this package are software implementations of the official PRISMA 2020 flow diagram structures. The PRISMA 2020 reporting guideline, checklist, and flow diagrams were developed by the PRISMA 2020 authors and are maintained through the PRISMA Executive; prisma-flow is not affiliated with or endorsed by them.",
     "crumbs": [
       "Home",
       "User guide",
@@ -76,7 +76,7 @@
     "href": "templates.html#implemented-in-v0.1",
     "title": "Templates",
     "section": "Implemented in v0.1",
-    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\n\nThis template supports the standard PRISMA 2020 new-review flow with databases and registers.",
+    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\n\nThis template supports the standard PRISMA 2020 new-review flow with databases and registers.\nThe official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0. When publishing or presenting diagrams, cite the original PRISMA 2020 papers; see PRISMA acknowledgement and references.",
     "crumbs": [
       "Home",
       "User guide",
@@ -172,7 +172,7 @@
     "href": "quickstart.html",
     "title": "Quickstart",
     "section": "",
-    "text": "from prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
     "crumbs": [
       "Home",
       "Get started",
@@ -184,7 +184,7 @@
     "href": "quickstart.html#create-a-flow",
     "title": "Quickstart",
     "section": "",
-    "text": "from prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
     "crumbs": [
       "Home",
       "Get started",
@@ -232,7 +232,7 @@
     "href": "data-model.html",
     "title": "Data model",
     "section": "",
-    "text": "The main model is PrismaFlow. It contains four PRISMA stages and optional metadata.",
+    "text": "The main model is PrismaFlow. It contains four PRISMA stages and optional metadata.\nThe stage names and count relationships follow the PRISMA 2020 flow diagram concepts for identification, screening, eligibility, and included studies. For the reporting guideline itself and citation guidance, see PRISMA acknowledgement and references.",
     "crumbs": [
       "Home",
       "User guide",
@@ -261,6 +261,150 @@
       "Home",
       "User guide",
       "Data model"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "PRISMA acknowledgement and references",
+    "section": "",
+    "text": "prisma-flow is an independent Python implementation for producing PRISMA-style flow diagrams. It is not the PRISMA reporting guideline itself and is not affiliated with or endorsed by the PRISMA Executive.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#what-prisma-is",
+    "href": "references.html#what-prisma-is",
+    "title": "PRISMA acknowledgement and references",
+    "section": "What PRISMA is",
+    "text": "What PRISMA is\nPRISMA stands for Preferred Reporting Items for Systematic reviews and Meta-Analyses. The official PRISMA website describes PRISMA as a reporting guideline intended to improve reporting of systematic reviews and to guide authors in reporting why a review was done, what methods were used, and what results were found.\nThe current main guideline is PRISMA 2020. It includes the statement paper, checklists, and template flow diagrams for original and updated reviews.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#acknowledgement",
+    "href": "references.html#acknowledgement",
+    "title": "PRISMA acknowledgement and references",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThe PRISMA 2020 reporting guideline, checklist, and flow diagram templates were developed by the PRISMA 2020 authors and are maintained through the PRISMA Executive. prisma-flow acknowledges that work and aims only to provide a Python implementation for generating diagrams and validating count relationships in software workflows.\nWhen using prisma-flow outputs in reports, manuscripts, presentations, or software documentation, cite the original PRISMA 2020 publications rather than citing prisma-flow as the source of the reporting guideline.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#recommended-prisma-citations",
+    "href": "references.html#recommended-prisma-citations",
+    "title": "PRISMA acknowledgement and references",
+    "section": "Recommended PRISMA citations",
+    "text": "Recommended PRISMA citations\nThe PRISMA website recommends citing the journal articles presenting the statement paper and the explanation and elaboration paper.\n\nStatement paper\nPage MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71. doi: 10.1136/bmj.n71.\n\n\nExplanation and elaboration paper\nPage MJ, Moher D, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. PRISMA 2020 explanation and elaboration: updated guidance and exemplars for reporting systematic reviews. BMJ. 2021;372:n160. doi: 10.1136/bmj.n160.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#official-resources",
+    "href": "references.html#official-resources",
+    "title": "PRISMA acknowledgement and references",
+    "section": "Official resources",
+    "text": "Official resources\n\nPRISMA website\nPRISMA 2020 overview\nPRISMA 2020 flow diagrams\nCiting PRISMA 2020",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#flow-diagram-licensing",
+    "href": "references.html#flow-diagram-licensing",
+    "title": "PRISMA acknowledgement and references",
+    "section": "Flow diagram licensing",
+    "text": "Flow diagram licensing\nThe official PRISMA 2020 flow diagram templates are distributed under the Creative Commons Attribution 4.0 International License. That license permits reuse and adaptation, including commercial use, provided the original work is properly cited.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "rendering.html",
+    "href": "rendering.html",
+    "title": "Rendering",
+    "section": "",
+    "text": "prisma-flow renders through a small intermediate layout representation:",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#svg",
+    "href": "rendering.html#svg",
+    "title": "Rendering",
+    "section": "SVG",
+    "text": "SVG\nSVG is the default renderer and is implemented in pure Python.\nsvg = flow.to_svg()\nflow.to_svg(\"prisma.svg\")\nThe SVG renderer supports:\n\nrectangles\narrows\nside boxes\nPRISMA 2020-style header, stage labels, footnotes, and source citation\nwrapped multiline text\nescaped user text\nembedded CSS\naccessibility title and description",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#notebook-display",
+    "href": "rendering.html#notebook-display",
+    "title": "Rendering",
+    "section": "Notebook display",
+    "text": "Notebook display\nPrismaFlow implements the Jupyter rich display protocol directly. In notebook frontends, evaluate a flow object as the last expression in a cell to display the SVG diagram inline:\nfrom prismaflow import new_review\n\nflow = new_review(...)\nflow\nThis uses SVG MIME output and does not require prisma-flow to depend on Jupyter or IPython.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#html",
+    "href": "rendering.html#html",
+    "title": "Rendering",
+    "section": "HTML",
+    "text": "HTML\nHTML output embeds the generated SVG in a standalone document.\nflow.to_html(\"prisma.html\")",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#mermaid",
+    "href": "rendering.html#mermaid",
+    "title": "Rendering",
+    "section": "Mermaid",
+    "text": "Mermaid\nMermaid output is text only. prisma-flow does not call Mermaid CLI.\nflow.to_mermaid(\"prisma.mmd\")\nExample output:\nflowchart TD\n    A[\"Records identified from*:&lt;br/&gt;Databases (n = 1240)\"]\n    B[\"Records removed before screening\"]\n    A --&gt; B",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#png",
+    "href": "rendering.html#png",
+    "title": "Rendering",
+    "section": "PNG",
+    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack in v0.1. If requested without an available backend, the package raises an OptionalDependencyError with installation guidance.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
     ]
   },
   {
@@ -309,66 +453,6 @@
       "Home",
       "Reference",
       "Examples"
-    ]
-  },
-  {
-    "objectID": "rendering.html",
-    "href": "rendering.html",
-    "title": "Rendering",
-    "section": "",
-    "text": "prisma-flow renders through a small intermediate layout representation:",
-    "crumbs": [
-      "Home",
-      "User guide",
-      "Rendering"
-    ]
-  },
-  {
-    "objectID": "rendering.html#svg",
-    "href": "rendering.html#svg",
-    "title": "Rendering",
-    "section": "SVG",
-    "text": "SVG\nSVG is the default renderer and is implemented in pure Python.\nsvg = flow.to_svg()\nflow.to_svg(\"prisma.svg\")\nThe SVG renderer supports:\n\nrectangles\narrows\nside boxes\nwrapped multiline text\nescaped user text\nembedded CSS\naccessibility title and description",
-    "crumbs": [
-      "Home",
-      "User guide",
-      "Rendering"
-    ]
-  },
-  {
-    "objectID": "rendering.html#html",
-    "href": "rendering.html#html",
-    "title": "Rendering",
-    "section": "HTML",
-    "text": "HTML\nHTML output embeds the generated SVG in a standalone document.\nflow.to_html(\"prisma.html\")",
-    "crumbs": [
-      "Home",
-      "User guide",
-      "Rendering"
-    ]
-  },
-  {
-    "objectID": "rendering.html#mermaid",
-    "href": "rendering.html#mermaid",
-    "title": "Rendering",
-    "section": "Mermaid",
-    "text": "Mermaid\nMermaid output is text only. prisma-flow does not call Mermaid CLI.\nflow.to_mermaid(\"prisma.mmd\")\nExample output:\nflowchart TD\n    A[\"Records identified from:&lt;br/&gt;Databases (n = 1240)\"]\n    B[\"Records removed before screening\"]\n    A --&gt; B",
-    "crumbs": [
-      "Home",
-      "User guide",
-      "Rendering"
-    ]
-  },
-  {
-    "objectID": "rendering.html#png",
-    "href": "rendering.html#png",
-    "title": "Rendering",
-    "section": "PNG",
-    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack in v0.1. If requested without an available backend, the package raises an OptionalDependencyError with installation guidance.",
-    "crumbs": [
-      "Home",
-      "User guide",
-      "Rendering"
     ]
   },
   {
@@ -436,7 +520,7 @@
     "href": "index.html",
     "title": "prisma-flow",
     "section": "",
-    "text": "prisma-flow is a lightweight Python package for generating PRISMA-style flow diagrams for systematic reviews, scoping reviews, evidence syntheses, and literature review workflows.\nThe default output is SVG rendered with pure Python. There are no required system-level layout or rendering tools.",
+    "text": "prisma-flow is a lightweight Python package for generating PRISMA-style flow diagrams for systematic reviews, scoping reviews, evidence syntheses, and literature review workflows.\nPRISMA refers to the Preferred Reporting Items for Systematic reviews and Meta-Analyses reporting guideline. prisma-flow is an independent Python implementation for generating PRISMA-style flow diagrams; it is not the PRISMA guideline itself. See PRISMA acknowledgement and references for original publications and official resources.\nThe default output is SVG rendered with pure Python. There are no required system-level layout or rendering tools.",
     "crumbs": [
       "Home",
       "Get started",
@@ -448,7 +532,7 @@
     "href": "index.html#minimal-example",
     "title": "prisma-flow",
     "section": "Minimal example",
-    "text": "Minimal example\nfrom prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)\n\nflow.to_svg(\"prisma.svg\")",
+    "text": "Minimal example\nfrom prismaflow import new_review\n\nflow = new_review(\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)\n\nflow.to_svg(\"prisma.svg\")",
     "crumbs": [
       "Home",
       "Get started",
@@ -472,7 +556,7 @@
     "href": "index.html#why-template-based-diagrams",
     "title": "prisma-flow",
     "section": "Why template-based diagrams?",
-    "text": "Why template-based diagrams?\nPRISMA flow diagrams are structured reporting documents, not arbitrary graphs. prisma-flow uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.",
+    "text": "Why template-based diagrams?\nPRISMA flow diagrams are structured reporting documents, not arbitrary graphs. prisma-flow uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.\nThe implemented templates are based on the official PRISMA 2020 flow diagram templates. Please cite the PRISMA 2020 statement and explanation/elaboration papers when using PRISMA-style diagrams in scholarly outputs.",
     "crumbs": [
       "Home",
       "Get started",
@@ -484,7 +568,7 @@
     "href": "validation.html",
     "title": "Validation",
     "section": "",
-    "text": "prisma-flow validates PRISMA count relationships before rendering.",
+    "text": "prisma-flow validates PRISMA count relationships before rendering.\nThese checks are intended to help catch arithmetic inconsistencies in data used to populate PRISMA-style flow diagrams. They do not replace the PRISMA 2020 reporting guideline, checklist, or author guidance; cite and follow the original PRISMA publications for scholarly reporting.",
     "crumbs": [
       "Home",
       "User guide",
@@ -544,7 +628,7 @@
     "href": "api.html#core-model",
     "title": "API reference",
     "section": "Core model",
-    "text": "Core model\n\nPrismaFlow\nFlowMetadata",
+    "text": "Core model\n\nPrismaFlow\nFlowMetadata\nnew_review",
     "crumbs": [
       "Home",
       "Reference",
@@ -604,7 +688,7 @@
     "href": "api.html#common-methods",
     "title": "API reference",
     "section": "Common methods",
-    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nPrismaFlow.new_review(...)\nCreate a v0.1 new-review flow from flat count arguments.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
+    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a v0.1 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a v0.1 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
     "crumbs": [
       "Home",
       "Reference",
