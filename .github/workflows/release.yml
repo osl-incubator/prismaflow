@@ -2,21 +2,24 @@ name: Release
 
 on:
   workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write
+  issues: write
+  pull-requests: write
 
 env:
   VIRTUALENV_ACTIVATORS: "bash,python"
 
 jobs:
-  publish:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    environment: pypi
 
     defaults:
       run:
@@ -24,6 +27,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
@@ -38,10 +43,20 @@ jobs:
       - name: Install dependencies
         run: |
           poetry config virtualenvs.create false
+          poetry check
           poetry install --extras "dev yaml"
 
-      - name: Build distributions
-        run: makim package.build
+      - name: Run release dry-run
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: makim release.dry
 
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Run semantic release
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry config pypi-token.pypi "${PYPI_TOKEN}"
+          makim release.ci
