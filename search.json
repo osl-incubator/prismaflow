@@ -76,7 +76,7 @@
     "href": "templates.html#implemented-in-v0.1",
     "title": "Templates",
     "section": "Implemented in v0.1",
-    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\n\nThis template supports the standard PRISMA 2020 new-review flow with databases and registers.\nThe official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0. When publishing or presenting diagrams, cite the original PRISMA 2020 papers; see PRISMA acknowledgement and references.",
+    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS_OTHER\nprisma_2020_new_databases_registers_other\n\n\n\nThese templates support the PRISMA 2020 new-review flows for databases/registers only and databases/registers plus other search methods. The SVG layout expands automatically when other-method counts are present.\nThe official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0. When publishing or presenting diagrams, cite the original PRISMA 2020 papers; see PRISMA acknowledgement and references.",
     "crumbs": [
       "Home",
       "User guide",
@@ -88,7 +88,7 @@
     "href": "templates.html#planned-templates",
     "title": "Templates",
     "section": "Planned templates",
-    "text": "Planned templates\nThe enum also reserves future template values:\n\nPRISMA_2020_NEW_DATABASES_REGISTERS_OTHER\nPRISMA_2020_UPDATED_DATABASES_REGISTERS\nPRISMA_2020_UPDATED_DATABASES_REGISTERS_OTHER\n\nAttempting to render a planned-but-unimplemented template raises TemplateNotSupportedError.",
+    "text": "Planned templates\nThe enum also reserves future template values:\n\nPRISMA_2020_UPDATED_DATABASES_REGISTERS\nPRISMA_2020_UPDATED_DATABASES_REGISTERS_OTHER\n\nAttempting to render a planned-but-unimplemented template raises TemplateNotSupportedError.",
     "crumbs": [
       "Home",
       "User guide",
@@ -172,7 +172,7 @@
     "href": "quickstart.html",
     "title": "Quickstart",
     "section": "",
-    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n    reports_included=40,\n)",
     "crumbs": [
       "Home",
       "Get started",
@@ -184,7 +184,7 @@
     "href": "quickstart.html#create-a-flow",
     "title": "Quickstart",
     "section": "",
-    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "text": "from prismaflow import new_review\n\nflow = new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n    reports_included=40,\n)",
     "crumbs": [
       "Home",
       "Get started",
@@ -220,7 +220,7 @@
     "href": "quickstart.html#render-from-json",
     "title": "Quickstart",
     "section": "4. Render from JSON",
-    "text": "4. Render from JSON\nThe same flow can be represented as JSON:\n{\n  \"template\": \"prisma_2020_new_databases_registers\",\n  \"identification\": {\n    \"records_identified_databases\": 1240,\n    \"records_identified_registers\": 50\n  },\n  \"screening\": {\n    \"records_removed_duplicates\": 210,\n    \"records_removed_automation\": 0,\n    \"records_removed_other\": 0,\n    \"records_screened\": 1080,\n    \"records_excluded\": 950\n  },\n  \"eligibility\": {\n    \"reports_sought\": 130,\n    \"reports_not_retrieved\": 10,\n    \"reports_assessed\": 120,\n    \"reports_excluded\": {\n      \"Wrong population\": 30,\n      \"Wrong intervention\": 20\n    }\n  },\n  \"included\": {\n    \"studies_included\": 40\n  }\n}\nRender it with the CLI:\nprisma-flow render review.json -o prisma.svg",
+    "text": "4. Render from JSON\nThe same flow can be represented as JSON:\n{\n  \"template\": \"prisma_2020_new_databases_registers\",\n  \"identification\": {\n    \"records_identified_databases\": 1240,\n    \"records_identified_registers\": 50\n  },\n  \"screening\": {\n    \"records_removed_duplicates\": 210,\n    \"records_removed_automation\": 0,\n    \"records_removed_other\": 0,\n    \"records_screened\": 1080,\n    \"records_excluded\": 950\n  },\n  \"eligibility\": {\n    \"reports_sought\": 130,\n    \"reports_not_retrieved\": 10,\n    \"reports_assessed\": 120,\n    \"reports_excluded\": {\n      \"Wrong population\": 30,\n      \"Wrong intervention\": 20,\n      \"Wrong outcome\": 15,\n      \"Not primary research\": 15\n    }\n  },\n  \"included\": {\n    \"studies_included\": 40,\n    \"reports_included\": 40\n  }\n}\nRender it with the CLI:\nprisma-flow render review.json -o prisma.svg",
     "crumbs": [
       "Home",
       "Get started",
@@ -244,7 +244,7 @@
     "href": "data-model.html#stages",
     "title": "Data model",
     "section": "Stages",
-    "text": "Stages\n\nIdentification\n\nrecords_identified_databases\nrecords_identified_registers\ncomputed property: records_identified_total\n\n\n\nScreening\n\nrecords_removed_duplicates\nrecords_removed_automation\nrecords_removed_other\nrecords_screened\nrecords_excluded\ncomputed property: records_removed_total\n\n\n\nEligibility\n\nreports_sought\nreports_not_retrieved\nreports_assessed\nreports_excluded\ncomputed property: reports_excluded_total\n\n\n\nIncluded\n\nstudies_included",
+    "text": "Stages\n\nIdentification\n\nrecords_identified_databases\nrecords_identified_registers\ndatabase_specific_results\nregister_specific_results\nwebsite_results\norganisation_results\ncitations_results\nprevious_studies\nprevious_reports\ncomputed property: records_identified_total\ncomputed property: other_methods_total\n\n\n\nScreening\n\nrecords_removed_duplicates\nrecords_removed_automation\nrecords_removed_other\nrecords_screened\nrecords_excluded\ncomputed property: records_removed_total\n\n\n\nEligibility\n\nreports_sought\nreports_not_retrieved\nreports_assessed\nreports_excluded\nother_sought_reports\nother_notretrieved_reports\nother_assessed\nother_excluded\ncomputed property: reports_excluded_total\ncomputed property: other_excluded_total\ncomputed property: all_reports_assessed\ncomputed property: all_reports_excluded_total\n\n\n\nIncluded\n\nstudies_included\nreports_included\ntotal_studies\ntotal_reports\n\nThe nested models also accept official PRISMA app-style input aliases such as database_results, register_results, duplicates, dbr_sought_reports, dbr_excluded, new_studies, and new_reports.",
     "crumbs": [
       "Home",
       "User guide",
@@ -256,7 +256,7 @@
     "href": "data-model.html#count-types",
     "title": "Data model",
     "section": "Count types",
-    "text": "Count types\nAll count fields are strict non-negative integers. String values such as \"10\" are not accepted as counts.",
+    "text": "Count types\nAll count fields are strict non-negative integers. Optional count fields may be omitted or set to null. String values such as \"10\" are not accepted as counts.",
     "crumbs": [
       "Home",
       "User guide",
@@ -352,7 +352,7 @@
     "href": "rendering.html#svg",
     "title": "Rendering",
     "section": "SVG",
-    "text": "SVG\nSVG is the default renderer and is implemented in pure Python.\nsvg = flow.to_svg()\nflow.to_svg(\"prisma.svg\")\nThe SVG renderer supports:\n\nrectangles\narrows\nside boxes\nPRISMA 2020-style header, stage labels, footnotes, and source citation\nwrapped multiline text\nescaped user text\nembedded CSS\naccessibility title and description",
+    "text": "SVG\nSVG is the default renderer and is implemented in pure Python.\nsvg = flow.to_svg()\nflow.to_svg(\"prisma.svg\")\nThe SVG renderer supports:\n\nrectangles\narrows\nside boxes\nPRISMA 2020-style header and stage labels\nexpanded other-methods layout when other-method counts are present\nwrapped multiline text\nescaped user text\nembedded CSS\naccessibility title and description",
     "crumbs": [
       "Home",
       "User guide",
@@ -388,7 +388,7 @@
     "href": "rendering.html#mermaid",
     "title": "Rendering",
     "section": "Mermaid",
-    "text": "Mermaid\nMermaid output is text only. prisma-flow does not call Mermaid CLI.\nflow.to_mermaid(\"prisma.mmd\")\nExample output:\nflowchart TD\n    A[\"Records identified from*:&lt;br/&gt;Databases (n = 1240)\"]\n    B[\"Records removed before screening\"]\n    A --&gt; B",
+    "text": "Mermaid\nMermaid output is text only. prisma-flow does not call Mermaid CLI.\nflow.to_mermaid(\"prisma.mmd\")\nExample output:\nflowchart TD\n    A[\"Records identified from:&lt;br/&gt;Databases (n = 1240)\"]\n    B[\"Records removed before screening\"]\n    A --&gt; B",
     "crumbs": [
       "Home",
       "User guide",
@@ -532,7 +532,7 @@
     "href": "index.html#minimal-example",
     "title": "prisma-flow",
     "section": "Minimal example",
-    "text": "Minimal example\nfrom prismaflow import new_review\n\nflow = new_review(\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)\n\nflow.to_svg(\"prisma.svg\")",
+    "text": "Minimal example\nfrom prismaflow import new_review\n\nflow = new_review(\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n    reports_included=40,\n)\n\nflow.to_svg(\"prisma.svg\")",
     "crumbs": [
       "Home",
       "Get started",
@@ -580,7 +580,7 @@
     "href": "validation.html#hard-validation-rules",
     "title": "Validation",
     "section": "Hard validation rules",
-    "text": "Hard validation rules\nrecords_screened = identified_total - removed_total\nreports_sought = records_screened - records_excluded\nreports_assessed = reports_sought - reports_not_retrieved\nAll counts must be non-negative integers.",
+    "text": "Hard validation rules\nrecords_screened = identified_total - removed_total\nreports_sought = records_screened - records_excluded\nreports_assessed = reports_sought - reports_not_retrieved\nWhen other-method search data is present:\nother_sought_reports = website_results + organisation_results + citations_results\nother_assessed = other_sought_reports - other_notretrieved_reports\nAll counts must be non-negative integers.",
     "crumbs": [
       "Home",
       "User guide",
@@ -592,7 +592,7 @@
     "href": "validation.html#included-study-reconciliation",
     "title": "Validation",
     "section": "Included-study reconciliation",
-    "text": "Included-study reconciliation\nThis relationship is a warning by default:\nstudies_included = reports_assessed - reports_excluded_total\nIt is not a hard error in v0.1 because one study can have multiple reports. Use strict validation when your workflow expects a one-to-one relationship.\nreport = flow.validate(strict_included=True)",
+    "text": "Included-study reconciliation\nThis relationship is a warning by default:\nstudies_included = all_reports_assessed - all_reports_excluded_total\nIt is not a hard error in v0.1 because one study can have multiple reports. Use strict validation when your workflow expects a one-to-one relationship. If reports_included is provided, it is also compared with the included-report count implied by assessed and excluded reports.\nreport = flow.validate(strict_included=True)",
     "crumbs": [
       "Home",
       "User guide",
@@ -688,7 +688,7 @@
     "href": "api.html#common-methods",
     "title": "API reference",
     "section": "Common methods",
-    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a v0.1 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a v0.1 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
+    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a PRISMA 2020 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a PRISMA 2020 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
     "crumbs": [
       "Home",
       "Reference",

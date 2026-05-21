@@ -549,7 +549,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>records_identified_databases</code></li>
 <li><code>records_identified_registers</code></li>
+<li><code>database_specific_results</code></li>
+<li><code>register_specific_results</code></li>
+<li><code>website_results</code></li>
+<li><code>organisation_results</code></li>
+<li><code>citations_results</code></li>
+<li><code>previous_studies</code></li>
+<li><code>previous_reports</code></li>
 <li>computed property: <code>records_identified_total</code></li>
+<li>computed property: <code>other_methods_total</code></li>
 </ul>
 </section>
 <section id="screening" class="level3">
@@ -570,19 +578,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>reports_not_retrieved</code></li>
 <li><code>reports_assessed</code></li>
 <li><code>reports_excluded</code></li>
+<li><code>other_sought_reports</code></li>
+<li><code>other_notretrieved_reports</code></li>
+<li><code>other_assessed</code></li>
+<li><code>other_excluded</code></li>
 <li>computed property: <code>reports_excluded_total</code></li>
+<li>computed property: <code>other_excluded_total</code></li>
+<li>computed property: <code>all_reports_assessed</code></li>
+<li>computed property: <code>all_reports_excluded_total</code></li>
 </ul>
 </section>
 <section id="included" class="level3">
 <h3 class="anchored" data-anchor-id="included">Included</h3>
 <ul>
 <li><code>studies_included</code></li>
+<li><code>reports_included</code></li>
+<li><code>total_studies</code></li>
+<li><code>total_reports</code></li>
 </ul>
+<p>The nested models also accept official PRISMA app-style input aliases such as <code>database_results</code>, <code>register_results</code>, <code>duplicates</code>, <code>dbr_sought_reports</code>, <code>dbr_excluded</code>, <code>new_studies</code>, and <code>new_reports</code>.</p>
 </section>
 </section>
 <section id="count-types" class="level2">
 <h2 class="anchored" data-anchor-id="count-types">Count types</h2>
-<p>All count fields are strict non-negative integers. String values such as <code>"10"</code> are not accepted as counts.</p>
+<p>All count fields are strict non-negative integers. Optional count fields may be omitted or set to <code>null</code>. String values such as <code>"10"</code> are not accepted as counts.</p>
 
 
 </section>

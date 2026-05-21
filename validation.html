@@ -511,24 +511,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre class="text"><code>records_screened = identified_total - removed_total
 reports_sought = records_screened - records_excluded
 reports_assessed = reports_sought - reports_not_retrieved</code></pre>
+<p>When other-method search data is present:</p>
+<pre class="text"><code>other_sought_reports = website_results + organisation_results + citations_results
+other_assessed = other_sought_reports - other_notretrieved_reports</code></pre>
 <p>All counts must be non-negative integers.</p>
 </section>
 <section id="included-study-reconciliation" class="level2">
 <h2 class="anchored" data-anchor-id="included-study-reconciliation">Included-study reconciliation</h2>
 <p>This relationship is a warning by default:</p>
-<pre class="text"><code>studies_included = reports_assessed - reports_excluded_total</code></pre>
-<p>It is not a hard error in v0.1 because one study can have multiple reports. Use strict validation when your workflow expects a one-to-one relationship.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> flow.validate(strict_included<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>studies_included = all_reports_assessed - all_reports_excluded_total</code></pre>
+<p>It is not a hard error in v0.1 because one study can have multiple reports. Use strict validation when your workflow expects a one-to-one relationship. If <code>reports_included</code> is provided, it is also compared with the included-report count implied by assessed and excluded reports.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> flow.validate(strict_included<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="validation-report" class="level2">
 <h2 class="anchored" data-anchor-id="validation-report">Validation report</h2>
 <p><code>validate()</code> returns a <code>ValidationReport</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> flow.validate()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> report.ok:</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Ready to render"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(report.format_text())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> flow.validate()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> report.ok:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Ready to render"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(report.format_text())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A failed report looks like:</p>
 <pre class="text"><code>Validation failed:
 - records_screened should equal identified records minus removed records. Expected: 1080 Found: 1090</code></pre>
