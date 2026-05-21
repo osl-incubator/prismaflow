@@ -8,6 +8,7 @@ The public API is exported from `prismaflow`.
 
 - `PrismaFlow`
 - `FlowMetadata`
+- `new_review`
 
 ## Stage models
 
@@ -37,8 +38,9 @@ The public API is exported from `prismaflow`.
 
 | Method | Description |
 |---|---|
-| `PrismaFlow(...)` | Create a v0.1 new-review flow from flat count arguments or nested stage models. |
-| `PrismaFlow.new_review(...)` | Explicit factory for a v0.1 new-review flow from flat count arguments. |
+| `new_review(...)` | Create a v0.1 new-review flow from flat count arguments. |
+| `PrismaFlow(...)` | Create a flow from nested stage models. |
+| `PrismaFlow.new_review(...)` | Compatibility factory for a v0.1 new-review flow. |
 | `flow.validate()` | Return a structured validation report. |
 | `flow.to_svg(path=None)` | Render SVG text and optionally write a file. |
 | `flow.to_html(path=None)` | Render standalone HTML and optionally write a file. |

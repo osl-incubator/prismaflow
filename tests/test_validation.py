@@ -1,8 +1,8 @@
-from prismaflow import PrismaFlow
+from prismaflow import new_review
 
 
 def test_validation_passes_for_consistent_flow() -> None:
-    flow = PrismaFlow.new_review(
+    flow = new_review(
         records_identified_databases=100,
         records_identified_registers=20,
         records_removed_duplicates=10,
@@ -22,7 +22,7 @@ def test_validation_passes_for_consistent_flow() -> None:
 
 
 def test_validation_reports_count_errors() -> None:
-    flow = PrismaFlow.new_review(
+    flow = new_review(
         records_identified_databases=100,
         records_identified_registers=0,
         records_removed_duplicates=10,
@@ -43,7 +43,7 @@ def test_validation_reports_count_errors() -> None:
 
 
 def test_included_reconciliation_is_warning_by_default() -> None:
-    flow = PrismaFlow.new_review(
+    flow = new_review(
         records_identified_databases=10,
         records_identified_registers=0,
         records_removed_duplicates=0,

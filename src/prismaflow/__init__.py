@@ -16,6 +16,7 @@ from prismaflow.models import (
     IncludedStage,
     PrismaFlow,
     ScreeningStage,
+    new_review,
 )
 from prismaflow.validation import ValidationMessage, ValidationReport, validate_flow
 
@@ -36,5 +37,6 @@ __all__ = [
     "ValidationMessage",
     "ValidationReport",
     "__version__",
+    "new_review",
     "validate_flow",
 ]

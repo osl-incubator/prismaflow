@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from datetime import date
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Any, ClassVar
+from typing import TYPE_CHECKING, Annotated, Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -211,14 +211,6 @@ class PrismaFlow(BaseModel):
       metadata:
         type: FlowMetadata | None
         description: Value for metadata.
-      _nested_init_fields:
-        type: ClassVar[frozenset[str]]
-        description: >-
-          Nested stage field names accepted by normal model initialization.
-      _new_review_init_fields:
-        type: ClassVar[frozenset[str]]
-        description: >-
-          Flat count field names accepted by new-review initialization.
     """
 
     template: PrismaTemplate = PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS
@@ -229,89 +221,10 @@ class PrismaFlow(BaseModel):
     included: IncludedStage
     metadata: FlowMetadata | None = None
 
-    _nested_init_fields: ClassVar[frozenset[str]] = frozenset(
-        {"identification", "screening", "eligibility", "included"}
-    )
-    _new_review_init_fields: ClassVar[frozenset[str]] = frozenset(
-        {
-            "records_identified_databases",
-            "records_identified_registers",
-            "records_removed_duplicates",
-            "records_removed_automation",
-            "records_removed_other",
-            "records_screened",
-            "records_excluded",
-            "reports_sought",
-            "reports_not_retrieved",
-            "reports_assessed",
-            "reports_excluded",
-            "studies_included",
-        }
-    )
-
     model_config = ConfigDict(
         use_enum_values=False,
         validate_assignment=True,
     )
-
-    def __init__(self, **data: Any) -> None:
-        """
-        title: Initialize a flow from nested stages or flat new-review counts.
-        parameters:
-          data:
-            type: Any
-            description: PrismaFlow model data or new-review count arguments.
-            variadic: keyword
-        """
-        if self._uses_new_review_init(data):
-            data = self._new_review_init_data(data)
-        super().__init__(**data)
-
-    @classmethod
-    def _uses_new_review_init(cls, data: dict[str, Any]) -> bool:
-        """
-        title: Return whether initialization data uses flat new-review fields.
-        parameters:
-          data:
-            type: dict[str, Any]
-            description: Initialization keyword arguments.
-        returns:
-          type: bool
-          description: Whether new-review initialization should be used.
-        """
-        return bool(cls._new_review_init_fields.intersection(data))
-
-    @classmethod
-    def _new_review_init_data(cls, data: dict[str, Any]) -> dict[str, Any]:
-        """
-        title: Convert flat new-review arguments into nested PrismaFlow data.
-        parameters:
-          data:
-            type: dict[str, Any]
-            description: Flat new-review keyword arguments.
-        returns:
-          type: dict[str, Any]
-          description: Nested PrismaFlow initialization data.
-        """
-        nested_fields = cls._nested_init_fields.intersection(data)
-        if nested_fields:
-            field_list = ", ".join(sorted(nested_fields))
-            raise ValueError(
-                "PrismaFlow cannot mix flat new-review count arguments with "
-                f"nested stage fields: {field_list}. Use either "
-                "PrismaFlow(...flat counts...) or PrismaFlow(identification=..., "
-                "screening=..., eligibility=..., included=...)."
-            )
-        flow = cls.new_review(**data)
-        return {
-            "template": flow.template,
-            "title": flow.title,
-            "identification": flow.identification,
-            "screening": flow.screening,
-            "eligibility": flow.eligibility,
-            "included": flow.included,
-            "metadata": flow.metadata,
-        }
 
     @classmethod
     def new_review(
@@ -568,6 +481,95 @@ class PrismaFlow(BaseModel):
         from prismaflow.io.yaml import load_yaml
 
         return load_yaml(source)
+
+
+def new_review(
+    *,
+    records_identified_databases: int,
+    records_identified_registers: int,
+    records_removed_duplicates: int,
+    records_removed_automation: int,
+    records_removed_other: int,
+    records_screened: int,
+    records_excluded: int,
+    reports_sought: int,
+    reports_not_retrieved: int,
+    reports_assessed: int,
+    reports_excluded: dict[str, int] | None = None,
+    studies_included: int,
+    title: str | None = None,
+    metadata: FlowMetadata | None = None,
+    template: PrismaTemplate = PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS,
+) -> PrismaFlow:
+    """
+    title: Create a PRISMA 2020 new-review flow from flat count arguments.
+    parameters:
+      records_identified_databases:
+        type: int
+        description: Value for records_identified_databases.
+      records_identified_registers:
+        type: int
+        description: Value for records_identified_registers.
+      records_removed_duplicates:
+        type: int
+        description: Value for records_removed_duplicates.
+      records_removed_automation:
+        type: int
+        description: Value for records_removed_automation.
+      records_removed_other:
+        type: int
+        description: Value for records_removed_other.
+      records_screened:
+        type: int
+        description: Value for records_screened.
+      records_excluded:
+        type: int
+        description: Value for records_excluded.
+      reports_sought:
+        type: int
+        description: Value for reports_sought.
+      reports_not_retrieved:
+        type: int
+        description: Value for reports_not_retrieved.
+      reports_assessed:
+        type: int
+        description: Value for reports_assessed.
+      reports_excluded:
+        type: dict[str, int] | None
+        description: Value for reports_excluded.
+      studies_included:
+        type: int
+        description: Value for studies_included.
+      title:
+        type: str | None
+        description: Value for title.
+      metadata:
+        type: FlowMetadata | None
+        description: Value for metadata.
+      template:
+        type: PrismaTemplate
+        description: Value for template.
+    returns:
+      type: PrismaFlow
+      description: Return value.
+    """
+    return PrismaFlow.new_review(
+        template=template,
+        title=title,
+        records_identified_databases=records_identified_databases,
+        records_identified_registers=records_identified_registers,
+        records_removed_duplicates=records_removed_duplicates,
+        records_removed_automation=records_removed_automation,
+        records_removed_other=records_removed_other,
+        records_screened=records_screened,
+        records_excluded=records_excluded,
+        reports_sought=reports_sought,
+        reports_not_retrieved=reports_not_retrieved,
+        reports_assessed=reports_assessed,
+        reports_excluded=reports_excluded,
+        studies_included=studies_included,
+        metadata=metadata,
+    )
 
 
 def _write_text(path: PathLike | None, content: str) -> None:

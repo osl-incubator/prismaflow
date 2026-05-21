@@ -53,9 +53,9 @@ uv add "prisma-flow[png]"
 ## Python API
 
 ```python
-from prismaflow import PrismaFlow
+from prismaflow import new_review
 
-flow = PrismaFlow(
+flow = new_review(
     records_identified_databases=1240,
     records_identified_registers=50,
     records_removed_duplicates=210,

@@ -2,9 +2,9 @@
 
 from pathlib import Path
 
-from prismaflow import PrismaFlow
+from prismaflow import new_review
 
-flow = PrismaFlow(
+flow = new_review(
     title="Example PRISMA Flow Diagram",
     records_identified_databases=1240,
     records_identified_registers=50,

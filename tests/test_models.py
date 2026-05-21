@@ -1,4 +1,3 @@
-import pytest
 from pydantic import ValidationError
 
 from prismaflow import (
@@ -8,6 +7,7 @@ from prismaflow import (
     PrismaFlow,
     PrismaTemplate,
     ScreeningStage,
+    new_review,
 )
 
 
@@ -30,22 +30,21 @@ def new_review_kwargs() -> dict[str, object]:
 
 
 def make_flow() -> PrismaFlow:
-    return PrismaFlow(**new_review_kwargs())
+    return new_review(**new_review_kwargs())
 
 
 def test_new_review_builds_model() -> None:
-    flow = PrismaFlow.new_review(**new_review_kwargs())
+    flow = make_flow()
     assert flow.template is PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS
     assert flow.identification.records_identified_total == 1290
     assert flow.screening.records_removed_total == 210
     assert flow.eligibility.reports_excluded_total == 50
 
 
-def test_flat_constructor_builds_new_review_model() -> None:
-    flow = make_flow()
+def test_prismaflow_new_review_remains_available() -> None:
+    flow = PrismaFlow.new_review(**new_review_kwargs())
     assert flow.title == "Example"
     assert flow.identification.records_identified_total == 1290
-    assert flow.included.studies_included == 70
 
 
 def test_nested_constructor_still_works() -> None:
@@ -72,16 +71,6 @@ def test_nested_constructor_still_works() -> None:
     )
     assert flow.title == "Nested"
     assert flow.identification.records_identified_total == 15
-
-
-def test_flat_and_nested_constructor_fields_cannot_be_mixed() -> None:
-    kwargs = new_review_kwargs()
-    kwargs["identification"] = IdentificationStage(
-        records_identified_databases=10,
-        records_identified_registers=5,
-    )
-    with pytest.raises(ValueError, match="cannot mix"):
-        PrismaFlow(**kwargs)
 
 
 def test_negative_count_is_rejected() -> None:
