@@ -1,6 +1,14 @@
 # Release Notes
 ---
 
+# [0.3.0](https://github.com/osl-incubator/prisma-flow/compare/0.2.0...0.3.0) (2026-05-21)
+
+
+### Features
+
+* Imporove the diagram structure ([cc6d1f0](https://github.com/osl-incubator/prisma-flow/commit/cc6d1f09be7e2ec8097676575fd624f88d7ce6e7))
+* Update API to have the latest input schema ([8afa6d2](https://github.com/osl-incubator/prisma-flow/commit/8afa6d2adb26038da1ae318c2e553ea450e6b1a1))
+
 # [0.2.0](https://github.com/osl-incubator/prisma-flow/compare/0.1.2...0.2.0) (2026-05-21)
 
 
