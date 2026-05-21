@@ -1,0 +1,638 @@
+[
+  {
+    "objectID": "dependency-policy.html",
+    "href": "dependency-policy.html",
+    "title": "Dependency policy",
+    "section": "",
+    "text": "The core package is intentionally small.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Dependency policy"
+    ]
+  },
+  {
+    "objectID": "dependency-policy.html#required-runtime-dependency",
+    "href": "dependency-policy.html#required-runtime-dependency",
+    "title": "Dependency policy",
+    "section": "Required runtime dependency",
+    "text": "Required runtime dependency\n\npydantic&gt;=2",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Dependency policy"
+    ]
+  },
+  {
+    "objectID": "dependency-policy.html#base-install-outputs",
+    "href": "dependency-policy.html#base-install-outputs",
+    "title": "Dependency policy",
+    "section": "Base-install outputs",
+    "text": "Base-install outputs\nThese work without optional extras:\n\nSVG\nHTML\nMermaid text\nJSON",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Dependency policy"
+    ]
+  },
+  {
+    "objectID": "dependency-policy.html#optional-extras",
+    "href": "dependency-policy.html#optional-extras",
+    "title": "Dependency policy",
+    "section": "Optional extras",
+    "text": "Optional extras\n\n\n\nExtra\nPurpose\n\n\n\n\nprisma-flow[yaml]\nYAML input/output through PyYAML.\n\n\nprisma-flow[png]\nFuture optional PNG backend.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Dependency policy"
+    ]
+  },
+  {
+    "objectID": "dependency-policy.html#not-required",
+    "href": "dependency-policy.html#not-required",
+    "title": "Dependency policy",
+    "section": "Not required",
+    "text": "Not required\nThe package does not require:\n\nGraphviz\nCairo or CairoSVG\nNode\nMermaid CLI\nInkscape\nPlaywright\nbrowser engines\nMatplotlib\nPlotly\n\nDocumentation is built with Quarto, but Quarto is a development/documentation tool and not a runtime dependency of prisma-flow.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Dependency policy"
+    ]
+  },
+  {
+    "objectID": "templates.html",
+    "href": "templates.html",
+    "title": "Templates",
+    "section": "",
+    "text": "prisma-flow treats PRISMA diagrams as template-based documents rather than arbitrary graphs.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Templates"
+    ]
+  },
+  {
+    "objectID": "templates.html#implemented-in-v0.1",
+    "href": "templates.html#implemented-in-v0.1",
+    "title": "Templates",
+    "section": "Implemented in v0.1",
+    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\n\nThis template supports the standard PRISMA 2020 new-review flow with databases and registers.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Templates"
+    ]
+  },
+  {
+    "objectID": "templates.html#planned-templates",
+    "href": "templates.html#planned-templates",
+    "title": "Templates",
+    "section": "Planned templates",
+    "text": "Planned templates\nThe enum also reserves future template values:\n\nPRISMA_2020_NEW_DATABASES_REGISTERS_OTHER\nPRISMA_2020_UPDATED_DATABASES_REGISTERS\nPRISMA_2020_UPDATED_DATABASES_REGISTERS_OTHER\n\nAttempting to render a planned-but-unimplemented template raises TemplateNotSupportedError.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Templates"
+    ]
+  },
+  {
+    "objectID": "installation.html",
+    "href": "installation.html",
+    "title": "Installation",
+    "section": "",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nor with uv:\nuv add prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "installation.html#base-install",
+    "href": "installation.html#base-install",
+    "title": "Installation",
+    "section": "",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nor with uv:\nuv add prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "installation.html#optional-yaml-support",
+    "href": "installation.html#optional-yaml-support",
+    "title": "Installation",
+    "section": "Optional YAML support",
+    "text": "Optional YAML support\npip install \"prisma-flow[yaml]\"\nor:\nuv add \"prisma-flow[yaml]\"",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "installation.html#optional-png-support",
+    "href": "installation.html#optional-png-support",
+    "title": "Installation",
+    "section": "Optional PNG support",
+    "text": "Optional PNG support\nPNG export is intentionally optional. In v0.1, to_png() and prisma-flow render --format png raise a clear optional-dependency error rather than adding a required rendering stack.\nuv add \"prisma-flow[png]\"",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "installation.html#development-install",
+    "href": "installation.html#development-install",
+    "title": "Installation",
+    "section": "Development install",
+    "text": "Development install\nconda env create -f conda/dev.yaml\nconda activate prismaflow\npoetry config virtualenvs.create false\npoetry install --extras \"dev yaml\"\nRun quality checks through Makim:\nmakim tests.linter\nmakim tests.unit\nmakim package.build\nmakim docs.build",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "installation.html#documentation-tooling",
+    "href": "installation.html#documentation-tooling",
+    "title": "Installation",
+    "section": "Documentation tooling",
+    "text": "Documentation tooling\nThe documentation site is built with Quarto. If you use Conda, install the development environment:\nconda env create -f conda/dev.yaml\nconda activate prismaflow\nBuild the docs:\nquarto render docs",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Installation"
+    ]
+  },
+  {
+    "objectID": "quickstart.html",
+    "href": "quickstart.html",
+    "title": "Quickstart",
+    "section": "",
+    "text": "from prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#create-a-flow",
+    "href": "quickstart.html#create-a-flow",
+    "title": "Quickstart",
+    "section": "",
+    "text": "from prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    title=\"Example PRISMA Flow Diagram\",\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#validate-counts",
+    "href": "quickstart.html#validate-counts",
+    "title": "Quickstart",
+    "section": "2. Validate counts",
+    "text": "2. Validate counts\nreport = flow.validate()\nprint(report.format_text())\nA valid flow prints:\nValidation passed.",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#export-outputs",
+    "href": "quickstart.html#export-outputs",
+    "title": "Quickstart",
+    "section": "3. Export outputs",
+    "text": "3. Export outputs\nflow.to_svg(\"prisma.svg\")\nflow.to_html(\"prisma.html\")\nflow.to_mermaid(\"prisma.mmd\")\nflow.to_json(\"review.json\")",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "quickstart.html#render-from-json",
+    "href": "quickstart.html#render-from-json",
+    "title": "Quickstart",
+    "section": "4. Render from JSON",
+    "text": "4. Render from JSON\nThe same flow can be represented as JSON:\n{\n  \"template\": \"prisma_2020_new_databases_registers\",\n  \"identification\": {\n    \"records_identified_databases\": 1240,\n    \"records_identified_registers\": 50\n  },\n  \"screening\": {\n    \"records_removed_duplicates\": 210,\n    \"records_removed_automation\": 0,\n    \"records_removed_other\": 0,\n    \"records_screened\": 1080,\n    \"records_excluded\": 950\n  },\n  \"eligibility\": {\n    \"reports_sought\": 130,\n    \"reports_not_retrieved\": 10,\n    \"reports_assessed\": 120,\n    \"reports_excluded\": {\n      \"Wrong population\": 30,\n      \"Wrong intervention\": 20\n    }\n  },\n  \"included\": {\n    \"studies_included\": 40\n  }\n}\nRender it with the CLI:\nprisma-flow render review.json -o prisma.svg",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "Quickstart"
+    ]
+  },
+  {
+    "objectID": "data-model.html",
+    "href": "data-model.html",
+    "title": "Data model",
+    "section": "",
+    "text": "The main model is PrismaFlow. It contains four PRISMA stages and optional metadata.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Data model"
+    ]
+  },
+  {
+    "objectID": "data-model.html#stages",
+    "href": "data-model.html#stages",
+    "title": "Data model",
+    "section": "Stages",
+    "text": "Stages\n\nIdentification\n\nrecords_identified_databases\nrecords_identified_registers\ncomputed property: records_identified_total\n\n\n\nScreening\n\nrecords_removed_duplicates\nrecords_removed_automation\nrecords_removed_other\nrecords_screened\nrecords_excluded\ncomputed property: records_removed_total\n\n\n\nEligibility\n\nreports_sought\nreports_not_retrieved\nreports_assessed\nreports_excluded\ncomputed property: reports_excluded_total\n\n\n\nIncluded\n\nstudies_included",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Data model"
+    ]
+  },
+  {
+    "objectID": "data-model.html#count-types",
+    "href": "data-model.html#count-types",
+    "title": "Data model",
+    "section": "Count types",
+    "text": "Count types\nAll count fields are strict non-negative integers. String values such as \"10\" are not accepted as counts.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Data model"
+    ]
+  },
+  {
+    "objectID": "examples.html",
+    "href": "examples.html",
+    "title": "Examples",
+    "section": "",
+    "text": "The repository includes runnable examples in examples/.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#json-input",
+    "href": "examples.html#json-input",
+    "title": "Examples",
+    "section": "JSON input",
+    "text": "JSON input\nprisma-flow validate examples/basic_new_review.json\nprisma-flow render examples/basic_new_review.json -o examples/output/basic_new_review.svg",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#python-script",
+    "href": "examples.html#python-script",
+    "title": "Examples",
+    "section": "Python script",
+    "text": "Python script\npython examples/basic_new_review.py\nThe script writes SVG, HTML, Mermaid, and JSON outputs to examples/output/.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "examples.html#yaml-input",
+    "href": "examples.html#yaml-input",
+    "title": "Examples",
+    "section": "YAML input",
+    "text": "YAML input\nYAML input requires the optional YAML extra:\nuv add \"prisma-flow[yaml]\"\nprisma-flow render examples/basic_new_review.yaml -o examples/output/basic_new_review.svg",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Examples"
+    ]
+  },
+  {
+    "objectID": "rendering.html",
+    "href": "rendering.html",
+    "title": "Rendering",
+    "section": "",
+    "text": "prisma-flow renders through a small intermediate layout representation:",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#svg",
+    "href": "rendering.html#svg",
+    "title": "Rendering",
+    "section": "SVG",
+    "text": "SVG\nSVG is the default renderer and is implemented in pure Python.\nsvg = flow.to_svg()\nflow.to_svg(\"prisma.svg\")\nThe SVG renderer supports:\n\nrectangles\narrows\nside boxes\nwrapped multiline text\nescaped user text\nembedded CSS\naccessibility title and description",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#html",
+    "href": "rendering.html#html",
+    "title": "Rendering",
+    "section": "HTML",
+    "text": "HTML\nHTML output embeds the generated SVG in a standalone document.\nflow.to_html(\"prisma.html\")",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#mermaid",
+    "href": "rendering.html#mermaid",
+    "title": "Rendering",
+    "section": "Mermaid",
+    "text": "Mermaid\nMermaid output is text only. prisma-flow does not call Mermaid CLI.\nflow.to_mermaid(\"prisma.mmd\")\nExample output:\nflowchart TD\n    A[\"Records identified from:&lt;br/&gt;Databases (n = 1240)\"]\n    B[\"Records removed before screening\"]\n    A --&gt; B",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "rendering.html#png",
+    "href": "rendering.html#png",
+    "title": "Rendering",
+    "section": "PNG",
+    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack in v0.1. If requested without an available backend, the package raises an OptionalDependencyError with installation guidance.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Rendering"
+    ]
+  },
+  {
+    "objectID": "cli.html",
+    "href": "cli.html",
+    "title": "Command-line interface",
+    "section": "",
+    "text": "The installed command is:",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Command-line interface"
+    ]
+  },
+  {
+    "objectID": "cli.html#validate",
+    "href": "cli.html#validate",
+    "title": "Command-line interface",
+    "section": "Validate",
+    "text": "Validate\nprisma-flow validate review.json\nUse strict included-study reconciliation:\nprisma-flow validate review.json --strict-included",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Command-line interface"
+    ]
+  },
+  {
+    "objectID": "cli.html#render",
+    "href": "cli.html#render",
+    "title": "Command-line interface",
+    "section": "Render",
+    "text": "Render\nRender SVG:\nprisma-flow render review.json --format svg --output prisma.svg\nShort form:\nprisma-flow render review.json -o prisma.svg\nRender HTML:\nprisma-flow render review.json -f html -o prisma.html\nRender Mermaid text:\nprisma-flow render review.json -f mermaid -o prisma.mmd",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Command-line interface"
+    ]
+  },
+  {
+    "objectID": "cli.html#format-inference",
+    "href": "cli.html#format-inference",
+    "title": "Command-line interface",
+    "section": "Format inference",
+    "text": "Format inference\nWhen --format is omitted, the CLI infers the format from the output extension. For example, -o prisma.html renders HTML.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Command-line interface"
+    ]
+  },
+  {
+    "objectID": "cli.html#invalid-inputs",
+    "href": "cli.html#invalid-inputs",
+    "title": "Command-line interface",
+    "section": "Invalid inputs",
+    "text": "Invalid inputs\nRendering stops when validation has errors. To render anyway:\nprisma-flow render review.json -o prisma.svg --allow-invalid",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Command-line interface"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "prisma-flow",
+    "section": "",
+    "text": "prisma-flow is a lightweight Python package for generating PRISMA-style flow diagrams for systematic reviews, scoping reviews, evidence syntheses, and literature review workflows.\nThe default output is SVG rendered with pure Python. There are no required system-level layout or rendering tools.",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "prisma-flow"
+    ]
+  },
+  {
+    "objectID": "index.html#minimal-example",
+    "href": "index.html#minimal-example",
+    "title": "prisma-flow",
+    "section": "Minimal example",
+    "text": "Minimal example\nfrom prismaflow import PrismaFlow\n\nflow = PrismaFlow.new_review(\n    records_identified_databases=1240,\n    records_identified_registers=50,\n    records_removed_duplicates=210,\n    records_removed_automation=0,\n    records_removed_other=0,\n    records_screened=1080,\n    records_excluded=950,\n    reports_sought=130,\n    reports_not_retrieved=10,\n    reports_assessed=120,\n    reports_excluded={\n        \"Wrong population\": 30,\n        \"Wrong intervention\": 20,\n        \"Wrong outcome\": 15,\n        \"Not primary research\": 15,\n    },\n    studies_included=40,\n)\n\nflow.to_svg(\"prisma.svg\")",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "prisma-flow"
+    ]
+  },
+  {
+    "objectID": "index.html#command-line-example",
+    "href": "index.html#command-line-example",
+    "title": "prisma-flow",
+    "section": "Command-line example",
+    "text": "Command-line example\nprisma-flow render examples/basic_new_review.json -o prisma.svg",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "prisma-flow"
+    ]
+  },
+  {
+    "objectID": "index.html#why-template-based-diagrams",
+    "href": "index.html#why-template-based-diagrams",
+    "title": "prisma-flow",
+    "section": "Why template-based diagrams?",
+    "text": "Why template-based diagrams?\nPRISMA flow diagrams are structured reporting documents, not arbitrary graphs. prisma-flow uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.",
+    "crumbs": [
+      "Home",
+      "Get started",
+      "prisma-flow"
+    ]
+  },
+  {
+    "objectID": "validation.html",
+    "href": "validation.html",
+    "title": "Validation",
+    "section": "",
+    "text": "prisma-flow validates PRISMA count relationships before rendering.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Validation"
+    ]
+  },
+  {
+    "objectID": "validation.html#hard-validation-rules",
+    "href": "validation.html#hard-validation-rules",
+    "title": "Validation",
+    "section": "Hard validation rules",
+    "text": "Hard validation rules\nrecords_screened = identified_total - removed_total\nreports_sought = records_screened - records_excluded\nreports_assessed = reports_sought - reports_not_retrieved\nAll counts must be non-negative integers.",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Validation"
+    ]
+  },
+  {
+    "objectID": "validation.html#included-study-reconciliation",
+    "href": "validation.html#included-study-reconciliation",
+    "title": "Validation",
+    "section": "Included-study reconciliation",
+    "text": "Included-study reconciliation\nThis relationship is a warning by default:\nstudies_included = reports_assessed - reports_excluded_total\nIt is not a hard error in v0.1 because one study can have multiple reports. Use strict validation when your workflow expects a one-to-one relationship.\nreport = flow.validate(strict_included=True)",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Validation"
+    ]
+  },
+  {
+    "objectID": "validation.html#validation-report",
+    "href": "validation.html#validation-report",
+    "title": "Validation",
+    "section": "Validation report",
+    "text": "Validation report\nvalidate() returns a ValidationReport:\nreport = flow.validate()\n\nif report.ok:\n    print(\"Ready to render\")\nelse:\n    print(report.format_text())\nA failed report looks like:\nValidation failed:\n- records_screened should equal identified records minus removed records. Expected: 1080 Found: 1090",
+    "crumbs": [
+      "Home",
+      "User guide",
+      "Validation"
+    ]
+  },
+  {
+    "objectID": "api.html",
+    "href": "api.html",
+    "title": "API reference",
+    "section": "",
+    "text": "The public API is exported from prismaflow.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#core-model",
+    "href": "api.html#core-model",
+    "title": "API reference",
+    "section": "Core model",
+    "text": "Core model\n\nPrismaFlow\nFlowMetadata",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#stage-models",
+    "href": "api.html#stage-models",
+    "title": "API reference",
+    "section": "Stage models",
+    "text": "Stage models\n\nIdentificationStage\nScreeningStage\nEligibilityStage\nIncludedStage",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#enums",
+    "href": "api.html#enums",
+    "title": "API reference",
+    "section": "Enums",
+    "text": "Enums\n\nPrismaTemplate",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#validation",
+    "href": "api.html#validation",
+    "title": "API reference",
+    "section": "Validation",
+    "text": "Validation\n\nValidationReport\nValidationMessage\nvalidate_flow",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#exceptions",
+    "href": "api.html#exceptions",
+    "title": "API reference",
+    "section": "Exceptions",
+    "text": "Exceptions\n\nPrismaFlowError\nPrismaValidationError\nTemplateNotSupportedError\nOptionalDependencyError",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "api.html#common-methods",
+    "href": "api.html#common-methods",
+    "title": "API reference",
+    "section": "Common methods",
+    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nPrismaFlow.new_review(...)\nCreate a v0.1 new-review flow from flat count arguments.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "API reference"
+    ]
+  },
+  {
+    "objectID": "changelog.html",
+    "href": "changelog.html",
+    "title": "Changelog",
+    "section": "",
+    "text": "Initial PRISMA 2020 new-review databases/registers implementation.\nAdded Pydantic models, validation reports, SVG/HTML/Mermaid renderers, JSON/YAML I/O, CLI, examples, tests, and Quarto documentation.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Changelog"
+    ]
+  },
+  {
+    "objectID": "changelog.html#section",
+    "href": "changelog.html#section",
+    "title": "Changelog",
+    "section": "",
+    "text": "Initial PRISMA 2020 new-review databases/registers implementation.\nAdded Pydantic models, validation reports, SVG/HTML/Mermaid renderers, JSON/YAML I/O, CLI, examples, tests, and Quarto documentation.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "Changelog"
+    ]
+  }
+]
