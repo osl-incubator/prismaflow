@@ -1,4 +1,6 @@
-"""Lightweight PRISMA-style flow diagram generation."""
+"""
+title: Lightweight PRISMA-style flow diagram generation.
+"""
 
 from prismaflow.enums import PrismaTemplate
 from prismaflow.exceptions import (

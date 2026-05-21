@@ -1,4 +1,6 @@
-"""Optional YAML input/output helpers."""
+"""
+title: Optional YAML input/output helpers.
+"""
 
 from __future__ import annotations
 
@@ -10,20 +12,49 @@ from prismaflow.models import PrismaFlow
 
 
 class _YamlModule(Protocol):
-    """Minimal PyYAML module protocol used by prisma-flow."""
+    """
+    title: Minimal PyYAML module protocol used by prisma-flow.
+    """
 
     def safe_load(self, stream: str) -> Any:
-        """Load YAML text."""
+        """
+        title: Load YAML text.
+        parameters:
+          stream:
+            type: str
+            description: Value for stream.
+        returns:
+          type: Any
+          description: Return value.
+        """
         ...
 
     def safe_dump(self, data: Any, *, sort_keys: bool = ...) -> str:
-        """Dump data as YAML text."""
+        """
+        title: Dump data as YAML text.
+        parameters:
+          data:
+            type: Any
+            description: Value for data.
+          sort_keys:
+            type: bool
+            description: Value for sort_keys.
+        returns:
+          type: str
+          description: Return value.
+        """
         ...
 
 
 def _yaml_module() -> _YamlModule:
+    """
+    title: _yaml_module.
+    returns:
+      type: _YamlModule
+      description: Return value.
+    """
     try:
-        import yaml  # type: ignore[import-untyped]
+        import yaml
     except ModuleNotFoundError as exc:
         raise OptionalDependencyError(
             "YAML support requires the optional dependency.\n\n"
@@ -37,7 +68,16 @@ def _yaml_module() -> _YamlModule:
 
 
 def load_yaml(source: str | Path) -> PrismaFlow:
-    """Load a PrismaFlow model from a YAML file path or YAML string."""
+    """
+    title: Load a PrismaFlow model from a YAML file path or YAML string.
+    parameters:
+      source:
+        type: str | Path
+        description: Value for source.
+    returns:
+      type: PrismaFlow
+      description: Return value.
+    """
     yaml = _yaml_module()
     if isinstance(source, Path) or _looks_like_path(source):
         path = Path(source)
@@ -49,7 +89,19 @@ def load_yaml(source: str | Path) -> PrismaFlow:
 
 
 def dump_yaml(flow: PrismaFlow, path: str | Path | None = None) -> str:
-    """Serialize a flow to YAML and optionally write it."""
+    """
+    title: Serialize a flow to YAML and optionally write it.
+    parameters:
+      flow:
+        type: PrismaFlow
+        description: Value for flow.
+      path:
+        type: str | Path | None
+        description: Value for path.
+    returns:
+      type: str
+      description: Return value.
+    """
     yaml = _yaml_module()
     data = flow.model_dump(mode="json")
     output = yaml.safe_dump(data, sort_keys=False)
@@ -59,6 +111,16 @@ def dump_yaml(flow: PrismaFlow, path: str | Path | None = None) -> str:
 
 
 def _looks_like_path(source: str | Path) -> bool:
+    """
+    title: _looks_like_path.
+    parameters:
+      source:
+        type: str | Path
+        description: Value for source.
+    returns:
+      type: bool
+      description: Return value.
+    """
     if isinstance(source, Path):
         return True
     text = str(source)

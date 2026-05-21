@@ -1,4 +1,6 @@
-"""Output renderers."""
+"""
+title: Output renderers.
+"""
 
 from prismaflow.renderers.html import HTMLRenderer
 from prismaflow.renderers.mermaid import MermaidRenderer

@@ -1,4 +1,6 @@
-"""Validation report objects and PRISMA count checks."""
+"""
+title: Validation report objects and PRISMA count checks.
+"""
 
 from __future__ import annotations
 
@@ -13,7 +15,25 @@ ValidationLevel = Literal["error", "warning"]
 
 
 class ValidationMessage(BaseModel):
-    """A single validation finding."""
+    """
+    title: A single validation finding.
+    attributes:
+      level:
+        type: ValidationLevel
+        description: Value for level.
+      field:
+        type: str
+        description: Value for field.
+      message:
+        type: str
+        description: Value for message.
+      expected:
+        type: int | None
+        description: Value for expected.
+      found:
+        type: int | None
+        description: Value for found.
+    """
 
     level: ValidationLevel
     field: str
@@ -24,7 +44,12 @@ class ValidationMessage(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     def format(self) -> str:
-        """Return a human-readable validation line."""
+        """
+        title: Return a human-readable validation line.
+        returns:
+          type: str
+          description: Return value.
+        """
         details: list[str] = [self.message]
         if self.expected is not None:
             details.append(f"Expected: {self.expected}")
@@ -34,28 +59,57 @@ class ValidationMessage(BaseModel):
 
 
 class ValidationReport(BaseModel):
-    """Structured validation result for a PRISMA flow."""
+    """
+    title: Structured validation result for a PRISMA flow.
+    attributes:
+      errors:
+        type: list[ValidationMessage]
+        description: Value for errors.
+      warnings:
+        type: list[ValidationMessage]
+        description: Value for warnings.
+    """
 
     errors: list[ValidationMessage] = Field(default_factory=list)
     warnings: list[ValidationMessage] = Field(default_factory=list)
 
     @property
     def ok(self) -> bool:
-        """Whether the flow has no validation errors."""
+        """
+        title: Whether the flow has no validation errors.
+        returns:
+          type: bool
+          description: Return value.
+        """
         return not self.errors
 
     @property
     def has_errors(self) -> bool:
-        """Whether the flow has validation errors."""
+        """
+        title: Whether the flow has validation errors.
+        returns:
+          type: bool
+          description: Return value.
+        """
         return bool(self.errors)
 
     @property
     def has_warnings(self) -> bool:
-        """Whether the flow has validation warnings."""
+        """
+        title: Whether the flow has validation warnings.
+        returns:
+          type: bool
+          description: Return value.
+        """
         return bool(self.warnings)
 
     def format_text(self) -> str:
-        """Return a readable multi-line validation summary."""
+        """
+        title: Return a readable multi-line validation summary.
+        returns:
+          type: str
+          description: Return value.
+        """
         if self.ok and not self.warnings:
             return "Validation passed."
 
@@ -77,6 +131,25 @@ def _count_error(
     expected: int,
     found: int,
 ) -> ValidationMessage:
+    """
+    title: _count_error.
+    parameters:
+      field:
+        type: str
+        description: Value for field.
+      message:
+        type: str
+        description: Value for message.
+      expected:
+        type: int
+        description: Value for expected.
+      found:
+        type: int
+        description: Value for found.
+    returns:
+      type: ValidationMessage
+      description: Return value.
+    """
     return ValidationMessage(
         level="error",
         field=field,
@@ -92,6 +165,25 @@ def _count_warning(
     expected: int | None = None,
     found: int | None = None,
 ) -> ValidationMessage:
+    """
+    title: _count_warning.
+    parameters:
+      field:
+        type: str
+        description: Value for field.
+      message:
+        type: str
+        description: Value for message.
+      expected:
+        type: int | None
+        description: Value for expected.
+      found:
+        type: int | None
+        description: Value for found.
+    returns:
+      type: ValidationMessage
+      description: Return value.
+    """
     return ValidationMessage(
         level="warning",
         field=field,
@@ -106,16 +198,18 @@ def validate_flow(
     *,
     strict_included: bool = False,
 ) -> ValidationReport:
-    """Validate PRISMA count relationships.
-
-    Parameters
-    ----------
-    flow
-        Flow model to validate.
-    strict_included
-        If true, treat the included-study reconciliation as an error. In v0.1
-        it is a warning by default because one study can have multiple reports.
-
+    """
+    title: Validate PRISMA count relationships.
+    parameters:
+      flow:
+        type: PrismaFlow
+        description: Value for flow.
+      strict_included:
+        type: bool
+        description: Value for strict_included.
+    returns:
+      type: ValidationReport
+      description: Return value.
     """
     errors: list[ValidationMessage] = []
     warnings: list[ValidationMessage] = []

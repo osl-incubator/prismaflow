@@ -1,4 +1,6 @@
-"""JSON input/output helpers."""
+"""
+title: JSON input/output helpers.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +10,16 @@ from prismaflow.models import PrismaFlow
 
 
 def load_json(source: str | Path) -> PrismaFlow:
-    """Load a PrismaFlow model from a JSON file path or JSON string."""
+    """
+    title: Load a PrismaFlow model from a JSON file path or JSON string.
+    parameters:
+      source:
+        type: str | Path
+        description: Value for source.
+    returns:
+      type: PrismaFlow
+      description: Return value.
+    """
     if isinstance(source, Path) or _looks_like_path(source):
         path = Path(source)
         if path.exists():
@@ -17,7 +28,19 @@ def load_json(source: str | Path) -> PrismaFlow:
 
 
 def dump_json(flow: PrismaFlow, path: str | Path | None = None) -> str:
-    """Serialize a flow to JSON and optionally write it."""
+    """
+    title: Serialize a flow to JSON and optionally write it.
+    parameters:
+      flow:
+        type: PrismaFlow
+        description: Value for flow.
+      path:
+        type: str | Path | None
+        description: Value for path.
+    returns:
+      type: str
+      description: Return value.
+    """
     output = flow.model_dump_json(indent=2)
     if path is not None:
         Path(path).write_text(output + "\n", encoding="utf-8")
@@ -25,6 +48,16 @@ def dump_json(flow: PrismaFlow, path: str | Path | None = None) -> str:
 
 
 def _looks_like_path(source: str | Path) -> bool:
+    """
+    title: _looks_like_path.
+    parameters:
+      source:
+        type: str | Path
+        description: Value for source.
+    returns:
+      type: bool
+      description: Return value.
+    """
     if isinstance(source, Path):
         return True
     text = str(source)

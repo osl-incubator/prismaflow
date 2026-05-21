@@ -1,4 +1,6 @@
-"""Standalone HTML renderer."""
+"""
+title: Standalone HTML renderer.
+"""
 
 from __future__ import annotations
 
@@ -9,10 +11,21 @@ from prismaflow.renderers.svg import SVGRenderer
 
 
 class HTMLRenderer:
-    """Render diagram layouts to standalone HTML documents."""
+    """
+    title: Render diagram layouts to standalone HTML documents.
+    """
 
     def render(self, layout: DiagramLayout) -> str:
-        """Render a layout as HTML with embedded SVG."""
+        """
+        title: Render a layout as HTML with embedded SVG.
+        parameters:
+          layout:
+            type: DiagramLayout
+            description: Value for layout.
+        returns:
+          type: str
+          description: Return value.
+        """
         title = layout.title or "PRISMA flow diagram"
         svg = (
             SVGRenderer()

@@ -1,4 +1,6 @@
-"""Overlap checks for diagram layouts."""
+"""
+title: Overlap checks for diagram layouts.
+"""
 
 from __future__ import annotations
 
@@ -10,7 +12,19 @@ def find_overlaps(
     *,
     padding: float = 0,
 ) -> list[tuple[DiagramNode, DiagramNode]]:
-    """Return node pairs with overlapping rectangles."""
+    """
+    title: Return node pairs with overlapping rectangles.
+    parameters:
+      layout:
+        type: DiagramLayout
+        description: Value for layout.
+      padding:
+        type: float
+        description: Value for padding.
+    returns:
+      type: list[tuple[DiagramNode, DiagramNode]]
+      description: Return value.
+    """
     overlaps: list[tuple[DiagramNode, DiagramNode]] = []
     nodes = layout.nodes
     for index, node in enumerate(nodes):
@@ -21,7 +35,16 @@ def find_overlaps(
 
 
 def assert_no_overlaps(layout: DiagramLayout, *, padding: float = 0) -> None:
-    """Raise AssertionError if any layout nodes overlap."""
+    """
+    title: Raise AssertionError if any layout nodes overlap.
+    parameters:
+      layout:
+        type: DiagramLayout
+        description: Value for layout.
+      padding:
+        type: float
+        description: Value for padding.
+    """
     overlaps = find_overlaps(layout, padding=padding)
     if overlaps:
         pairs = ", ".join(f"{left.id}/{right.id}" for left, right in overlaps)

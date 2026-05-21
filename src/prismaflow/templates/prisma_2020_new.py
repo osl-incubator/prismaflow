@@ -1,4 +1,6 @@
-"""PRISMA 2020 new-review databases/registers layout template."""
+"""
+title: PRISMA 2020 new-review databases/registers layout template.
+"""
 
 from __future__ import annotations
 
@@ -8,10 +10,21 @@ from prismaflow.models import PrismaFlow
 
 
 class Prisma2020NewTemplate:
-    """Template for PRISMA 2020 new reviews using databases/registers."""
+    """
+    title: Template for PRISMA 2020 new reviews using databases/registers.
+    """
 
     def build(self, flow: PrismaFlow) -> DiagramLayout:
-        """Build a stable template-based layout."""
+        """
+        title: Build a stable template-based layout.
+        parameters:
+          flow:
+            type: PrismaFlow
+            description: Value for flow.
+        returns:
+          type: DiagramLayout
+          description: Return value.
+        """
         main_x = 300.0
         side_x = 660.0
         box_width = 300.0
@@ -174,6 +187,16 @@ class Prisma2020NewTemplate:
 
     @staticmethod
     def _reports_excluded_text(flow: PrismaFlow) -> str:
+        """
+        title: _reports_excluded_text.
+        parameters:
+          flow:
+            type: PrismaFlow
+            description: Value for flow.
+        returns:
+          type: str
+          description: Return value.
+        """
         if not flow.eligibility.reports_excluded:
             return "Reports excluded\n(n = 0)"
         lines = ["Reports excluded:"]

@@ -1,4 +1,6 @@
-"""Pydantic data models for PRISMA-style flow diagrams."""
+"""
+title: Pydantic data models for PRISMA-style flow diagrams.
+"""
 
 from __future__ import annotations
 
@@ -18,7 +20,25 @@ PathLike = str | Path
 
 
 class FlowMetadata(BaseModel):
-    """Optional metadata associated with a PRISMA flow."""
+    """
+    title: Optional metadata associated with a PRISMA flow.
+    attributes:
+      review_id:
+        type: str | None
+        description: Value for review_id.
+      authors:
+        type: list[str]
+        description: Value for authors.
+      created_at:
+        type: date | None
+        description: Value for created_at.
+      notes:
+        type: str | None
+        description: Value for notes.
+      extra:
+        type: dict[str, str]
+        description: Value for extra.
+    """
 
     review_id: str | None = None
     authors: list[str] = Field(default_factory=list)
@@ -28,19 +48,51 @@ class FlowMetadata(BaseModel):
 
 
 class IdentificationStage(BaseModel):
-    """Identification-stage counts."""
+    """
+    title: Identification-stage counts.
+    attributes:
+      records_identified_databases:
+        type: Count
+        description: Value for records_identified_databases.
+      records_identified_registers:
+        type: Count
+        description: Value for records_identified_registers.
+    """
 
     records_identified_databases: Count
     records_identified_registers: Count
 
     @property
     def records_identified_total(self) -> int:
-        """Total records identified from databases and registers."""
+        """
+        title: Total records identified from databases and registers.
+        returns:
+          type: int
+          description: Return value.
+        """
         return self.records_identified_databases + self.records_identified_registers
 
 
 class ScreeningStage(BaseModel):
-    """Screening-stage counts."""
+    """
+    title: Screening-stage counts.
+    attributes:
+      records_removed_duplicates:
+        type: Count
+        description: Value for records_removed_duplicates.
+      records_removed_automation:
+        type: Count
+        description: Value for records_removed_automation.
+      records_removed_other:
+        type: Count
+        description: Value for records_removed_other.
+      records_screened:
+        type: Count
+        description: Value for records_screened.
+      records_excluded:
+        type: Count
+        description: Value for records_excluded.
+    """
 
     records_removed_duplicates: Count
     records_removed_automation: Count
@@ -50,7 +102,12 @@ class ScreeningStage(BaseModel):
 
     @property
     def records_removed_total(self) -> int:
-        """Total records removed before screening."""
+        """
+        title: Total records removed before screening.
+        returns:
+          type: int
+          description: Return value.
+        """
         return (
             self.records_removed_duplicates
             + self.records_removed_automation
@@ -59,7 +116,22 @@ class ScreeningStage(BaseModel):
 
 
 class EligibilityStage(BaseModel):
-    """Eligibility-stage counts."""
+    """
+    title: Eligibility-stage counts.
+    attributes:
+      reports_sought:
+        type: Count
+        description: Value for reports_sought.
+      reports_not_retrieved:
+        type: Count
+        description: Value for reports_not_retrieved.
+      reports_assessed:
+        type: Count
+        description: Value for reports_assessed.
+      reports_excluded:
+        type: dict[str, Count]
+        description: Value for reports_excluded.
+    """
 
     reports_sought: Count
     reports_not_retrieved: Count
@@ -72,6 +144,16 @@ class EligibilityStage(BaseModel):
         cls,
         value: dict[str, Count],
     ) -> dict[str, Count]:
+        """
+        title: _validate_reports_excluded.
+        parameters:
+          value:
+            type: dict[str, Count]
+            description: Value for value.
+        returns:
+          type: dict[str, Count]
+          description: Return value.
+        """
         for reason, count in value.items():
             if not isinstance(reason, str) or not reason.strip():
                 raise ValueError("reports_excluded reasons must be non-empty strings")
@@ -83,18 +165,53 @@ class EligibilityStage(BaseModel):
 
     @property
     def reports_excluded_total(self) -> int:
-        """Total reports excluded after eligibility assessment."""
+        """
+        title: Total reports excluded after eligibility assessment.
+        returns:
+          type: int
+          description: Return value.
+        """
         return sum(self.reports_excluded.values())
 
 
 class IncludedStage(BaseModel):
-    """Included-stage counts."""
+    """
+    title: Included-stage counts.
+    attributes:
+      studies_included:
+        type: Count
+        description: Value for studies_included.
+    """
 
     studies_included: Count
 
 
 class PrismaFlow(BaseModel):
-    """A validated PRISMA-style flow diagram document."""
+    """
+    title: A validated PRISMA-style flow diagram document.
+    attributes:
+      template:
+        type: PrismaTemplate
+        description: Value for template.
+      title:
+        type: str | None
+        description: Value for title.
+      identification:
+        type: IdentificationStage
+        description: Value for identification.
+      screening:
+        type: ScreeningStage
+        description: Value for screening.
+      eligibility:
+        type: EligibilityStage
+        description: Value for eligibility.
+      included:
+        type: IncludedStage
+        description: Value for included.
+      metadata:
+        type: FlowMetadata | None
+        description: Value for metadata.
+    """
 
     template: PrismaTemplate = PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS
     title: str | None = None
@@ -129,7 +246,58 @@ class PrismaFlow(BaseModel):
         metadata: FlowMetadata | None = None,
         template: PrismaTemplate = PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS,
     ) -> PrismaFlow:
-        """Create a PRISMA 2020 new-review flow from flat count arguments."""
+        """
+        title: Create a PRISMA 2020 new-review flow from flat count arguments.
+        parameters:
+          records_identified_databases:
+            type: int
+            description: Value for records_identified_databases.
+          records_identified_registers:
+            type: int
+            description: Value for records_identified_registers.
+          records_removed_duplicates:
+            type: int
+            description: Value for records_removed_duplicates.
+          records_removed_automation:
+            type: int
+            description: Value for records_removed_automation.
+          records_removed_other:
+            type: int
+            description: Value for records_removed_other.
+          records_screened:
+            type: int
+            description: Value for records_screened.
+          records_excluded:
+            type: int
+            description: Value for records_excluded.
+          reports_sought:
+            type: int
+            description: Value for reports_sought.
+          reports_not_retrieved:
+            type: int
+            description: Value for reports_not_retrieved.
+          reports_assessed:
+            type: int
+            description: Value for reports_assessed.
+          reports_excluded:
+            type: dict[str, int] | None
+            description: Value for reports_excluded.
+          studies_included:
+            type: int
+            description: Value for studies_included.
+          title:
+            type: str | None
+            description: Value for title.
+          metadata:
+            type: FlowMetadata | None
+            description: Value for metadata.
+          template:
+            type: PrismaTemplate
+            description: Value for template.
+        returns:
+          type: PrismaFlow
+          description: Return value.
+        """
         return cls(
             template=template,
             title=title,
@@ -159,19 +327,42 @@ class PrismaFlow(BaseModel):
         *,
         strict_included: bool = False,
     ) -> ValidationReport:
-        """Validate PRISMA count relationships and return a report."""
+        """
+        title: Validate PRISMA count relationships and return a report.
+        parameters:
+          strict_included:
+            type: bool
+            description: Value for strict_included.
+        returns:
+          type: ValidationReport
+          description: Return value.
+        """
         from prismaflow.validation import validate_flow
 
         return validate_flow(self, strict_included=strict_included)
 
     def to_layout(self) -> Any:
-        """Build the intermediate layout representation for this flow."""
+        """
+        title: Build the intermediate layout representation for this flow.
+        returns:
+          type: Any
+          description: Return value.
+        """
         from prismaflow.layout.engine import build_layout
 
         return build_layout(self)
 
     def to_svg(self, path: PathLike | None = None) -> str:
-        """Render the flow as SVG and optionally write it to a file."""
+        """
+        title: Render the flow as SVG and optionally write it to a file.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: str
+          description: Return value.
+        """
         from prismaflow.renderers.svg import SVGRenderer
 
         output = SVGRenderer().render(self.to_layout())
@@ -179,7 +370,16 @@ class PrismaFlow(BaseModel):
         return output
 
     def to_html(self, path: PathLike | None = None) -> str:
-        """Render the flow as standalone HTML and optionally write it."""
+        """
+        title: Render the flow as standalone HTML and optionally write it.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: str
+          description: Return value.
+        """
         from prismaflow.renderers.html import HTMLRenderer
 
         output = HTMLRenderer().render(self.to_layout())
@@ -187,7 +387,16 @@ class PrismaFlow(BaseModel):
         return output
 
     def to_mermaid(self, path: PathLike | None = None) -> str:
-        """Render the flow as Mermaid text and optionally write it."""
+        """
+        title: Render the flow as Mermaid text and optionally write it.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: str
+          description: Return value.
+        """
         from prismaflow.renderers.mermaid import MermaidRenderer
 
         output = MermaidRenderer().render(self.to_layout())
@@ -195,30 +404,62 @@ class PrismaFlow(BaseModel):
         return output
 
     def to_png(self, path: PathLike | None = None) -> bytes:
-        """Export PNG if an optional backend is available.
-
-        PNG is intentionally not implemented in v0.1 because the default stable
-        output is pure-Python SVG.
+        """
+        title: Export PNG if an optional backend is available.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: bytes
+          description: Return value.
         """
         from prismaflow.renderers.png import PNGRenderer
 
         return PNGRenderer().render(self.to_layout(), path=path)
 
     def to_json(self, path: PathLike | None = None) -> str:
-        """Serialize the flow to JSON and optionally write it."""
+        """
+        title: Serialize the flow to JSON and optionally write it.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: str
+          description: Return value.
+        """
         output = self.model_dump_json(indent=2)
         _write_text(path, output + "\n")
         return output
 
     @classmethod
     def from_json(cls, source: str | Path) -> PrismaFlow:
-        """Load a flow from a JSON path or JSON string."""
+        """
+        title: Load a flow from a JSON path or JSON string.
+        parameters:
+          source:
+            type: str | Path
+            description: Value for source.
+        returns:
+          type: PrismaFlow
+          description: Return value.
+        """
         from prismaflow.io.json import load_json
 
         return load_json(source)
 
     def to_yaml(self, path: PathLike | None = None) -> str:
-        """Serialize the flow to YAML when PyYAML is installed."""
+        """
+        title: Serialize the flow to YAML when PyYAML is installed.
+        parameters:
+          path:
+            type: PathLike | None
+            description: Value for path.
+        returns:
+          type: str
+          description: Return value.
+        """
         from prismaflow.io.yaml import dump_yaml
 
         output = dump_yaml(self)
@@ -227,13 +468,32 @@ class PrismaFlow(BaseModel):
 
     @classmethod
     def from_yaml(cls, source: str | Path) -> PrismaFlow:
-        """Load a flow from YAML when PyYAML is installed."""
+        """
+        title: Load a flow from YAML when PyYAML is installed.
+        parameters:
+          source:
+            type: str | Path
+            description: Value for source.
+        returns:
+          type: PrismaFlow
+          description: Return value.
+        """
         from prismaflow.io.yaml import load_yaml
 
         return load_yaml(source)
 
 
 def _write_text(path: PathLike | None, content: str) -> None:
+    """
+    title: _write_text.
+    parameters:
+      path:
+        type: PathLike | None
+        description: Value for path.
+      content:
+        type: str
+        description: Value for content.
+    """
     if path is None:
         return
     Path(path).write_text(content, encoding="utf-8")

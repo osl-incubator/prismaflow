@@ -1,4 +1,6 @@
-"""Text wrapping helpers for renderers."""
+"""
+title: Text wrapping helpers for renderers.
+"""
 
 from __future__ import annotations
 
@@ -6,7 +8,19 @@ import textwrap
 
 
 def wrap_text(text: str, *, max_chars: int = 34) -> list[str]:
-    """Wrap text while preserving explicit line breaks."""
+    """
+    title: Wrap text while preserving explicit line breaks.
+    parameters:
+      text:
+        type: str
+        description: Value for text.
+      max_chars:
+        type: int
+        description: Value for max_chars.
+    returns:
+      type: list[str]
+      description: Return value.
+    """
     lines: list[str] = []
     for raw_line in text.splitlines() or [""]:
         if not raw_line:

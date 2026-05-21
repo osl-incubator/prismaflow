@@ -1,4 +1,6 @@
-"""Layout primitives and helpers."""
+"""
+title: Layout primitives and helpers.
+"""
 
 from prismaflow.layout.engine import (
     DiagramEdge,

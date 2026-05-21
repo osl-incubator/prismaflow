@@ -1,10 +1,14 @@
-"""Enumerations used by prisma-flow."""
+"""
+title: Enumerations used by prisma-flow.
+"""
 
 from enum import Enum
 
 
 class PrismaTemplate(str, Enum):
-    """Supported and planned PRISMA diagram templates."""
+    """
+    title: Supported and planned PRISMA diagram templates.
+    """
 
     PRISMA_2020_NEW_DATABASES_REGISTERS = "prisma_2020_new_databases_registers"
     PRISMA_2020_NEW_DATABASES_REGISTERS_OTHER = (

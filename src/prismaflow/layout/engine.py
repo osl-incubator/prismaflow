@@ -1,4 +1,6 @@
-"""Layout dataclasses and template dispatch."""
+"""
+title: Layout dataclasses and template dispatch.
+"""
 
 from __future__ import annotations
 
@@ -14,7 +16,31 @@ NodeKind = Literal["stage", "exclusion", "header", "note"]
 
 @dataclass
 class DiagramNode:
-    """A positioned text box in a diagram."""
+    """
+    title: A positioned text box in a diagram.
+    attributes:
+      id:
+        type: str
+        description: Value for id.
+      rect:
+        type: Rect
+        description: Value for rect.
+      text:
+        type: str
+        description: Value for text.
+      kind:
+        type: NodeKind
+        description: Value for kind.
+      href:
+        type: str | None
+        description: Value for href.
+      tooltip:
+        type: str | None
+        description: Value for tooltip.
+      css_class:
+        type: str | None
+        description: Value for css_class.
+    """
 
     id: str
     rect: Rect
@@ -27,7 +53,34 @@ class DiagramNode:
 
 @dataclass
 class DiagramEdge:
-    """An arrow connecting two diagram nodes."""
+    """
+    title: An arrow connecting two diagram nodes.
+    attributes:
+      id:
+        type: str
+        description: Value for id.
+      source_id:
+        type: str
+        description: Value for source_id.
+      target_id:
+        type: str
+        description: Value for target_id.
+      source_anchor:
+        type: Anchor
+        description: Value for source_anchor.
+      target_anchor:
+        type: Anchor
+        description: Value for target_anchor.
+      label:
+        type: str | None
+        description: Value for label.
+      path:
+        type: list[Point] | None
+        description: Value for path.
+      css_class:
+        type: str | None
+        description: Value for css_class.
+    """
 
     id: str
     source_id: str
@@ -41,7 +94,25 @@ class DiagramEdge:
 
 @dataclass
 class DiagramLayout:
-    """Complete intermediate representation for a rendered diagram."""
+    """
+    title: Complete intermediate representation for a rendered diagram.
+    attributes:
+      width:
+        type: float
+        description: Value for width.
+      height:
+        type: float
+        description: Value for height.
+      nodes:
+        type: list[DiagramNode]
+        description: Value for nodes.
+      edges:
+        type: list[DiagramEdge]
+        description: Value for edges.
+      title:
+        type: str | None
+        description: Value for title.
+    """
 
     width: float
     height: float
@@ -50,7 +121,16 @@ class DiagramLayout:
     title: str | None = None
 
     def node_by_id(self, node_id: str) -> DiagramNode:
-        """Return a node by ID."""
+        """
+        title: Return a node by ID.
+        parameters:
+          node_id:
+            type: str
+            description: Value for node_id.
+        returns:
+          type: DiagramNode
+          description: Return value.
+        """
         for node in self.nodes:
             if node.id == node_id:
                 return node
@@ -58,7 +138,16 @@ class DiagramLayout:
 
 
 def build_layout(flow: object) -> DiagramLayout:
-    """Build a diagram layout for a supported PRISMA flow template."""
+    """
+    title: Build a diagram layout for a supported PRISMA flow template.
+    parameters:
+      flow:
+        type: object
+        description: Value for flow.
+    returns:
+      type: DiagramLayout
+      description: Return value.
+    """
     from prismaflow.models import PrismaFlow
     from prismaflow.templates.prisma_2020_new import Prisma2020NewTemplate
 

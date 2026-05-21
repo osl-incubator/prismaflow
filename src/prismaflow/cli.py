@@ -1,4 +1,6 @@
-"""Command-line interface for prisma-flow."""
+"""
+title: Command-line interface for prisma-flow.
+"""
 
 from __future__ import annotations
 
@@ -16,7 +18,16 @@ RenderFormat = str
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    """Run the prisma-flow command-line interface."""
+    """
+    title: Run the prisma-flow command-line interface.
+    parameters:
+      argv:
+        type: Sequence[str] | None
+        description: Value for argv.
+    returns:
+      type: int
+      description: Return value.
+    """
     parser = build_parser()
     args = parser.parse_args(argv)
     try:
@@ -39,7 +50,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Build the CLI argument parser."""
+    """
+    title: Build the CLI argument parser.
+    returns:
+      type: argparse.ArgumentParser
+      description: Return value.
+    """
     parser = argparse.ArgumentParser(
         prog="prisma-flow",
         description="Generate PRISMA-style flow diagrams without system dependencies.",
@@ -72,6 +88,16 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _validate_command(args: argparse.Namespace) -> int:
+    """
+    title: _validate_command.
+    parameters:
+      args:
+        type: argparse.Namespace
+        description: Value for args.
+    returns:
+      type: int
+      description: Return value.
+    """
     flow = _load_flow(args.input)
     report = flow.validate(strict_included=args.strict_included)
     print(report.format_text())
@@ -79,6 +105,16 @@ def _validate_command(args: argparse.Namespace) -> int:
 
 
 def _render_command(args: argparse.Namespace) -> int:
+    """
+    title: _render_command.
+    parameters:
+      args:
+        type: argparse.Namespace
+        description: Value for args.
+    returns:
+      type: int
+      description: Return value.
+    """
     flow = _load_flow(args.input)
     report = flow.validate()
     if report.has_errors and not args.allow_invalid:
@@ -95,6 +131,16 @@ def _render_command(args: argparse.Namespace) -> int:
 
 
 def _load_flow(path: str | Path) -> PrismaFlow:
+    """
+    title: _load_flow.
+    parameters:
+      path:
+        type: str | Path
+        description: Value for path.
+    returns:
+      type: PrismaFlow
+      description: Return value.
+    """
     suffix = Path(path).suffix.lower()
     if suffix in {".yaml", ".yml"}:
         return PrismaFlow.from_yaml(path)
@@ -102,6 +148,16 @@ def _load_flow(path: str | Path) -> PrismaFlow:
 
 
 def _infer_format(output: str | None) -> RenderFormat:
+    """
+    title: _infer_format.
+    parameters:
+      output:
+        type: str | None
+        description: Value for output.
+    returns:
+      type: RenderFormat
+      description: Return value.
+    """
     if not output:
         return "svg"
     suffix = Path(output).suffix.lower().lstrip(".")
@@ -117,6 +173,22 @@ def _render(
     output_format: RenderFormat,
     output: str | None,
 ) -> str | bytes:
+    """
+    title: _render.
+    parameters:
+      flow:
+        type: PrismaFlow
+        description: Value for flow.
+      output_format:
+        type: RenderFormat
+        description: Value for output_format.
+      output:
+        type: str | None
+        description: Value for output.
+    returns:
+      type: str | bytes
+      description: Return value.
+    """
     if output_format == "svg":
         return flow.to_svg(output)
     if output_format == "html":
