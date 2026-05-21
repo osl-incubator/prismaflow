@@ -49,7 +49,7 @@ dev = [
   "ruff>=0.6",
   "mypy>=1.10",
   "pre-commit>=3",
-  "makim==1.29.0"
+  "makim==1.29.0",
 ]
 docs = []
 
@@ -57,8 +57,8 @@ docs = []
 prisma-flow = "prismaflow.cli:main"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=2"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 packages = [
@@ -66,23 +66,6 @@ packages = [
 ]
 include = [
   "src/prismaflow/py.typed",
-]
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/prismaflow"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-  "/src",
-  "/tests",
-  "/examples",
-  "/docs",
-  "/README.md",
-  "/LICENSE",
-  "/CHANGELOG.md",
-  "/CONTRIBUTING.md",
-  "/CODE_OF_CONDUCT.md",
-  "/pyproject.toml",
 ]
 
 [tool.ruff]

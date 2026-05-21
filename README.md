@@ -161,21 +161,20 @@ Inkscape, Playwright, browser engines, Matplotlib, or Plotly.
 ## Development
 
 ```bash
-uv sync --all-extras --dev
-uv run ruff check .
-uv run mypy src
-uv run pytest
-uv build
-quarto render docs
+conda env create -f conda/dev.yaml
+conda activate prismaflow
+poetry config virtualenvs.create false
+poetry install --extras "dev yaml"
 ```
 
-Useful Makim tasks are also available:
+Run the same workflow through Makim:
 
 ```bash
-makim prisma-flow.unittests
-makim prisma-flow.typecheck
-makim prisma-flow.lint
-makim prisma-flow.build
+makim tests.linter
+makim tests.unit
+makim package.build
+makim docs.build
+makim all.ci
 ```
 
 ## Documentation

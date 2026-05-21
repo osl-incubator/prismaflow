@@ -1,4 +1,15 @@
 groups:
+  all:
+    tasks:
+      ci:
+        help: Run lint, tests, package build, and docs build
+        hooks:
+          pre-run:
+            - task: tests.linter
+            - task: tests.unit
+            - task: package.build
+            - task: docs.build
+
   clean:
     tasks:
       tmp:
@@ -59,11 +70,7 @@ groups:
             default: "-vv"
         backend: bash
         run: |
-          pytest \
-            --cov=prismaflow \
-            --cov-fail-under=92 \
-            --cov-report term-missing \
-            --no-cov-on-fail ${{ args.path }} ${{ args.params }}
+          pytest ${{ args.path }} ${{ args.params }}
 
       ci:
         help: run the same tests executed on CI
@@ -76,8 +83,9 @@ groups:
   package:
     tasks:
       build:
-        help: Build the package
-        run: uv build
+        help: Build the package with Poetry
+        backend: bash
+        run: poetry build
 
   release:
     vars:

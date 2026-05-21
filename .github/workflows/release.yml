@@ -9,22 +9,39 @@ permissions:
   contents: read
   id-token: write
 
+env:
+  VIRTUALENV_ACTIVATORS: "bash,python"
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment: pypi
+
+    defaults:
+      run:
+        shell: bash -l {0}
 
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          enable-cache: true
-      - uses: actions/setup-python@v5
-        with:
+          miniforge-version: latest
+          environment-file: conda/release.yaml
+          channels: conda-forge,nodefaults
+          activate-environment: prismaflow
+          auto-update-conda: true
+          conda-solver: libmamba
           python-version: "3.13"
 
+      - name: Install dependencies
+        run: |
+          poetry config virtualenvs.create false
+          poetry install --extras "dev yaml"
+
       - name: Build distributions
-        run: uv build
+        run: makim package.build
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

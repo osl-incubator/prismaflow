@@ -5,7 +5,10 @@ Thank you for contributing to `prisma-flow`.
 ## Development setup
 
 ```bash
-uv sync --all-extras --dev
+conda env create -f conda/dev.yaml
+conda activate prismaflow
+poetry config virtualenvs.create false
+poetry install --extras "dev yaml"
 ```
 
 ## Checks
@@ -13,12 +16,10 @@ uv sync --all-extras --dev
 Run the same core checks used by CI:
 
 ```bash
-uv run ruff check .
-uv run ruff format --check .
-uv run mypy src
-uv run pytest
-uv build
-quarto render docs
+makim tests.linter
+makim tests.unit
+makim package.build
+makim docs.build
 ```
 
 ## Scope

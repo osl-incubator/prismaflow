@@ -9,8 +9,8 @@ This file is the shared operating manual for AI contributors working in
 - Python import package: `prismaflow`
 - CLI command: `prisma-flow`
 - Repository: `osl-incubator/prisma-flow`
-- Build backend: Hatchling
-- Package manager: uv
+- Build backend: Poetry
+- Environment/workflow: conda + Poetry + Makim
 - Runtime: Python 3.10+
 
 ## Design constraints
@@ -50,22 +50,19 @@ rendering stacks.
 ## Development commands
 
 ```bash
-uv sync --all-extras --dev
-uv run ruff check .
-uv run ruff format --check .
-uv run mypy src
-uv run pytest
-uv build
-quarto render docs
+conda env create -f conda/dev.yaml
+conda activate prismaflow
+poetry config virtualenvs.create false
+poetry install --extras "dev yaml"
 ```
 
-Makim wrappers:
+Makim workflow:
 
 ```bash
-makim prisma-flow.unittests
-makim prisma-flow.typecheck
-makim prisma-flow.lint
-makim prisma-flow.build
+makim tests.linter
+makim tests.unit
+makim package.build
+makim docs.build
 makim all.ci
 ```
 

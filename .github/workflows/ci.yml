@@ -5,41 +5,49 @@ on:
   push:
     branches: [main]
 
+env:
+  VIRTUALENV_ACTIVATORS: "bash,python"
+
 jobs:
-  tests:
+  checks:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.10", "3.11", "3.12", "3.13"]
 
+    defaults:
+      run:
+        shell: bash -l {0}
+
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          enable-cache: true
-      - uses: actions/setup-python@v5
-        with:
+          miniforge-version: latest
+          environment-file: conda/dev.yaml
+          channels: conda-forge,nodefaults
+          activate-environment: prismaflow
+          auto-update-conda: true
+          conda-solver: libmamba
           python-version: ${{ matrix.python-version }}
-      - uses: quarto-dev/quarto-actions/setup@v2
 
       - name: Install dependencies
-        run: uv sync --all-extras --dev
+        run: |
+          poetry config virtualenvs.create false
+          poetry check
+          poetry install --extras "dev yaml"
 
-      - name: Lint
-        run: uv run ruff check .
+      - name: Run linter checks
+        run: makim tests.linter
 
-      - name: Format check
-        run: uv run ruff format --check .
+      - name: Run tests
+        run: makim tests.unit
 
-      - name: Type check
-        run: uv run mypy src
+      - name: Build package
+        run: makim package.build
 
-      - name: Test
-        run: uv run pytest
-
-      - name: Build
-        run: uv build
-
-      - name: Render docs
-        run: quarto render docs
+      - name: Build documentation
+        run: makim docs.build
