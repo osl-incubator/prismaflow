@@ -1,0 +1,128 @@
+groups:
+  default:
+    tasks:
+      clean:
+        help: remove build artifacts, compiled files, and cache
+        run: |
+          rm -fr build/
+          rm -fr dist/
+          rm -fr .eggs/
+          find . -name '*.egg-info' -exec rm -fr {} +
+          find . -name '*.egg' -exec rm -f {} +
+          find . -name '*.pyc' -exec rm -f {} +
+          find . -name '__pycache__' -exec rm -fr {} +
+          find . -name '*.pyo' -exec rm -f {} +
+          find . -name '*~' -exec rm -f {} +
+          rm -f .coverage
+          rm -fr htmlcov/
+          rm -fr .mypy_cache/
+          rm -fr .pytest_cache/
+          rm -fr .ruff_cache/
+
+  all:
+    tasks:
+      lint:
+        help: run all lint and pre-commit checks
+        run: |
+          pre-commit install
+          pre-commit run --all-files
+
+      typecheck:
+        help: run type checks for every package
+        hooks:
+          pre-run:
+            - task: prisma-flow.typecheck
+
+      build:
+        help: build all packages
+        hooks:
+          pre-run:
+            - task: prisma-flow.build
+
+      ci:
+        help: run the same checks executed on CI
+        hooks:
+          pre-run:
+            - task: prisma-flow.unittests
+            - task: prisma-flow.typecheck
+            - task: prisma-flow.lint
+            - task: prisma-flow.build
+
+  prisma-flow:
+    tasks:
+      unittests:
+        help: run Prisma Flow unit tests
+        args:
+          path:
+            help: Specify the location of the tests
+            type: string
+            default: "tests"
+          params:
+            help: Specify parameters to be used for tests
+            type: string
+            default: "-vv"
+        run: pytest ${{ args.path }} ${{ args.params }}
+
+      format:
+        help: format Prisma Flow Python files
+        run: pre-commit run ruff-format --all-files
+
+      lint:
+        help: run Prisma Flow package lint hooks
+        run: |
+          pre-commit run ruff-check --all-files
+          pre-commit run bandit --all-files
+          pre-commit run vulture --all-files
+
+      typecheck:
+        help: run Prisma Flow type checks
+        run: mypy src tests
+
+      build:
+        help: build the Prisma Flow package
+        run: poetry build
+
+      ci:
+        help: run Prisma Flow package CI checks
+        hooks:
+          pre-run:
+            - task: prisma-flow.unittests
+            - task: prisma-flow.typecheck
+            - task: prisma-flow.lint
+            - task: prisma-flow.build
+
+  docs:
+    tasks:
+      build:
+        help: build documentation
+        run: |
+          rm -rf build
+          mkdocs build --config-file mkdocs.yaml --strict
+
+      preview:
+        help: preview documentation locally
+        run: mkdocs serve --config-file mkdocs.yaml
+
+  release:
+    vars:
+      app: |
+        npx --yes \
+          -p semantic-release \
+          -p conventional-changelog-conventionalcommits \
+          -p "@semantic-release/commit-analyzer" \
+          -p "@semantic-release/release-notes-generator" \
+          -p "@semantic-release/changelog" \
+          -p "@semantic-release/exec" \
+          -p "@semantic-release/github" \
+          -p "@semantic-release/git" \
+          -p semantic-release-replace-plugin \
+          semantic-release
+
+    tasks:
+      ci:
+        help: run semantic release on CI
+        run: ${{ vars.app }} --ci
+
+      dry-run:
+        help: run semantic release in dry-run mode
+        run: ${{ vars.app }} --dry-run

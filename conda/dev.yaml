@@ -1,0 +1,13 @@
+name: prismaflow
+channels:
+  - nodefaults
+  - conda-forge
+dependencies:
+  - bash
+  - python
+  - poetry >=1.5
+  - nodejs
+  - shellcheck
+  - pip
+  - pip:
+      - makim>=1.29.0

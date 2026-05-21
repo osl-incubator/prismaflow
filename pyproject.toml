@@ -1,0 +1,123 @@
+[project]
+name = "prisma-flow"
+version = "0.1.0"  # semantic-release
+description = "Project scaffold for the Prisma Flow Python package."
+authors = [
+  {name = "Ivan Ogasawara", email = "ivan.ogasawara@gmail.com"}
+]
+license = "BSD-3-Clause"
+readme = "README.md"
+requires-python = ">=3.10,<4"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/osl-incubator/prisma-flow"
+Repository = "https://github.com/osl-incubator/prisma-flow"
+Issues = "https://github.com/osl-incubator/prisma-flow/issues"
+Documentation = "https://osl-incubator.github.io/prisma-flow"
+
+[build-system]
+requires = ["poetry-core>=2"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+packages = [
+  {include = "prisma_flow", from = "src"},
+]
+include = [
+  "src/prisma_flow/py.typed",
+]
+exclude = [
+  ".git/*",
+  ".env*",
+]
+
+[tool.poetry.group.dev.dependencies]
+pytest = ">=7"
+pre-commit = ">=3"
+mypy = ">=1"
+pytest-cov = ">=3.0.0"
+mkdocs = ">=1.3,<2"
+mkdocs-exclude = ">=1.0.2"
+mkdocs-jupyter = ">=0.24.7"
+mkdocs-literate-nav = ">=0.4.1"
+mkdocs-macros-plugin = ">=0.6.3"
+mkdocs-material = ">=8"
+mkdocstrings = {version = ">=0.19.0", extras = ["python"]}
+griffe = "<2"
+mkdocstrings-python = "<2"
+ruff = ">=0.1.5"
+bandit = ">=1.7.5"
+vulture = ">=2.7"
+jupyterlab = ">=4.1.5"
+nox = ">=2024.3.2"
+nbconvert = ">=7.16.3"
+pymdown-extensions = ">=10.7.1"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+
+[tool.mypy]
+python_version = "3.10"
+check_untyped_defs = true
+strict = true
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+show_error_codes = true
+exclude = ["scripts/"]
+
+[tool.ruff]
+line-length = 79
+force-exclude = true
+src = ["./src/prisma_flow", "./tests"]
+exclude = [
+  "docs",
+]
+fix = true
+
+[tool.ruff.lint]
+select = [
+  "E",    # pycodestyle
+  "F",    # pyflakes
+  "D",    # pydocstyle
+  "YTT",  # flake8-2020
+  "PL",   # pylint
+  "RUF",  # Ruff-specific rules
+  "I001", # isort
+  "I002", # isort
+]
+ignore = [
+  "RUF012",
+  "PLR0915", # too many statements
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+lines-between-types = 1
+
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+targets = "src/prisma_flow/"
+skips = ["B102", "B701", "B507", "B601", "B603"]
+
+[tool.vulture]
+exclude = ["tests"]
+ignore_decorators = []
+ignore_names = []
+make_whitelist = true
+min_confidence = 80
+paths = ["src/prisma_flow/"]
+sort_by_size = true
+verbose = false
