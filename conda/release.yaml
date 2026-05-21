@@ -6,4 +6,5 @@ dependencies:
   - python >=3.10
   - poetry >=2
   - nodejs >=18
+  - quarto
   - pip

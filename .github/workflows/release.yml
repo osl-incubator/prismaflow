@@ -44,7 +44,7 @@ jobs:
         run: |
           poetry config virtualenvs.create false
           poetry check
-          poetry install --extras "dev yaml"
+          poetry install
 
       - name: Run release dry-run
         if: ${{ github.event_name != 'workflow_dispatch' }}
@@ -60,3 +60,14 @@ jobs:
         run: |
           poetry config pypi-token.pypi "${PYPI_TOKEN}"
           makim release.ci
+
+      - name: Generate documentation with changes from release process
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: makim docs.build
+
+      - name: GitHub Pages action
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: peaceiris/actions-gh-pages@v3.5.9
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
