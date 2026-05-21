@@ -40,7 +40,7 @@
     "href": "dependency-policy.html#optional-extras",
     "title": "Dependency policy",
     "section": "Optional extras",
-    "text": "Optional extras\n\n\n\nExtra\nPurpose\n\n\n\n\nprisma-flow[yaml]\nYAML input/output through PyYAML.\n\n\nprisma-flow[png]\nFuture optional PNG backend.",
+    "text": "Optional extras\n\n\n\n\n\n\n\nExtra\nPurpose\n\n\n\n\nprisma-flow[yaml]\nYAML input/output through PyYAML.\n\n\nprisma-flow[png]\nPNG rasterization through the optional resvg backend.",
     "crumbs": [
       "Home",
       "Reference",
@@ -100,7 +100,7 @@
     "href": "installation.html",
     "title": "Installation",
     "section": "",
-    "text": "Install from PyPI with pip:\npip install prisma-flow\nor with uv:\nuv add prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
     "crumbs": [
       "Home",
       "Get started",
@@ -112,7 +112,7 @@
     "href": "installation.html#base-install",
     "title": "Installation",
     "section": "",
-    "text": "Install from PyPI with pip:\npip install prisma-flow\nor with uv:\nuv add prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
     "crumbs": [
       "Home",
       "Get started",
@@ -124,7 +124,7 @@
     "href": "installation.html#optional-yaml-support",
     "title": "Installation",
     "section": "Optional YAML support",
-    "text": "Optional YAML support\npip install \"prisma-flow[yaml]\"\nor:\nuv add \"prisma-flow[yaml]\"",
+    "text": "Optional YAML support\npip install \"prisma-flow[yaml]\"",
     "crumbs": [
       "Home",
       "Get started",
@@ -136,7 +136,7 @@
     "href": "installation.html#optional-png-support",
     "title": "Installation",
     "section": "Optional PNG support",
-    "text": "Optional PNG support\nPNG export is intentionally optional. In v0.1, to_png() and prisma-flow render --format png raise a clear optional-dependency error rather than adding a required rendering stack.\nuv add \"prisma-flow[png]\"",
+    "text": "Optional PNG support\nPNG export is intentionally optional and uses the pip-installable resvg backend. Install the PNG extra to enable to_png() and prisma-flow render --format png:\npip install \"prisma-flow[png]\"",
     "crumbs": [
       "Home",
       "Get started",
@@ -400,7 +400,7 @@
     "href": "rendering.html#png",
     "title": "Rendering",
     "section": "PNG",
-    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack in v0.1. If requested without an available backend, the package raises an OptionalDependencyError with installation guidance.",
+    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack. Install prisma-flow[png] to enable rasterization through the optional resvg backend:\npng = flow.to_png()\nflow.to_png(\"prisma.png\")\nIf the optional backend is not installed, the package raises an OptionalDependencyError with installation guidance.",
     "crumbs": [
       "Home",
       "User guide",
@@ -448,7 +448,7 @@
     "href": "examples.html#yaml-input",
     "title": "Examples",
     "section": "YAML input",
-    "text": "YAML input\nYAML input requires the optional YAML extra:\nuv add \"prisma-flow[yaml]\"\nprisma-flow render examples/basic_new_review.yaml -o examples/output/basic_new_review.svg",
+    "text": "YAML input\nYAML input requires the optional YAML extra:\npip install \"prisma-flow[yaml]\"\nprisma-flow render examples/basic_new_review.yaml -o examples/output/basic_new_review.svg",
     "crumbs": [
       "Home",
       "Reference",
@@ -484,7 +484,7 @@
     "href": "cli.html#render",
     "title": "Command-line interface",
     "section": "Render",
-    "text": "Render\nRender SVG:\nprisma-flow render review.json --format svg --output prisma.svg\nShort form:\nprisma-flow render review.json -o prisma.svg\nRender HTML:\nprisma-flow render review.json -f html -o prisma.html\nRender Mermaid text:\nprisma-flow render review.json -f mermaid -o prisma.mmd",
+    "text": "Render\nRender SVG:\nprisma-flow render review.json --format svg --output prisma.svg\nShort form:\nprisma-flow render review.json -o prisma.svg\nRender HTML:\nprisma-flow render review.json -f html -o prisma.html\nRender Mermaid text:\nprisma-flow render review.json -f mermaid -o prisma.mmd\nRender PNG when prisma-flow[png] is installed:\nprisma-flow render review.json -f png -o prisma.png",
     "crumbs": [
       "Home",
       "User guide",
@@ -688,7 +688,7 @@
     "href": "api.html#common-methods",
     "title": "API reference",
     "section": "Common methods",
-    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a PRISMA 2020 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a PRISMA 2020 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
+    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a PRISMA 2020 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a PRISMA 2020 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_png(path=None)\nRender PNG bytes through the optional PNG backend.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
     "crumbs": [
       "Home",
       "Reference",
