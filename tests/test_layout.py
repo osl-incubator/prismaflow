@@ -37,3 +37,36 @@ def test_layout_follows_prisma_2020_visual_flow() -> None:
         "identified_to_removed",
         "identified_to_screened",
     }
+
+
+def test_layout_expands_when_other_methods_are_present() -> None:
+    flow = PrismaFlow.new_review(
+        records_identified_databases=100,
+        records_identified_registers=20,
+        records_removed_duplicates=10,
+        records_removed_automation=5,
+        records_removed_other=5,
+        records_screened=100,
+        records_excluded=60,
+        reports_sought=40,
+        reports_not_retrieved=5,
+        reports_assessed=35,
+        reports_excluded={"Wrong population": 10},
+        website_results=2,
+        organisation_results=1,
+        citations_results=2,
+        other_sought_reports=5,
+        other_notretrieved_reports=1,
+        other_assessed=4,
+        other_excluded={"Wrong outcome": 1},
+        studies_included=28,
+        reports_included=28,
+    )
+    layout = flow.to_layout()
+
+    assert layout.width > 1000
+    assert layout.node_by_id("other_methods_header").kind == "header"
+    assert layout.node_by_id("other_identified").text.startswith(
+        "Records identified from"
+    )
+    assert layout.node_by_id("included").text.endswith("(n = 28)")

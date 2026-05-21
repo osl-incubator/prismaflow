@@ -23,6 +23,7 @@ flow = new_review(
         "Not primary research": 15,
     },
     studies_included=40,
+    reports_included=40,
 )
 
 report = flow.validate()

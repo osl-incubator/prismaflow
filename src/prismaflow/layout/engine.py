@@ -154,7 +154,10 @@ def build_layout(flow: object) -> DiagramLayout:
     if not isinstance(flow, PrismaFlow):
         raise TypeError("build_layout expects a PrismaFlow instance")
 
-    if flow.template == PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS:
+    if flow.template in {
+        PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS,
+        PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS_OTHER,
+    }:
         return Prisma2020NewTemplate().build(flow)
 
     raise TemplateNotSupportedError(

@@ -20,6 +20,7 @@ eligibility:
     Not primary research: 15
 included:
   studies_included: 40
+  reports_included: 40
 metadata:
   review_id: example-new-review
   authors:

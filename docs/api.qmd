@@ -38,9 +38,9 @@ The public API is exported from `prismaflow`.
 
 | Method | Description |
 |---|---|
-| `new_review(...)` | Create a v0.1 new-review flow from flat count arguments. |
+| `new_review(...)` | Create a PRISMA 2020 new-review flow from flat count arguments. |
 | `PrismaFlow(...)` | Create a flow from nested stage models. |
-| `PrismaFlow.new_review(...)` | Compatibility factory for a v0.1 new-review flow. |
+| `PrismaFlow.new_review(...)` | Compatibility factory for a PRISMA 2020 new-review flow. |
 | `flow.validate()` | Return a structured validation report. |
 | `flow.to_svg(path=None)` | Render SVG text and optionally write a file. |
 | `flow._repr_svg_()` | Return SVG for inline notebook display. |

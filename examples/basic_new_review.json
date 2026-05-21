@@ -24,7 +24,8 @@
     }
   },
   "included": {
-    "studies_included": 40
+    "studies_included": 40,
+    "reports_included": 40
   },
   "metadata": {
     "review_id": "example-new-review",

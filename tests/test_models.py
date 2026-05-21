@@ -41,6 +41,68 @@ def test_new_review_builds_model() -> None:
     assert flow.eligibility.reports_excluded_total == 50
 
 
+def test_new_review_accepts_other_method_fields() -> None:
+    kwargs = new_review_kwargs()
+    kwargs.update(
+        {
+            "website_results": 3,
+            "organisation_results": 2,
+            "citations_results": 1,
+            "other_sought_reports": 6,
+            "other_notretrieved_reports": 1,
+            "other_assessed": 5,
+            "other_excluded": {"Duplicate report": 1},
+            "reports_included": 74,
+        }
+    )
+    flow = new_review(**kwargs)
+
+    assert flow.has_other_methods
+    assert flow.identification.other_methods_total == 6
+    assert flow.eligibility.other_excluded_total == 1
+    assert flow.included.reports_included == 74
+
+
+def test_model_accepts_official_app_field_aliases() -> None:
+    flow = PrismaFlow.model_validate(
+        {
+            "identification": {
+                "database_results": 10,
+                "register_results": 5,
+                "website_results": 2,
+                "organisation_results": 1,
+                "citations_results": 1,
+            },
+            "screening": {
+                "duplicates": 1,
+                "excluded_automatic": 1,
+                "excluded_other": 1,
+                "records_screened": 12,
+                "records_excluded": 8,
+            },
+            "eligibility": {
+                "dbr_sought_reports": 4,
+                "dbr_notretrieved_reports": 1,
+                "dbr_assessed": 3,
+                "dbr_excluded": {"Wrong population": 1},
+                "other_sought_reports": 4,
+                "other_notretrieved_reports": 1,
+                "other_assessed": 3,
+                "other_excluded": {"Wrong outcome": 1},
+            },
+            "included": {
+                "new_studies": 4,
+                "new_reports": 4,
+            },
+        }
+    )
+
+    assert flow.identification.records_identified_total == 15
+    assert flow.screening.records_removed_total == 3
+    assert flow.eligibility.reports_excluded_total == 1
+    assert flow.included.studies_included == 4
+
+
 def test_prismaflow_new_review_remains_available() -> None:
     flow = PrismaFlow.new_review(**new_review_kwargs())
     assert flow.title == "Example"

@@ -73,6 +73,7 @@ flow = new_review(
         "Not primary research": 15,
     },
     studies_included=40,
+    reports_included=40,
 )
 
 flow.to_svg("prisma.svg")

@@ -80,6 +80,7 @@ flow = new_review(
         "Not primary research": 15,
     },
     studies_included=40,
+    reports_included=40,
 )
 
 report = flow.validate()
@@ -121,8 +122,8 @@ Validation failed:
 
 ## Data model
 
-The v0.1 implementation supports the PRISMA 2020 new-review databases/registers
-template:
+The implementation supports PRISMA 2020 new-review databases/registers fields,
+with optional other-method fields for expanded SVG diagrams:
 
 ```python
 from prismaflow import (
@@ -152,8 +153,11 @@ flow = PrismaFlow(
         reports_not_retrieved=10,
         reports_assessed=120,
         reports_excluded={"Wrong population": 30},
+        other_sought_reports=0,
+        other_notretrieved_reports=0,
+        other_assessed=0,
     ),
-    included=IncludedStage(studies_included=40),
+    included=IncludedStage(studies_included=40, reports_included=90),
 )
 ```
 

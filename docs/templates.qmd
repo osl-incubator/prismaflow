@@ -16,9 +16,11 @@ by them.
 | Template enum | Value |
 |---|---|
 | `PRISMA_2020_NEW_DATABASES_REGISTERS` | `prisma_2020_new_databases_registers` |
+| `PRISMA_2020_NEW_DATABASES_REGISTERS_OTHER` | `prisma_2020_new_databases_registers_other` |
 
-This template supports the standard PRISMA 2020 new-review flow with databases
-and registers.
+These templates support the PRISMA 2020 new-review flows for
+databases/registers only and databases/registers plus other search methods.
+The SVG layout expands automatically when other-method counts are present.
 
 The official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0.
 When publishing or presenting diagrams, cite the original PRISMA 2020 papers;
@@ -28,7 +30,6 @@ see [PRISMA acknowledgement and references](references.qmd).
 
 The enum also reserves future template values:
 
-- `PRISMA_2020_NEW_DATABASES_REGISTERS_OTHER`
 - `PRISMA_2020_UPDATED_DATABASES_REGISTERS`
 - `PRISMA_2020_UPDATED_DATABASES_REGISTERS_OTHER`
 

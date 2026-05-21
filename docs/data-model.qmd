@@ -50,7 +50,15 @@ flow = PrismaFlow(
 
 - `records_identified_databases`
 - `records_identified_registers`
+- `database_specific_results`
+- `register_specific_results`
+- `website_results`
+- `organisation_results`
+- `citations_results`
+- `previous_studies`
+- `previous_reports`
 - computed property: `records_identified_total`
+- computed property: `other_methods_total`
 
 ### Screening
 
@@ -67,13 +75,28 @@ flow = PrismaFlow(
 - `reports_not_retrieved`
 - `reports_assessed`
 - `reports_excluded`
+- `other_sought_reports`
+- `other_notretrieved_reports`
+- `other_assessed`
+- `other_excluded`
 - computed property: `reports_excluded_total`
+- computed property: `other_excluded_total`
+- computed property: `all_reports_assessed`
+- computed property: `all_reports_excluded_total`
 
 ### Included
 
 - `studies_included`
+- `reports_included`
+- `total_studies`
+- `total_reports`
+
+The nested models also accept official PRISMA app-style input aliases such as
+`database_results`, `register_results`, `duplicates`, `dbr_sought_reports`,
+`dbr_excluded`, `new_studies`, and `new_reports`.
 
 ## Count types
 
-All count fields are strict non-negative integers. String values such as
-`"10"` are not accepted as counts.
+All count fields are strict non-negative integers. Optional count fields may be
+omitted or set to `null`. String values such as `"10"` are not accepted as
+counts.

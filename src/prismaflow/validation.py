@@ -256,11 +256,43 @@ def validate_flow(
             )
         )
 
-    reports_excluded_total = flow.eligibility.reports_excluded_total
-    implied_exclusions = (
-        flow.eligibility.reports_assessed - flow.included.studies_included
+    if flow.has_other_methods:
+        expected_other_sought = flow.identification.other_methods_total
+        if flow.eligibility.other_sought_reports != expected_other_sought:
+            errors.append(
+                _count_error(
+                    "eligibility.other_sought_reports",
+                    "other_sought_reports should equal records identified "
+                    "through other methods.",
+                    expected_other_sought,
+                    flow.eligibility.other_sought_reports,
+                )
+            )
+
+        expected_other_assessed = (
+            flow.eligibility.other_sought_reports
+            - flow.eligibility.other_notretrieved_reports
+        )
+        if flow.eligibility.other_assessed != expected_other_assessed:
+            errors.append(
+                _count_error(
+                    "eligibility.other_assessed",
+                    "other_assessed should equal other_sought_reports minus "
+                    "other_notretrieved_reports.",
+                    expected_other_assessed,
+                    flow.eligibility.other_assessed,
+                )
+            )
+
+    reports_excluded_total = flow.eligibility.all_reports_excluded_total
+    implied_exclusions = flow.eligibility.all_reports_assessed - (
+        flow.included.studies_included
     )
-    if not flow.eligibility.reports_excluded and implied_exclusions > 0:
+    if (
+        not flow.eligibility.reports_excluded
+        and not flow.eligibility.other_excluded
+        and implied_exclusions > 0
+    ):
         warnings.append(
             _count_warning(
                 "eligibility.reports_excluded",
@@ -271,13 +303,13 @@ def validate_flow(
             )
         )
 
-    expected_included = flow.eligibility.reports_assessed - reports_excluded_total
+    expected_included = flow.eligibility.all_reports_assessed - reports_excluded_total
     if expected_included != flow.included.studies_included:
         message = _count_warning(
             "included.studies_included",
-            "studies_included does not equal reports_assessed minus "
-            "reports_excluded_total; this may be valid because one study "
-            "can have multiple reports.",
+            "studies_included does not equal total reports assessed minus "
+            "total reports excluded; this may be valid because one study can "
+            "have multiple reports.",
             expected_included,
             flow.included.studies_included,
         )
@@ -293,5 +325,19 @@ def validate_flow(
             )
         else:
             warnings.append(message)
+
+    if (
+        flow.included.reports_included is not None
+        and expected_included != flow.included.reports_included
+    ):
+        warnings.append(
+            _count_warning(
+                "included.reports_included",
+                "reports_included does not equal total reports assessed minus "
+                "total reports excluded.",
+                expected_included,
+                flow.included.reports_included,
+            )
+        )
 
     return ValidationReport(errors=errors, warnings=warnings)

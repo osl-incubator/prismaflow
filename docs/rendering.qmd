@@ -26,6 +26,7 @@ The SVG renderer supports:
 - arrows
 - side boxes
 - PRISMA 2020-style header and stage labels
+- expanded other-methods layout when other-method counts are present
 - wrapped multiline text
 - escaped user text
 - embedded CSS

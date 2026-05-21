@@ -26,6 +26,7 @@ flow = new_review(
         "Not primary research": 15,
     },
     studies_included=40,
+    reports_included=40,
 )
 ```
 
@@ -75,11 +76,14 @@ The same flow can be represented as JSON:
     "reports_assessed": 120,
     "reports_excluded": {
       "Wrong population": 30,
-      "Wrong intervention": 20
+      "Wrong intervention": 20,
+      "Wrong outcome": 15,
+      "Not primary research": 15
     }
   },
   "included": {
-    "studies_included": 40
+    "studies_included": 40,
+    "reports_included": 40
   }
 }
 ```
