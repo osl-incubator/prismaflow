@@ -4,6 +4,7 @@ title: Pydantic data models for PRISMA-style flow diagrams.
 
 from __future__ import annotations
 
+from collections.abc import Container
 from datetime import date
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Any
@@ -369,6 +370,39 @@ class PrismaFlow(BaseModel):
         _write_text(path, output)
         return output
 
+    def _repr_svg_(self) -> str:
+        """
+        title: Return SVG for notebook rich display.
+        returns:
+          type: str
+          description: >-
+            SVG representation rendered inline by notebook frontends.
+        """
+        return self.to_svg()
+
+    def _repr_mimebundle_(
+        self,
+        include: object = None,
+        exclude: object = None,
+    ) -> tuple[dict[str, str], dict[str, dict[str, str]]]:
+        """
+        title: Return a Jupyter MIME bundle for notebook rich display.
+        parameters:
+          include:
+            type: object
+            description: Optional frontend include filter.
+          exclude:
+            type: object
+            description: Optional frontend exclude filter.
+        returns:
+          type: tuple[dict[str, str], dict[str, dict[str, str]]]
+          description: SVG MIME data and empty metadata.
+        """
+        mime_type = "image/svg+xml"
+        if _mime_filter_excludes(mime_type, include=include, exclude=exclude):
+            return {}, {}
+        return {mime_type: self.to_svg()}, {}
+
     def to_html(self, path: PathLike | None = None) -> str:
         """
         title: Render the flow as standalone HTML and optionally write it.
@@ -570,6 +604,50 @@ def new_review(
         studies_included=studies_included,
         metadata=metadata,
     )
+
+
+def _mime_filter_excludes(
+    mime_type: str,
+    *,
+    include: object,
+    exclude: object,
+) -> bool:
+    """
+    title: Return whether a Jupyter MIME filter excludes a MIME type.
+    parameters:
+      mime_type:
+        type: str
+        description: MIME type to test.
+      include:
+        type: object
+        description: Optional include filter provided by a notebook frontend.
+      exclude:
+        type: object
+        description: Optional exclude filter provided by a notebook frontend.
+    returns:
+      type: bool
+      description: Whether the MIME type should be omitted.
+    """
+    if include is not None and not _contains_mime_type(include, mime_type):
+        return True
+    return exclude is not None and _contains_mime_type(exclude, mime_type)
+
+
+def _contains_mime_type(values: object, mime_type: str) -> bool:
+    """
+    title: Return whether a filter object contains a MIME type.
+    parameters:
+      values:
+        type: object
+        description: Filter value provided by a notebook frontend.
+      mime_type:
+        type: str
+        description: MIME type to find.
+    returns:
+      type: bool
+      description: Whether the filter contains the MIME type.
+    """
+    return isinstance(values, Container) and mime_type in values
 
 
 def _write_text(path: PathLike | None, content: str) -> None:

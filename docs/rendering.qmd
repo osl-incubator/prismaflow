@@ -30,6 +30,22 @@ The SVG renderer supports:
 - embedded CSS
 - accessibility title and description
 
+## Notebook display
+
+`PrismaFlow` implements the Jupyter rich display protocol directly. In notebook
+frontends, evaluate a flow object as the last expression in a cell to display
+the SVG diagram inline:
+
+```python
+from prismaflow import new_review
+
+flow = new_review(...)
+flow
+```
+
+This uses SVG MIME output and does not require `prisma-flow` to depend on
+Jupyter or IPython.
+
 ## HTML
 
 HTML output embeds the generated SVG in a standalone document.

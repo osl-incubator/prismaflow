@@ -43,6 +43,8 @@ The public API is exported from `prismaflow`.
 | `PrismaFlow.new_review(...)` | Compatibility factory for a v0.1 new-review flow. |
 | `flow.validate()` | Return a structured validation report. |
 | `flow.to_svg(path=None)` | Render SVG text and optionally write a file. |
+| `flow._repr_svg_()` | Return SVG for inline notebook display. |
+| `flow._repr_mimebundle_()` | Return an SVG MIME bundle for notebook frontends. |
 | `flow.to_html(path=None)` | Render standalone HTML and optionally write a file. |
 | `flow.to_mermaid(path=None)` | Render Mermaid text and optionally write a file. |
 | `flow.to_json(path=None)` | Serialize JSON and optionally write a file. |

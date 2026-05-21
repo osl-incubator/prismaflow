@@ -23,6 +23,7 @@ syntheses, and literature review workflows.
 - JSON input/output in the base install
 - Optional YAML input/output via `prisma-flow[yaml]`
 - Optional PNG method that clearly reports the missing optional dependency
+- Inline SVG display in notebook frontends
 - Python API and `prisma-flow` command-line interface
 - PRISMA count validation with errors and warnings
 
