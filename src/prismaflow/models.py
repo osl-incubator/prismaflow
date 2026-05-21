@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from datetime import date
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Any
+from typing import TYPE_CHECKING, Annotated, Any, ClassVar
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -211,6 +211,14 @@ class PrismaFlow(BaseModel):
       metadata:
         type: FlowMetadata | None
         description: Value for metadata.
+      _nested_init_fields:
+        type: ClassVar[frozenset[str]]
+        description: >-
+          Nested stage field names accepted by normal model initialization.
+      _new_review_init_fields:
+        type: ClassVar[frozenset[str]]
+        description: >-
+          Flat count field names accepted by new-review initialization.
     """
 
     template: PrismaTemplate = PrismaTemplate.PRISMA_2020_NEW_DATABASES_REGISTERS
@@ -221,10 +229,89 @@ class PrismaFlow(BaseModel):
     included: IncludedStage
     metadata: FlowMetadata | None = None
 
+    _nested_init_fields: ClassVar[frozenset[str]] = frozenset(
+        {"identification", "screening", "eligibility", "included"}
+    )
+    _new_review_init_fields: ClassVar[frozenset[str]] = frozenset(
+        {
+            "records_identified_databases",
+            "records_identified_registers",
+            "records_removed_duplicates",
+            "records_removed_automation",
+            "records_removed_other",
+            "records_screened",
+            "records_excluded",
+            "reports_sought",
+            "reports_not_retrieved",
+            "reports_assessed",
+            "reports_excluded",
+            "studies_included",
+        }
+    )
+
     model_config = ConfigDict(
         use_enum_values=False,
         validate_assignment=True,
     )
+
+    def __init__(self, **data: Any) -> None:
+        """
+        title: Initialize a flow from nested stages or flat new-review counts.
+        parameters:
+          data:
+            type: Any
+            description: PrismaFlow model data or new-review count arguments.
+            variadic: keyword
+        """
+        if self._uses_new_review_init(data):
+            data = self._new_review_init_data(data)
+        super().__init__(**data)
+
+    @classmethod
+    def _uses_new_review_init(cls, data: dict[str, Any]) -> bool:
+        """
+        title: Return whether initialization data uses flat new-review fields.
+        parameters:
+          data:
+            type: dict[str, Any]
+            description: Initialization keyword arguments.
+        returns:
+          type: bool
+          description: Whether new-review initialization should be used.
+        """
+        return bool(cls._new_review_init_fields.intersection(data))
+
+    @classmethod
+    def _new_review_init_data(cls, data: dict[str, Any]) -> dict[str, Any]:
+        """
+        title: Convert flat new-review arguments into nested PrismaFlow data.
+        parameters:
+          data:
+            type: dict[str, Any]
+            description: Flat new-review keyword arguments.
+        returns:
+          type: dict[str, Any]
+          description: Nested PrismaFlow initialization data.
+        """
+        nested_fields = cls._nested_init_fields.intersection(data)
+        if nested_fields:
+            field_list = ", ".join(sorted(nested_fields))
+            raise ValueError(
+                "PrismaFlow cannot mix flat new-review count arguments with "
+                f"nested stage fields: {field_list}. Use either "
+                "PrismaFlow(...flat counts...) or PrismaFlow(identification=..., "
+                "screening=..., eligibility=..., included=...)."
+            )
+        flow = cls.new_review(**data)
+        return {
+            "template": flow.template,
+            "title": flow.title,
+            "identification": flow.identification,
+            "screening": flow.screening,
+            "eligibility": flow.eligibility,
+            "included": flow.included,
+            "metadata": flow.metadata,
+        }
 
     @classmethod
     def new_review(
