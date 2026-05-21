@@ -14,6 +14,8 @@ class Prisma2020NewTemplate:
     title: Template for PRISMA 2020 new reviews using databases/registers.
     """
 
+    DEFAULT_TITLE = "PRISMA Flow Diagram"
+
     def build(self, flow: PrismaFlow) -> DiagramLayout:
         """
         title: Build a stable template-based layout.
@@ -245,7 +247,7 @@ class Prisma2020NewTemplate:
             height=layout_height,
             nodes=nodes,
             edges=edges,
-            title=flow.title,
+            title=self._diagram_title(flow),
         )
 
     def _build_with_other_methods(self, flow: PrismaFlow) -> DiagramLayout:
@@ -586,8 +588,24 @@ class Prisma2020NewTemplate:
             height=layout_height,
             nodes=nodes,
             edges=edges,
-            title=flow.title,
+            title=self._diagram_title(flow),
         )
+
+    @classmethod
+    def _diagram_title(cls, flow: PrismaFlow) -> str:
+        """
+        title: Return the user title or the PRISMA template title.
+        parameters:
+          flow:
+            type: PrismaFlow
+            description: Value for flow.
+        returns:
+          type: str
+          description: Return value.
+        """
+        if flow.title is not None:
+            return flow.title
+        return cls.DEFAULT_TITLE
 
     @staticmethod
     def _identified_text(flow: PrismaFlow) -> str:
@@ -651,10 +669,11 @@ class Prisma2020NewTemplate:
         return "\n".join(
             [
                 "Records removed before screening:",
-                "Duplicate records",
-                f"(n = {screening.records_removed_duplicates})",
-                "Records marked as ineligible by automation tools",
-                f"(n = {screening.records_removed_automation})",
+                f"Duplicate records (n = {screening.records_removed_duplicates})",
+                (
+                    "Records marked as ineligible by automation tools "
+                    f"(n = {screening.records_removed_automation})"
+                ),
                 "Records removed for other reasons",
                 f"(n = {screening.records_removed_other})",
             ]

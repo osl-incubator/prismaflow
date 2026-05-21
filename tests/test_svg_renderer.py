@@ -1,4 +1,6 @@
-from prismaflow import PrismaFlow
+import re
+
+from prismaflow import PrismaFlow, new_review
 
 
 def test_svg_renderer_outputs_accessible_svg() -> None:
@@ -13,6 +15,54 @@ def test_svg_renderer_outputs_accessible_svg() -> None:
     assert "PRISMA 2020 statement" not in svg
     assert "prisma-statement.org" not in svg
     assert "Wrong population" in svg
+
+
+def test_svg_renderer_uses_default_title_when_no_title_is_provided() -> None:
+    flow = new_review(
+        records_identified_databases=1240,
+        records_identified_registers=50,
+        records_removed_duplicates=210,
+        records_removed_automation=0,
+        records_removed_other=0,
+        records_screened=1080,
+        records_excluded=950,
+        reports_sought=130,
+        reports_not_retrieved=10,
+        reports_assessed=120,
+        reports_excluded={
+            "Wrong population": 30,
+            "Wrong intervention": 20,
+            "Wrong outcome": 15,
+            "Not primary research": 15,
+        },
+        studies_included=40,
+        reports_included=40,
+    )
+
+    svg = flow.to_svg()
+
+    assert '<title id="title">PRISMA Flow Diagram</title>' in svg
+    assert ">PRISMA Flow Diagram<" in svg
+    assert "Example PRISMA Flow Diagram" not in svg
+    assert '<text class="diagram-title"' in svg
+
+
+def test_svg_renderer_keeps_removed_text_away_from_top_border() -> None:
+    flow = PrismaFlow.from_json("examples/basic_new_review.json")
+    svg = flow.to_svg()
+
+    match = re.search(
+        r'<g id="removed" class="node stage">\n'
+        r'  <rect x="(?P<rect_x>[\d.]+)" y="(?P<rect_y>[\d.]+)" '
+        r'width="(?P<rect_width>[\d.]+)" height="(?P<rect_height>[\d.]+)" />\n'
+        r'  <text x="(?P<text_x>[\d.]+)" y="(?P<text_y>[\d.]+)"',
+        svg,
+    )
+
+    assert match is not None
+    assert float(match.group("text_y")) - float(match.group("rect_y")) >= 18
+    assert "Duplicate records (n = 210)" in svg
+    assert "automation tools (n = 0)" in svg
 
 
 def test_svg_renderer_escapes_text() -> None:
@@ -49,6 +99,7 @@ def test_svg_renderer_includes_other_methods_when_present() -> None:
     svg = flow.to_svg()
 
     assert 'width="1180"' in svg
+    assert "PRISMA Flow Diagram" in svg
     assert "Identification of new studies via other methods" in svg
     assert "Reports of new included studies" in svg
     assert "Wrong outcome" in svg

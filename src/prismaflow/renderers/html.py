@@ -26,7 +26,7 @@ class HTMLRenderer:
           type: str
           description: Return value.
         """
-        title = layout.title or "PRISMA flow diagram"
+        title = layout.title or "PRISMA Flow Diagram"
         svg = (
             SVGRenderer()
             .render(layout)
