@@ -1,6 +1,18 @@
 # Release Notes
 ---
 
+# [0.5.0](https://github.com/osl-incubator/prisma-flow/compare/0.4.2...0.5.0) (2026-05-22)
+
+
+### Bug Fixes
+
+* Fix author's name and citattion info ([95f6d55](https://github.com/osl-incubator/prisma-flow/commit/95f6d5557bcd73b64f512b9593707b238311fd0e))
+
+
+### Features
+
+* Keep png as part of the main dependencies ([a505c5b](https://github.com/osl-incubator/prisma-flow/commit/a505c5bf189d01b490a27abd7249d5eeaf4c1ee1))
+
 ## [0.4.2](https://github.com/osl-incubator/prisma-flow/compare/0.4.1...0.4.2) (2026-05-22)
 
 
