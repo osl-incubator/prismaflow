@@ -47,6 +47,6 @@ The public API is exported from `prismaflow`.
 | `flow._repr_mimebundle_()` | Return an SVG MIME bundle for notebook frontends. |
 | `flow.to_html(path=None)` | Render standalone HTML and optionally write a file. |
 | `flow.to_mermaid(path=None)` | Render Mermaid text and optionally write a file. |
-| `flow.to_png(path=None)` | Render PNG bytes through the optional PNG backend. |
+| `flow.to_png(path=None)` | Render PNG bytes and optionally write a file. |
 | `flow.to_json(path=None)` | Serialize JSON and optionally write a file. |
 | `PrismaFlow.from_json(source)` | Load a flow from JSON text or a JSON path. |

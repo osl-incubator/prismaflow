@@ -17,7 +17,7 @@ class TemplateNotSupportedError(PrismaFlowError):
 
 class OptionalDependencyError(PrismaFlowError):
     """
-    title: Raised when an optional export backend is not installed.
+    title: Raised when an optional runtime dependency is not installed.
     """
 
 

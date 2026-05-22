@@ -36,14 +36,14 @@ def test_png_renderer_writes_png_file(tmp_path) -> None:  # type: ignore[no-unty
     assert output.read_bytes() == png
 
 
-def test_png_renderer_reports_missing_optional_dependency(monkeypatch) -> None:  # type: ignore[no-untyped-def]
+def test_png_renderer_reports_missing_runtime_dependency(monkeypatch) -> None:  # type: ignore[no-untyped-def]
     def missing_import(name: str) -> object:
         raise ImportError(name)
 
     monkeypatch.setattr(png_module, "import_module", missing_import)
     flow = PrismaFlow.from_json("examples/basic_new_review.json")
 
-    with pytest.raises(OptionalDependencyError, match="prisma-flow\\[png\\]"):
+    with pytest.raises(OptionalDependencyError, match="runtime dependency resvg"):
         PNGRenderer().render(flow.to_layout())
 
 

@@ -16,6 +16,7 @@ The base install supports:
 - SVG rendering
 - standalone HTML rendering
 - Mermaid text rendering
+- PNG rendering through the bundled `resvg` Python dependency
 - validation reports
 - the `prisma-flow` CLI
 
@@ -25,14 +26,18 @@ The base install supports:
 pip install "prisma-flow[yaml]"
 ```
 
-## Optional PNG support
+## PNG support
 
-PNG export is intentionally optional and uses the pip-installable `resvg`
-backend. Install the PNG extra to enable `to_png()` and
-`prisma-flow render --format png`:
+PNG export is included in the base install and uses the pip-installable `resvg`
+backend. No Graphviz, Cairo, browser engine, Node renderer, or Mermaid CLI is
+required.
+
+Minimal notebook environments may not include fonts. If PNG text is missing in
+Google Colab or another minimal container, install a basic font package before
+rendering:
 
 ```bash
-pip install "prisma-flow[png]"
+apt-get update && apt-get install -y fonts-dejavu-core
 ```
 
 ## Development install

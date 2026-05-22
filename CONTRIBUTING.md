@@ -25,7 +25,7 @@ makim docs.build
 ## Scope
 
 The v0.1 scope focuses on template-based PRISMA diagrams with pure-Python SVG,
-HTML, Mermaid, JSON, optional YAML, and a CLI. Do not add required system
+HTML, Mermaid, PNG, JSON, optional YAML, and a CLI. Do not add required system
 dependencies such as Graphviz, Cairo, Node, Mermaid CLI, browser engines,
 Matplotlib, or Plotly.
 

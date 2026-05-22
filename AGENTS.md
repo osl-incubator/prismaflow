@@ -24,11 +24,11 @@ Required base-install outputs:
 - HTML with embedded SVG
 - Mermaid text only
 - JSON input/output
+- PNG via the pip-installable `resvg` Python backend
 
 Optional outputs:
 
 - YAML via `prisma-flow[yaml]`
-- PNG via `prisma-flow[png]` when a pip/uv-installable backend is available
 
 Do not add required dependencies on Graphviz, Cairo, CairoSVG, Node, Mermaid
 CLI, Inkscape, Playwright, browser engines, Matplotlib, Plotly, or other system
@@ -40,7 +40,7 @@ rendering stacks.
 - `src/prismaflow/validation.py`: validation report objects and count checks
 - `src/prismaflow/templates/`: PRISMA template layout builders
 - `src/prismaflow/layout/`: geometry, layout dataclasses, overlap checks
-- `src/prismaflow/renderers/`: SVG, HTML, Mermaid, optional PNG renderer
+- `src/prismaflow/renderers/`: SVG, HTML, Mermaid, and PNG renderers
 - `src/prismaflow/io/`: JSON and optional YAML helpers
 - `src/prismaflow/cli.py`: command-line interface
 - `examples/`: runnable example inputs/scripts
@@ -68,7 +68,7 @@ makim all.ci
 
 ## Implementation rules
 
-1. Keep the base install lightweight.
+1. Keep the base install lightweight, while keeping PNG available by default.
 2. Keep SVG rendering pure Python.
 3. Keep Mermaid export as text generation only; never invoke Mermaid CLI.
 4. Validate PRISMA count relationships and return structured reports.

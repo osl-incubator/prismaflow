@@ -28,7 +28,7 @@ syntheses, and literature review workflows.
 - Mermaid text export without Mermaid CLI
 - JSON input/output in the base install
 - Optional YAML input/output via `prisma-flow[yaml]`
-- Optional PNG export via `prisma-flow[png]`
+- PNG export through the bundled `resvg` Python dependency
 - Inline SVG display in notebook frontends
 - Python API and `prisma-flow` command-line interface
 - PRISMA count validation with errors and warnings
@@ -43,12 +43,6 @@ Optional YAML support:
 
 ```bash
 pip install "prisma-flow[yaml]"
-```
-
-Optional PNG support:
-
-```bash
-pip install "prisma-flow[png]"
 ```
 
 ## Python API
@@ -105,6 +99,7 @@ Render other base-install formats:
 ```bash
 prisma-flow render examples/basic_new_review.json --format html -o prisma.html
 prisma-flow render examples/basic_new_review.json --format mermaid -o prisma.mmd
+prisma-flow render examples/basic_new_review.json --format png -o prisma.png
 ```
 
 If validation fails, the CLI prints a report and exits with a non-zero status:
@@ -157,8 +152,16 @@ flow = PrismaFlow(
 
 ## Dependency policy
 
-SVG, HTML, Mermaid, and JSON work with the base install. YAML is optional. PNG
-is intentionally optional and not implemented as a required renderer in v0.1.
+SVG, HTML, Mermaid, PNG, and JSON work with the base install. YAML is optional.
+PNG rasterization uses the pip-installable `resvg` Python package; no Graphviz,
+Cairo, browser engine, or Node-based renderer is required.
+
+If PNG text is missing in a minimal notebook image such as Google Colab, install
+a font package before rendering:
+
+```bash
+apt-get update && apt-get install -y fonts-dejavu-core
+```
 
 The package does **not** require Graphviz, Cairo, CairoSVG, Node, Mermaid CLI,
 Inkscape, Playwright, browser engines, Matplotlib, or Plotly.

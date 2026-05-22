@@ -46,7 +46,7 @@ Render Mermaid text:
 prisma-flow render review.json -f mermaid -o prisma.mmd
 ```
 
-Render PNG when `prisma-flow[png]` is installed:
+Render PNG:
 
 ```bash
 prisma-flow render review.json -f png -o prisma.png

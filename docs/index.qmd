@@ -31,8 +31,8 @@ CLI, browser engines, Matplotlib, or Plotly.
 ::: {.feature-card}
 ### Multiple outputs
 
-Export SVG, standalone HTML, Mermaid text, and JSON with the base installation.
-YAML and PNG are optional extras.
+Export SVG, standalone HTML, Mermaid text, PNG, and JSON with the base
+installation. YAML is available as an optional extra.
 :::
 
 ::: {.feature-card}

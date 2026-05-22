@@ -717,7 +717,7 @@ class PrismaFlow(BaseModel):
 
     def to_png(self, path: PathLike | None = None) -> bytes:
         """
-        title: Export PNG if an optional backend is available.
+        title: Render the flow as PNG bytes and optionally write it.
         parameters:
           path:
             type: PathLike | None

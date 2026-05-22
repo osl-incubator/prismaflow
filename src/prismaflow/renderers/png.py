@@ -1,5 +1,5 @@
 """
-title: Optional PNG renderer.
+title: PNG renderer.
 """
 
 from __future__ import annotations
@@ -33,7 +33,7 @@ FALLBACK_FONT_FILES = (
 
 class PNGRenderer:
     """
-    title: Render diagram layouts to PNG through the optional resvg backend.
+    title: Render diagram layouts to PNG through the resvg backend.
     attributes:
       scale:
         description: Scale factor applied while rasterizing the SVG.
@@ -111,7 +111,7 @@ class PNGRenderer:
 
 def _load_resvg() -> Any:
     """
-    title: Import the optional resvg backend.
+    title: Import the required resvg backend.
     returns:
       type: Any
       description: Imported resvg module.
@@ -120,9 +120,9 @@ def _load_resvg() -> Any:
         return import_module("resvg")
     except ImportError as exc:
         raise OptionalDependencyError(
-            "PNG export requires the optional dependency.\n\n"
-            "Install it with:\n\n"
-            '  pip install "prisma-flow[png]"'
+            "PNG export requires the runtime dependency resvg.\n\n"
+            "Reinstall prisma-flow with:\n\n"
+            "  pip install --force-reinstall prisma-flow"
         ) from exc
 
 

@@ -75,14 +75,15 @@ flowchart TD
 
 ## PNG
 
-PNG export is optional and intentionally not part of the required rendering
-stack. Install `prisma-flow[png]` to enable rasterization through the optional
-`resvg` backend:
+PNG export is included in the base install and rasterizes the generated SVG
+through the pip-installable `resvg` Python backend:
 
 ```python
 png = flow.to_png()
 flow.to_png("prisma.png")
 ```
 
-If the optional backend is not installed, the package raises an
-`OptionalDependencyError` with installation guidance.
+The PNG renderer does not require Graphviz, Cairo, a browser engine, Node, or
+Mermaid CLI. Minimal notebook environments may not include fonts; if PNG output
+has boxes but no text, install a basic font package such as `fonts-dejavu-core`
+before rendering.

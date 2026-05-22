@@ -4,9 +4,10 @@ title: Dependency policy
 
 The core package is intentionally small.
 
-## Required runtime dependency
+## Required runtime dependencies
 
 - `pydantic>=2`
+- `resvg>=0.2.0`
 
 ## Base-install outputs
 
@@ -15,6 +16,7 @@ These work without optional extras:
 - SVG
 - HTML
 - Mermaid text
+- PNG
 - JSON
 
 ## Optional extras
@@ -22,7 +24,11 @@ These work without optional extras:
 | Extra | Purpose |
 |---|---|
 | `prisma-flow[yaml]` | YAML input/output through PyYAML. |
-| `prisma-flow[png]` | PNG rasterization through the optional `resvg` backend. |
+
+PNG rasterization is included in the base install because most users need image
+files for manuscripts, presentations, and notebook workflows. The `resvg`
+dependency is a pip-installable Python package and does not require Graphviz,
+Cairo, a browser engine, or Node.
 
 ## Not required
 
