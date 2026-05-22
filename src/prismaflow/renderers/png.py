@@ -13,6 +13,22 @@ from prismaflow.layout.engine import DiagramLayout
 from prismaflow.renderers.svg import SVGRenderer
 
 Transform = tuple[float, float, float, float, float, float]
+PREFERRED_FONT_FAMILIES = (
+    "DejaVu Sans",
+    "Liberation Sans",
+    "Arial",
+    "Helvetica",
+    "FreeSans",
+    "Noto Sans",
+    "Roboto",
+    "Arimo",
+)
+FALLBACK_FONT_FILES = (
+    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf",
+    "/usr/share/fonts/truetype/freefont/FreeSans.ttf",
+    "/usr/local/share/fonts/DejaVuSans.ttf",
+)
 
 
 class PNGRenderer:
@@ -59,8 +75,17 @@ class PNGRenderer:
         options = resvg.usvg.Options.default()
         if self.load_system_fonts:
             options.load_system_fonts()
+            _load_fallback_fonts(options)
+        font_family = _preferred_font_family(options.list_fonts())
+        if font_family is None:
+            raise OptionalDependencyError(
+                "PNG export requires at least one TrueType/OpenType font so text "
+                "can be rendered.\n\n"
+                "In Google Colab, install fonts with:\n\n"
+                "  !apt-get update && !apt-get install -y fonts-dejavu-core"
+            )
 
-        svg = SVGRenderer().render(layout)
+        svg = SVGRenderer(font_family=font_family).render(layout)
         tree = resvg.usvg.Tree.from_str(svg, options)
         png = cast(
             bytes,
@@ -99,3 +124,37 @@ def _load_resvg() -> Any:
             "Install it with:\n\n"
             '  pip install "prisma-flow[png]"'
         ) from exc
+
+
+def _load_fallback_fonts(options: Any) -> None:
+    """
+    title: Load common Linux notebook fonts when font discovery is empty.
+    parameters:
+      options:
+        type: Any
+        description: resvg usvg options object.
+    """
+    if options.list_fonts():
+        return
+    for font_file in FALLBACK_FONT_FILES:
+        path = Path(font_file)
+        if path.exists():
+            options.load_font_file(str(path))
+
+
+def _preferred_font_family(fonts: list[str]) -> str | None:
+    """
+    title: Pick a font family that is available to resvg.
+    parameters:
+      fonts:
+        type: list[str]
+        description: Font families loaded in resvg options.
+    returns:
+      type: str | None
+      description: Preferred family name, or None when no fonts are loaded.
+    """
+    available = set(fonts)
+    for family in PREFERRED_FONT_FAMILIES:
+        if family in available:
+            return family
+    return fonts[0] if fonts else None

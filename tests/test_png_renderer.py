@@ -6,7 +6,7 @@ import pytest
 import prismaflow.renderers.png as png_module
 from prismaflow import PrismaFlow
 from prismaflow.exceptions import OptionalDependencyError
-from prismaflow.renderers.png import PNGRenderer
+from prismaflow.renderers.png import PNGRenderer, _preferred_font_family
 
 
 def test_png_renderer_outputs_png_bytes() -> None:
@@ -50,6 +50,12 @@ def test_png_renderer_reports_missing_optional_dependency(monkeypatch) -> None: 
 def test_png_renderer_rejects_non_positive_scale() -> None:
     with pytest.raises(ValueError, match="greater than zero"):
         PNGRenderer(scale=0)
+
+
+def test_png_renderer_prefers_available_notebook_fonts() -> None:
+    assert _preferred_font_family(["FreeSans", "Other Sans"]) == "FreeSans"
+    assert _preferred_font_family(["Other Sans"]) == "Other Sans"
+    assert _preferred_font_family([]) is None
 
 
 def _rgba_pixels(png: bytes) -> list[tuple[int, int, int, int]]:
