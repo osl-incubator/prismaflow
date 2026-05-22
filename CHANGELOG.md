@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.4.2](https://github.com/osl-incubator/prisma-flow/compare/0.4.1...0.4.2) (2026-05-22)
+
+
+### Bug Fixes
+
+* Fix png text generation ([5f63939](https://github.com/osl-incubator/prisma-flow/commit/5f6393943e4e6c5a1aafc313ce01dbde6dde9099))
+
 ## [0.4.1](https://github.com/osl-incubator/prisma-flow/compare/0.4.0...0.4.1) (2026-05-21)
 
 
