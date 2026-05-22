@@ -555,10 +555,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="png" class="level2">
 <h2 class="anchored" data-anchor-id="png">PNG</h2>
-<p>PNG export is optional and intentionally not part of the required rendering stack. Install <code>prisma-flow[png]</code> to enable rasterization through the optional <code>resvg</code> backend:</p>
+<p>PNG export is included in the base install and rasterizes the generated SVG through the pip-installable <code>resvg</code> Python backend:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>png <span class="op">=</span> flow.to_png()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flow.to_png(<span class="st">"prisma.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>If the optional backend is not installed, the package raises an <code>OptionalDependencyError</code> with installation guidance.</p>
+<p>The PNG renderer does not require Graphviz, Cairo, a browser engine, Node, or Mermaid CLI. Minimal notebook environments may not include fonts; if PNG output has boxes but no text, install a basic font package such as <code>fonts-dejavu-core</code> before rendering.</p>
 
 
 </section>

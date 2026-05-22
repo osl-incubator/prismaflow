@@ -12,11 +12,11 @@
     ]
   },
   {
-    "objectID": "dependency-policy.html#required-runtime-dependency",
-    "href": "dependency-policy.html#required-runtime-dependency",
+    "objectID": "dependency-policy.html#required-runtime-dependencies",
+    "href": "dependency-policy.html#required-runtime-dependencies",
     "title": "Dependency policy",
-    "section": "Required runtime dependency",
-    "text": "Required runtime dependency\n\npydantic&gt;=2",
+    "section": "Required runtime dependencies",
+    "text": "Required runtime dependencies\n\npydantic&gt;=2\nresvg&gt;=0.2.0",
     "crumbs": [
       "Home",
       "Reference",
@@ -28,7 +28,7 @@
     "href": "dependency-policy.html#base-install-outputs",
     "title": "Dependency policy",
     "section": "Base-install outputs",
-    "text": "Base-install outputs\nThese work without optional extras:\n\nSVG\nHTML\nMermaid text\nJSON",
+    "text": "Base-install outputs\nThese work without optional extras:\n\nSVG\nHTML\nMermaid text\nPNG\nJSON",
     "crumbs": [
       "Home",
       "Reference",
@@ -40,7 +40,7 @@
     "href": "dependency-policy.html#optional-extras",
     "title": "Dependency policy",
     "section": "Optional extras",
-    "text": "Optional extras\n\n\n\n\n\n\n\nExtra\nPurpose\n\n\n\n\nprisma-flow[yaml]\nYAML input/output through PyYAML.\n\n\nprisma-flow[png]\nPNG rasterization through the optional resvg backend.",
+    "text": "Optional extras\n\n\n\nExtra\nPurpose\n\n\n\n\nprisma-flow[yaml]\nYAML input/output through PyYAML.\n\n\n\nPNG rasterization is included in the base install because most users need image files for manuscripts, presentations, and notebook workflows. The resvg dependency is a pip-installable Python package and does not require Graphviz, Cairo, a browser engine, or Node.",
     "crumbs": [
       "Home",
       "Reference",
@@ -76,7 +76,7 @@
     "href": "templates.html#implemented-in-v0.1",
     "title": "Templates",
     "section": "Implemented in v0.1",
-    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS_OTHER\nprisma_2020_new_databases_registers_other\n\n\n\nThese templates support the PRISMA 2020 new-review flows for databases/registers only and databases/registers plus other search methods. The SVG layout expands automatically when other-method counts are present.\nThe official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0. When publishing or presenting diagrams, cite the original PRISMA 2020 papers; see PRISMA acknowledgement and references.",
+    "text": "Implemented in v0.1\n\n\n\n\n\n\n\nTemplate enum\nValue\n\n\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS\nprisma_2020_new_databases_registers\n\n\nPRISMA_2020_NEW_DATABASES_REGISTERS_OTHER\nprisma_2020_new_databases_registers_other\n\n\n\nThese templates support the PRISMA 2020 new-review flows for databases/registers only and databases/registers plus other search methods. The SVG layout expands automatically when other-method counts are present.\nThe official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0. When publishing or presenting diagrams, cite the original PRISMA 2020 papers for the guideline and cite prisma-flow when you want to acknowledge the software used to generate the diagram; see PRISMA acknowledgement and references.",
     "crumbs": [
       "Home",
       "User guide",
@@ -100,7 +100,7 @@
     "href": "installation.html",
     "title": "Installation",
     "section": "",
-    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nPNG rendering through the bundled resvg Python dependency\nvalidation reports\nthe prisma-flow CLI",
     "crumbs": [
       "Home",
       "Get started",
@@ -112,7 +112,7 @@
     "href": "installation.html#base-install",
     "title": "Installation",
     "section": "",
-    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nvalidation reports\nthe prisma-flow CLI",
+    "text": "Install from PyPI with pip:\npip install prisma-flow\nThe base install supports:\n\nJSON input and output\nSVG rendering\nstandalone HTML rendering\nMermaid text rendering\nPNG rendering through the bundled resvg Python dependency\nvalidation reports\nthe prisma-flow CLI",
     "crumbs": [
       "Home",
       "Get started",
@@ -132,11 +132,11 @@
     ]
   },
   {
-    "objectID": "installation.html#optional-png-support",
-    "href": "installation.html#optional-png-support",
+    "objectID": "installation.html#png-support",
+    "href": "installation.html#png-support",
     "title": "Installation",
-    "section": "Optional PNG support",
-    "text": "Optional PNG support\nPNG export is intentionally optional and uses the pip-installable resvg backend. Install the PNG extra to enable to_png() and prisma-flow render --format png:\npip install \"prisma-flow[png]\"",
+    "section": "PNG support",
+    "text": "PNG support\nPNG export is included in the base install and uses the pip-installable resvg backend. No Graphviz, Cairo, browser engine, Node renderer, or Mermaid CLI is required.\nMinimal notebook environments may not include fonts. If PNG text is missing in Google Colab or another minimal container, install a basic font package before rendering:\napt-get update && apt-get install -y fonts-dejavu-core",
     "crumbs": [
       "Home",
       "Get started",
@@ -292,7 +292,19 @@
     "href": "references.html#acknowledgement",
     "title": "PRISMA acknowledgement and references",
     "section": "Acknowledgement",
-    "text": "Acknowledgement\nThe PRISMA 2020 reporting guideline, checklist, and flow diagram templates were developed by the PRISMA 2020 authors and are maintained through the PRISMA Executive. prisma-flow acknowledges that work and aims only to provide a Python implementation for generating diagrams and validating count relationships in software workflows.\nWhen using prisma-flow outputs in reports, manuscripts, presentations, or software documentation, cite the original PRISMA 2020 publications rather than citing prisma-flow as the source of the reporting guideline.",
+    "text": "Acknowledgement\nThe PRISMA 2020 reporting guideline, checklist, and flow diagram templates were developed by the PRISMA 2020 authors and are maintained through the PRISMA Executive. prisma-flow acknowledges that work and aims only to provide a Python implementation for generating diagrams and validating count relationships in software workflows.\nWhen using prisma-flow outputs in reports, manuscripts, presentations, or software documentation, cite the original PRISMA 2020 publications as the source of the reporting guideline.\nIt is also appropriate to cite prisma-flow as the software used to generate the diagrams or serialized flow data. The two citations serve different purposes: PRISMA should be cited for the reporting guideline, and prisma-flow may be cited for the software implementation.",
+    "crumbs": [
+      "Home",
+      "Reference",
+      "PRISMA acknowledgement and references"
+    ]
+  },
+  {
+    "objectID": "references.html#citing-prisma-flow",
+    "href": "references.html#citing-prisma-flow",
+    "title": "PRISMA acknowledgement and references",
+    "section": "Citing prisma-flow",
+    "text": "Citing prisma-flow\nIf prisma-flow helps produce figures, outputs, or data files used in your work, please cite the version of the software you used. Citation metadata is available in the repository CITATION.cff.\nSuggested wording:\nPRISMA flow diagrams were generated with prisma-flow and reported according to\nthe PRISMA 2020 statement.",
     "crumbs": [
       "Home",
       "Reference",
@@ -400,7 +412,7 @@
     "href": "rendering.html#png",
     "title": "Rendering",
     "section": "PNG",
-    "text": "PNG\nPNG export is optional and intentionally not part of the required rendering stack. Install prisma-flow[png] to enable rasterization through the optional resvg backend:\npng = flow.to_png()\nflow.to_png(\"prisma.png\")\nIf the optional backend is not installed, the package raises an OptionalDependencyError with installation guidance.",
+    "text": "PNG\nPNG export is included in the base install and rasterizes the generated SVG through the pip-installable resvg Python backend:\npng = flow.to_png()\nflow.to_png(\"prisma.png\")\nThe PNG renderer does not require Graphviz, Cairo, a browser engine, Node, or Mermaid CLI. Minimal notebook environments may not include fonts; if PNG output has boxes but no text, install a basic font package such as fonts-dejavu-core before rendering.",
     "crumbs": [
       "Home",
       "User guide",
@@ -484,7 +496,7 @@
     "href": "cli.html#render",
     "title": "Command-line interface",
     "section": "Render",
-    "text": "Render\nRender SVG:\nprisma-flow render review.json --format svg --output prisma.svg\nShort form:\nprisma-flow render review.json -o prisma.svg\nRender HTML:\nprisma-flow render review.json -f html -o prisma.html\nRender Mermaid text:\nprisma-flow render review.json -f mermaid -o prisma.mmd\nRender PNG when prisma-flow[png] is installed:\nprisma-flow render review.json -f png -o prisma.png",
+    "text": "Render\nRender SVG:\nprisma-flow render review.json --format svg --output prisma.svg\nShort form:\nprisma-flow render review.json -o prisma.svg\nRender HTML:\nprisma-flow render review.json -f html -o prisma.html\nRender Mermaid text:\nprisma-flow render review.json -f mermaid -o prisma.mmd\nRender PNG:\nprisma-flow render review.json -f png -o prisma.png",
     "crumbs": [
       "Home",
       "User guide",
@@ -556,7 +568,7 @@
     "href": "index.html#why-template-based-diagrams",
     "title": "prisma-flow",
     "section": "Why template-based diagrams?",
-    "text": "Why template-based diagrams?\nPRISMA flow diagrams are structured reporting documents, not arbitrary graphs. prisma-flow uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.\nThe implemented templates are based on the official PRISMA 2020 flow diagram templates. Please cite the PRISMA 2020 statement and explanation/elaboration papers when using PRISMA-style diagrams in scholarly outputs.",
+    "text": "Why template-based diagrams?\nPRISMA flow diagrams are structured reporting documents, not arbitrary graphs. prisma-flow uses fixed PRISMA templates and a small layout engine so output is predictable and easy to reproduce in research workflows.\nThe implemented templates are based on the official PRISMA 2020 flow diagram templates. Please cite the PRISMA 2020 statement and explanation/elaboration papers when using PRISMA-style diagrams in scholarly outputs, and cite prisma-flow as software when it is used to generate your diagrams.",
     "crumbs": [
       "Home",
       "Get started",
@@ -688,7 +700,7 @@
     "href": "api.html#common-methods",
     "title": "API reference",
     "section": "Common methods",
-    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a PRISMA 2020 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a PRISMA 2020 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_png(path=None)\nRender PNG bytes through the optional PNG backend.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
+    "text": "Common methods\n\n\n\n\n\n\n\nMethod\nDescription\n\n\n\n\nnew_review(...)\nCreate a PRISMA 2020 new-review flow from flat count arguments.\n\n\nPrismaFlow(...)\nCreate a flow from nested stage models.\n\n\nPrismaFlow.new_review(...)\nCompatibility factory for a PRISMA 2020 new-review flow.\n\n\nflow.validate()\nReturn a structured validation report.\n\n\nflow.to_svg(path=None)\nRender SVG text and optionally write a file.\n\n\nflow._repr_svg_()\nReturn SVG for inline notebook display.\n\n\nflow._repr_mimebundle_()\nReturn an SVG MIME bundle for notebook frontends.\n\n\nflow.to_html(path=None)\nRender standalone HTML and optionally write a file.\n\n\nflow.to_mermaid(path=None)\nRender Mermaid text and optionally write a file.\n\n\nflow.to_png(path=None)\nRender PNG bytes and optionally write a file.\n\n\nflow.to_json(path=None)\nSerialize JSON and optionally write a file.\n\n\nPrismaFlow.from_json(source)\nLoad a flow from JSON text or a JSON path.",
     "crumbs": [
       "Home",
       "Reference",

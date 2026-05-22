@@ -477,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#base-install" id="toc-base-install" class="nav-link active" data-scroll-target="#base-install">Base install</a></li>
   <li><a href="#optional-yaml-support" id="toc-optional-yaml-support" class="nav-link" data-scroll-target="#optional-yaml-support">Optional YAML support</a></li>
-  <li><a href="#optional-png-support" id="toc-optional-png-support" class="nav-link" data-scroll-target="#optional-png-support">Optional PNG support</a></li>
+  <li><a href="#png-support" id="toc-png-support" class="nav-link" data-scroll-target="#png-support">PNG support</a></li>
   <li><a href="#development-install" id="toc-development-install" class="nav-link" data-scroll-target="#development-install">Development install</a></li>
   <li><a href="#documentation-tooling" id="toc-documentation-tooling" class="nav-link" data-scroll-target="#documentation-tooling">Documentation tooling</a></li>
   </ul>
@@ -516,6 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>SVG rendering</li>
 <li>standalone HTML rendering</li>
 <li>Mermaid text rendering</li>
+<li>PNG rendering through the bundled <code>resvg</code> Python dependency</li>
 <li>validation reports</li>
 <li>the <code>prisma-flow</code> CLI</li>
 </ul>
@@ -524,10 +525,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="optional-yaml-support">Optional YAML support</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"prisma-flow[yaml]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="optional-png-support" class="level2">
-<h2 class="anchored" data-anchor-id="optional-png-support">Optional PNG support</h2>
-<p>PNG export is intentionally optional and uses the pip-installable <code>resvg</code> backend. Install the PNG extra to enable <code>to_png()</code> and <code>prisma-flow render --format png</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"prisma-flow[png]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="png-support" class="level2">
+<h2 class="anchored" data-anchor-id="png-support">PNG support</h2>
+<p>PNG export is included in the base install and uses the pip-installable <code>resvg</code> backend. No Graphviz, Cairo, browser engine, Node renderer, or Mermaid CLI is required.</p>
+<p>Minimal notebook environments may not include fonts. If PNG text is missing in Google Colab or another minimal container, install a basic font package before rendering:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt-get</span> update <span class="kw">&amp;&amp;</span> <span class="ex">apt-get</span> install <span class="at">-y</span> fonts-dejavu-core</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="development-install" class="level2">
 <h2 class="anchored" data-anchor-id="development-install">Development install</h2>

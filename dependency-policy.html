@@ -440,7 +440,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#required-runtime-dependency" id="toc-required-runtime-dependency" class="nav-link active" data-scroll-target="#required-runtime-dependency">Required runtime dependency</a></li>
+  <li><a href="#required-runtime-dependencies" id="toc-required-runtime-dependencies" class="nav-link active" data-scroll-target="#required-runtime-dependencies">Required runtime dependencies</a></li>
   <li><a href="#base-install-outputs" id="toc-base-install-outputs" class="nav-link" data-scroll-target="#base-install-outputs">Base-install outputs</a></li>
   <li><a href="#optional-extras" id="toc-optional-extras" class="nav-link" data-scroll-target="#optional-extras">Optional extras</a></li>
   <li><a href="#not-required" id="toc-not-required" class="nav-link" data-scroll-target="#not-required">Not required</a></li>
@@ -471,10 +471,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>The core package is intentionally small.</p>
-<section id="required-runtime-dependency" class="level2">
-<h2 class="anchored" data-anchor-id="required-runtime-dependency">Required runtime dependency</h2>
+<section id="required-runtime-dependencies" class="level2">
+<h2 class="anchored" data-anchor-id="required-runtime-dependencies">Required runtime dependencies</h2>
 <ul>
 <li><code>pydantic&gt;=2</code></li>
+<li><code>resvg&gt;=0.2.0</code></li>
 </ul>
 </section>
 <section id="base-install-outputs" class="level2">
@@ -484,16 +485,13 @@ ul.task-list li input[type="checkbox"] {
 <li>SVG</li>
 <li>HTML</li>
 <li>Mermaid text</li>
+<li>PNG</li>
 <li>JSON</li>
 </ul>
 </section>
 <section id="optional-extras" class="level2">
 <h2 class="anchored" data-anchor-id="optional-extras">Optional extras</h2>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Extra</th>
@@ -505,12 +503,9 @@ ul.task-list li input[type="checkbox"] {
 <td><code>prisma-flow[yaml]</code></td>
 <td>YAML input/output through PyYAML.</td>
 </tr>
-<tr class="even">
-<td><code>prisma-flow[png]</code></td>
-<td>PNG rasterization through the optional <code>resvg</code> backend.</td>
-</tr>
 </tbody>
 </table>
+<p>PNG rasterization is included in the base install because most users need image files for manuscripts, presentations, and notebook workflows. The <code>resvg</code> dependency is a pip-installable Python package and does not require Graphviz, Cairo, a browser engine, or Node.</p>
 </section>
 <section id="not-required" class="level2">
 <h2 class="anchored" data-anchor-id="not-required">Not required</h2>
