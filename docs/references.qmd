@@ -26,8 +26,27 @@ Python implementation for generating diagrams and validating count
 relationships in software workflows.
 
 When using `prisma-flow` outputs in reports, manuscripts, presentations, or
-software documentation, cite the original PRISMA 2020 publications rather than
-citing `prisma-flow` as the source of the reporting guideline.
+software documentation, cite the original PRISMA 2020 publications as the
+source of the reporting guideline.
+
+It is also appropriate to cite `prisma-flow` as the software used to generate
+the diagrams or serialized flow data. The two citations serve different
+purposes: PRISMA should be cited for the reporting guideline, and `prisma-flow`
+may be cited for the software implementation.
+
+## Citing prisma-flow
+
+If `prisma-flow` helps produce figures, outputs, or data files used in your
+work, please cite the version of the software you used. Citation metadata is
+available in the repository
+[`CITATION.cff`](https://github.com/osl-incubator/prisma-flow/blob/main/CITATION.cff).
+
+Suggested wording:
+
+```text
+PRISMA flow diagrams were generated with prisma-flow and reported according to
+the PRISMA 2020 statement.
+```
 
 ## Recommended PRISMA citations
 

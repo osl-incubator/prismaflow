@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use prisma-flow to generate PRISMA diagrams, please cite this software and the relevant PRISMA guideline publications."
+type: software
+title: "prisma-flow"
+version: "0.4.2" # semantic-release
+authors:
+  - family-names: "Ogasawara"
+    given-names: "Ivan"
+    email: "ivan.ogasawara@gmail.com"
+abstract: "Lightweight Python tools for generating PRISMA-style flow diagrams without system dependencies."
+repository-code: "https://github.com/osl-incubator/prisma-flow"
+url: "https://osl-incubator.github.io/prisma-flow/"
+license: "BSD-3-Clause"
+keywords:
+  - prisma
+  - systematic-review
+  - evidence-synthesis
+  - flow-diagram
+  - python

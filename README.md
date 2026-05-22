@@ -165,10 +165,23 @@ Inkscape, Playwright, browser engines, Matplotlib, or Plotly.
 
 ## PRISMA acknowledgement and citation
 
+If `prisma-flow` helps produce diagrams or serialized flow data for your work,
+it is appropriate to cite the software as well as the PRISMA guideline. Citation
+metadata for `prisma-flow` is provided in [`CITATION.cff`](CITATION.cff); please
+cite the version you used.
+
+Suggested wording:
+
+```text
+PRISMA flow diagrams were generated with prisma-flow and reported according to
+the PRISMA 2020 statement.
+```
+
 The PRISMA 2020 reporting guideline, checklist, and flow diagram templates were
 developed by the PRISMA 2020 authors and are maintained through the PRISMA
 Executive. When using PRISMA-style diagrams in reports, manuscripts, or
-presentations, cite the original PRISMA 2020 publications:
+presentations, cite the original PRISMA 2020 publications in addition to any
+software citation:
 
 - Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al.
   The PRISMA 2020 statement: an updated guideline for reporting systematic

@@ -93,4 +93,5 @@ predictable and easy to reproduce in research workflows.
 
 The implemented templates are based on the official PRISMA 2020 flow diagram
 templates. Please cite the PRISMA 2020 statement and explanation/elaboration
-papers when using PRISMA-style diagrams in scholarly outputs.
+papers when using PRISMA-style diagrams in scholarly outputs, and cite
+`prisma-flow` as software when it is used to generate your diagrams.

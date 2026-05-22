@@ -34,6 +34,20 @@
               }
             ],
             "countMatches": true
+          },
+          {
+            "files": ["CITATION.cff"],
+            "from": "version: \".*\" # semantic-release",
+            "to": "version: \"${nextRelease.version}\" # semantic-release",
+            "results": [
+              {
+                "file": "CITATION.cff",
+                "hasChanged": true,
+                "numMatches": 1,
+                "numReplacements": 1
+              }
+            ],
+            "countMatches": true
           }
         ]
       }
@@ -65,7 +79,8 @@
         "assets": [
           "pyproject.toml",
           "CHANGELOG.md",
-          "src/prismaflow/__init__.py"
+          "src/prismaflow/__init__.py",
+          "CITATION.cff"
         ],
         "message": "chore(release): ${nextRelease.version}"
       }

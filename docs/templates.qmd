@@ -23,8 +23,10 @@ databases/registers only and databases/registers plus other search methods.
 The SVG layout expands automatically when other-method counts are present.
 
 The official PRISMA 2020 flow diagram templates are distributed under CC BY 4.0.
-When publishing or presenting diagrams, cite the original PRISMA 2020 papers;
-see [PRISMA acknowledgement and references](references.qmd).
+When publishing or presenting diagrams, cite the original PRISMA 2020 papers
+for the guideline and cite `prisma-flow` when you want to acknowledge the
+software used to generate the diagram; see
+[PRISMA acknowledgement and references](references.qmd).
 
 ## Planned templates
 
