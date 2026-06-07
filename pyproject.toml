@@ -43,6 +43,7 @@ Documentation = "https://osl-incubator.github.io/prisma-flow/"
 
 [project.optional-dependencies]
 yaml = ["pyyaml>=6"]
+ui = ["ipywidgets>=8"]
 dev = [
   "douki>=0.12.1",
   "pytest>=8",

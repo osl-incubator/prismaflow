@@ -28,6 +28,7 @@ syntheses, and literature review workflows.
 - Mermaid text export without Mermaid CLI
 - JSON input/output in the base install
 - Optional YAML input/output via `prisma-flow[yaml]`
+- Optional Jupyter widget UI via `prisma-flow[ui]`
 - PNG export through the bundled `resvg` Python dependency
 - Inline SVG display in notebook frontends
 - Python API and `prisma-flow` command-line interface
@@ -43,6 +44,12 @@ Optional YAML support:
 
 ```bash
 pip install "prisma-flow[yaml]"
+```
+
+Optional Jupyter widget support:
+
+```bash
+pip install "prisma-flow[ui]"
 ```
 
 ## Python API
@@ -79,6 +86,31 @@ flow.to_html("prisma.html")
 flow.to_mermaid("prisma.mmd")
 flow.to_json("review.json")
 ```
+
+## Jupyter widget UI
+
+Install the optional UI extra, then call `load()` in a notebook cell:
+
+```python
+from prismaflow.ui import load
+
+load(
+    records_identified_databases=1240,
+    records_identified_registers=50,
+    records_removed_duplicates=210,
+    records_removed_automation=0,
+    records_removed_other=0,
+    records_screened=1080,
+    records_excluded=950,
+    reports_sought=130,
+    reports_not_retrieved=10,
+    reports_assessed=120,
+    reports_excluded={"Wrong population": 30},
+    studies_included=70,
+)
+```
+
+The widget can generate an inline SVG preview and save SVG or PNG files.
 
 ## CLI usage
 
@@ -152,9 +184,10 @@ flow = PrismaFlow(
 
 ## Dependency policy
 
-SVG, HTML, Mermaid, PNG, and JSON work with the base install. YAML is optional.
-PNG rasterization uses the pip-installable `resvg` Python package; no Graphviz,
-Cairo, browser engine, or Node-based renderer is required.
+SVG, HTML, Mermaid, PNG, and JSON work with the base install. YAML and Jupyter
+widget support are optional. PNG rasterization uses the pip-installable `resvg`
+Python package; no Graphviz, Cairo, browser engine, or Node-based renderer is
+required.
 
 If PNG text is missing in a minimal notebook image such as Google Colab, install
 a font package before rendering:

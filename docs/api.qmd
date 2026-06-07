@@ -2,7 +2,8 @@
 title: API reference
 ---
 
-The public API is exported from `prismaflow`.
+The core public API is exported from `prismaflow`. Optional notebook widgets are
+exported from `prismaflow.ui`.
 
 ## Core model
 
@@ -33,6 +34,11 @@ The public API is exported from `prismaflow`.
 - `PrismaValidationError`
 - `TemplateNotSupportedError`
 - `OptionalDependencyError`
+
+## Optional UI
+
+- `prismaflow.ui.load(...)`: create an interactive Jupyter widget for the
+  `new_review()` parameters, inline SVG preview, and SVG/PNG save buttons.
 
 ## Common methods
 

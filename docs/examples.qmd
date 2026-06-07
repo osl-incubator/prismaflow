@@ -27,3 +27,18 @@ YAML input requires the optional YAML extra:
 pip install "prisma-flow[yaml]"
 prisma-flow render examples/basic_new_review.yaml -o examples/output/basic_new_review.svg
 ```
+
+## Jupyter widget
+
+The optional widget example is intended to run in a notebook after installing
+the UI extra:
+
+```bash
+pip install "prisma-flow[ui]"
+```
+
+```python
+from prismaflow.ui import load
+
+load()
+```

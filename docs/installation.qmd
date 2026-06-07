@@ -26,6 +26,15 @@ The base install supports:
 pip install "prisma-flow[yaml]"
 ```
 
+## Optional Jupyter widget support
+
+```bash
+pip install "prisma-flow[ui]"
+```
+
+This installs `ipywidgets` for the interactive notebook UI exposed as
+`prismaflow.ui.load()`.
+
 ## PNG support
 
 PNG export is included in the base install and uses the pip-installable `resvg`

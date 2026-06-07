@@ -48,6 +48,22 @@ flow
 This uses SVG MIME output and does not require `prisma-flow` to depend on
 Jupyter or IPython.
 
+For a form-based notebook workflow, install the optional UI extra and call
+`load()` in a cell:
+
+```bash
+pip install "prisma-flow[ui]"
+```
+
+```python
+from prismaflow.ui import load
+
+load()
+```
+
+The widget exposes the `new_review()` fields, a **Generate image** button, and
+buttons to save SVG or PNG files.
+
 ## HTML
 
 HTML output embeds the generated SVG in a standalone document.

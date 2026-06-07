@@ -24,6 +24,7 @@ These work without optional extras:
 | Extra | Purpose |
 |---|---|
 | `prisma-flow[yaml]` | YAML input/output through PyYAML. |
+| `prisma-flow[ui]` | Jupyter widget UI through ipywidgets. |
 
 PNG rasterization is included in the base install because most users need image
 files for manuscripts, presentations, and notebook workflows. The `resvg`
