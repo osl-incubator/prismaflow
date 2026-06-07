@@ -5,8 +5,10 @@ title: Jupyter widget helpers for interactive PRISMA flow creation.
 from __future__ import annotations
 
 import json
+from base64 import b64encode
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from html import escape
 from importlib import import_module
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -242,6 +244,7 @@ def load(
         layout=layout,
     )
     output = widgets.Output()
+    status = widgets.HTML(value="")
     latest: LatestFlow = {"flow": None}
 
     generate_button = widgets.Button(
@@ -266,6 +269,7 @@ def load(
             type: object
             description: Button click event object.
         """
+        _clear_status(status)
         _generate_into_output(
             inputs,
             output,
@@ -288,6 +292,7 @@ def load(
             display,
             svg_display,
             latest,
+            status,
             path=svg_path_widget.value,
             format_name="SVG",
         )
@@ -306,6 +311,7 @@ def load(
             display,
             svg_display,
             latest,
+            status,
             path=png_path_widget.value,
             format_name="PNG",
         )
@@ -330,12 +336,14 @@ def load(
             *sections,
             output_section,
             controls,
+            status,
             output,
         ]
     )
 
     container.prisma_flow_fields = inputs
     container.prisma_flow_output = output
+    container.prisma_flow_status = status
     container.prisma_flow_build_kwargs = lambda: collect_new_review_kwargs(inputs)
     container.prisma_flow_build_flow = lambda: build_flow_from_widgets(inputs)
     container.prisma_flow_latest = latest
@@ -806,6 +814,7 @@ def _generate_into_output(
     display: DisplayFunction,
     svg_display: Any,
     latest: LatestFlow,
+    status: Any | None = None,
 ) -> PrismaFlow | None:
     """
     title: Build and render the current flow in an output widget.
@@ -825,6 +834,9 @@ def _generate_into_output(
       latest:
         type: LatestFlow
         description: Mutable latest-flow cache.
+      status:
+        type: Any | None
+        description: Optional reusable status HTML widget.
     returns:
       type: PrismaFlow | None
       description: Generated flow, or None when generation failed.
@@ -834,6 +846,7 @@ def _generate_into_output(
     except Exception as exc:
         latest["flow"] = None
         _show_error(output, exc)
+        _show_status_error(status, exc)
         return None
 
     latest["flow"] = flow
@@ -847,6 +860,7 @@ def _save_current_flow(
     display: DisplayFunction,
     svg_display: Any,
     latest: LatestFlow,
+    status: Any | None = None,
     *,
     path: object,
     format_name: Literal["PNG", "SVG"],
@@ -869,6 +883,9 @@ def _save_current_flow(
       latest:
         type: LatestFlow
         description: Mutable latest-flow cache.
+      status:
+        type: Any | None
+        description: Reusable status HTML widget.
       path:
         type: object
         description: Destination path value.
@@ -878,23 +895,34 @@ def _save_current_flow(
     """
     destination = str(path).strip()
     if destination == "":
-        _show_error(output, ValueError(f"{format_name} path cannot be empty"))
+        error = ValueError(f"{format_name} path cannot be empty")
+        _show_error(output, error)
+        _show_status_error(status, error)
         return
 
-    flow = _generate_into_output(inputs, output, display, svg_display, latest)
+    flow = _generate_into_output(inputs, output, display, svg_display, latest, status)
     if flow is None:
         return
 
     try:
+        destination_path = Path(destination)
         if format_name == "SVG":
-            flow.to_svg(Path(destination))
+            saved = flow.to_svg(destination_path).encode("utf-8")
+            mime_type = "image/svg+xml"
         else:
-            flow.to_png(Path(destination))
+            saved = flow.to_png(destination_path)
+            mime_type = "image/png"
     except Exception as exc:
         _show_error(output, exc)
+        _show_status_error(status, exc)
         return
-    with output:
-        print(f"Saved {format_name} to {destination}")
+    _show_download_status(
+        status,
+        format_name=format_name,
+        path=destination_path,
+        mime_type=mime_type,
+        content=saved,
+    )
 
 
 def _show_flow(
@@ -941,3 +969,116 @@ def _show_error(output: Any, error: Exception) -> None:
     with output:
         output.clear_output(wait=True)
         print(f"Error: {error}")
+
+
+def _clear_status(status: Any | None) -> None:
+    """
+    title: Clear the reusable status message box.
+    parameters:
+      status:
+        type: Any | None
+        description: Status HTML widget to clear.
+    """
+    if status is not None:
+        status.value = ""
+
+
+def _show_download_status(
+    status: Any,
+    *,
+    format_name: Literal["PNG", "SVG"],
+    path: Path,
+    mime_type: str,
+    content: bytes,
+) -> None:
+    """
+    title: Show a successful save message with a data-URL download link.
+    parameters:
+      status:
+        type: Any
+        description: Status HTML widget to update.
+      format_name:
+        type: Literal[PNG, SVG]
+        description: Saved output format name.
+      path:
+        type: Path
+        description: Destination path.
+      mime_type:
+        type: str
+        description: Download MIME type.
+      content:
+        type: bytes
+        description: Saved file content.
+    """
+    filename = path.name or f"prisma-flow.{format_name.lower()}"
+    href = _data_url(mime_type, content)
+    status.value = _status_alert(
+        "success",
+        (
+            f"Saved {escape(format_name)} to "
+            f"<code>{escape(str(path))}</code>. "
+            f'<a href="{href}" download="{escape(filename, quote=True)}">'
+            f"Download {escape(filename)}</a>."
+        ),
+    )
+
+
+def _show_status_error(status: Any | None, error: Exception) -> None:
+    """
+    title: Show an error message in the reusable status message box.
+    parameters:
+      status:
+        type: Any | None
+        description: Status HTML widget to update.
+      error:
+        type: Exception
+        description: Error to display.
+    """
+    if status is not None:
+        status.value = _status_alert("danger", f"Error: {escape(str(error))}")
+
+
+def _status_alert(kind: Literal["danger", "success"], message: str) -> str:
+    """
+    title: Render a Bootstrap-like alert box.
+    parameters:
+      kind:
+        type: Literal[danger, success]
+        description: Alert visual kind.
+      message:
+        type: str
+        description: HTML message body.
+    returns:
+      type: str
+      description: Alert HTML.
+    """
+    colors = {
+        "danger": ("#f8d7da", "#842029", "#f5c2c7"),
+        "success": ("#d1e7dd", "#0f5132", "#badbcc"),
+    }
+    background, color, border = colors[kind]
+    return (
+        f'<div class="alert alert-{kind}" role="alert" '
+        'style="margin: .5rem 0; padding: .75rem 1rem; '
+        f"border: 1px solid {border}; border-radius: .375rem; "
+        f"background-color: {background}; color: {color};"
+        f'">{message}</div>'
+    )
+
+
+def _data_url(mime_type: str, content: bytes) -> str:
+    """
+    title: Build a base64 data URL for a downloadable file.
+    parameters:
+      mime_type:
+        type: str
+        description: File MIME type.
+      content:
+        type: bytes
+        description: File bytes.
+    returns:
+      type: str
+      description: Data URL string.
+    """
+    encoded = b64encode(content).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"

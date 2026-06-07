@@ -129,7 +129,17 @@ def test_widget_buttons_save_svg_and_png(
     )
 
     widget.prisma_flow_buttons["save_svg"].click()
+    svg_status = widget.prisma_flow_status.value
+
+    assert "alert-success" in svg_status
+    assert "Download widget.svg" in svg_status
+    assert "data:image/svg+xml;base64," in svg_status
+
     widget.prisma_flow_buttons["save_png"].click()
+    png_status = widget.prisma_flow_status.value
 
     assert svg_path.read_text().startswith('<?xml version="1.0"')
     assert png_path.read_bytes() == b"fake png"
+    assert "Download widget.png" in png_status
+    assert "Download widget.svg" not in png_status
+    assert "data:image/png;base64," in png_status
