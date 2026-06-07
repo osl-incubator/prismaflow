@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+## [0.6.1](https://github.com/osl-incubator/prismaflow/compare/0.6.0...0.6.1) (2026-06-07)
+
+
+### Bug Fixes
+
+* Improve the prima widget ([29e0510](https://github.com/osl-incubator/prismaflow/commit/29e051029fee60a3254e3e27b4fd61d0636b843f))
+
 # [0.6.0](https://github.com/osl-incubator/prismaflow/compare/0.5.0...0.6.0) (2026-06-07)
 
 
