@@ -20,7 +20,7 @@ from prismaflow.models import (
 )
 from prismaflow.validation import ValidationMessage, ValidationReport, validate_flow
 
-__version__ = "0.5.0"  # semantic-release
+__version__ = "0.6.0"  # semantic-release
 
 __all__ = [
     "EligibilityStage",

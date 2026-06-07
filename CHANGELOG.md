@@ -1,6 +1,13 @@
 # Release Notes
 ---
 
+# [0.6.0](https://github.com/osl-incubator/prismaflow/compare/0.5.0...0.6.0) (2026-06-07)
+
+
+### Features
+
+* Add support jupyter widgets ([c486c20](https://github.com/osl-incubator/prismaflow/commit/c486c2081430e0161cf01011b8ea0379734e222d))
+
 # [0.5.0](https://github.com/osl-incubator/prisma-flow/compare/0.4.2...0.5.0) (2026-05-22)
 
 

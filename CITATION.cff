@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use prisma-flow to generate PRISMA diagrams, please cite this software and the relevant PRISMA guideline publications."
 type: software
 title: "prisma-flow"
-version: "0.5.0" # semantic-release
+version: "0.6.0" # semantic-release
 authors:
   - family-names: "Ogasawara"
     given-names: "Ivan"
